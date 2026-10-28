@@ -18,7 +18,7 @@ jobs:
           - {image: tollgate, dockerfile: apps/gateway/Dockerfile}
           - {image: tollgate-dashboard, dockerfile: apps/dashboard/Dockerfile}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: {ref: '${{ inputs.version }}'}
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
