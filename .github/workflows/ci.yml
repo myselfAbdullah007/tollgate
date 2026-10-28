@@ -45,7 +45,7 @@ jobs:
           npm run start --prefix apps/dashboard > /tmp/tollgate-ui.log 2>&1 &
           for attempt in $(seq 1 60); do curl -fsS http://localhost:3187/login > /dev/null && break; sleep 1; done
           npm run test:e2e --prefix apps/dashboard
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with: {name: browser-failures, path: apps/dashboard/test-results}
 
