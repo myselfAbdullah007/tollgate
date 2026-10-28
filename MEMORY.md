@@ -45,3 +45,7 @@ Remaining work: realistic load/soak/SLOs, incremental reconciliation and bounded
 Current deployed version is 0.2.0 at dashboard 3187 / gateway 8187. Final infrastructure suite: 79 passing; memory suite: 70 passing, 9 infrastructure skips. Corrected production Docker browser suite: 11 passing. `make check`, optimized build and Compose smoke pass. A real production-only overlap race was found during verification, reproduced before correction, and fixed: cancelled superseded reads cannot turn completed writes into save errors. No paid calls or external webhook delivery occurred. Development children on 3188/8188 were stopped; Tollgate and the other project continue on their own ports.
 
 Final release gate: worker heartbeat healthcheck is enabled; full Compose `up --wait` exits 0. GitHub CI run 40682693230 for 2cae69f passed gateway, dashboard and Compose smoke. See docs/validation.md; do not confuse earlier failed verification attempts with this final result.
+
+## Dependency PR work — 2026-10-28
+
+The 14-PR review is tracked in docs/pr-review-2026-10-28.md and ADR 0008. Thirteen compatible PR heads are integrated locally; TypeScript 7 is excluded after clean local and remote lint failures. Do not remove lint coverage to force the upgrade. Reconciled npm lock must pass clean Node 22 npm ci; host-only package-lock generation previously missed optional native entries. Live provider tests and image publication are not part of this maintenance task.

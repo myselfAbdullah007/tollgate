@@ -89,3 +89,7 @@ The corrected CI run [40681881074](https://github.com/myselfAbdullah007/tollgate
 ### Final release gate
 
 `docker compose -f deploy/docker-compose.yml up -d --no-build --wait --wait-timeout 180` now exits **0**, including a healthy heartbeat-checked worker. The controlled smoke passes again. GitHub [CI run 40682693230](https://github.com/myselfAbdullah007/tollgate/actions/runs/40682693230) for source commit `2cae69f` completed **successfully**: gateway, dashboard (including all 11 browser tests) and fresh Compose build/start/smoke jobs all passed. This is the actual CI workflow, not a Dependabot result. Subsequent validation-record edits are documentation only.
+
+## Dependency PR validation — 2026-10-28
+
+See [PR review](pr-review-2026-10-28.md) for the 14-PR inventory and TypeScript 7 reproduction. Integrated runtime package minima match existing lock versions. Updated editable gateway build passes with the new setuptools minimum. `make test`: 70 passed / 9 skipped in 56.80 s; `make integration`: 79 passed in 75.74 s; `make check` and production dashboard build pass. Clean Node 22 and host npm ci pass after reconciling the lock; an earlier malformed optional-dependency lock install failed and was corrected. ESLint peer-range warnings remain documented; no force or legacy-peer-deps bypass is used. Browser/visual and remote results follow when complete.

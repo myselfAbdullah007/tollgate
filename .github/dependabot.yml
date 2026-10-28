@@ -3,6 +3,10 @@ updates:
   - package-ecosystem: npm
     directory: /apps/dashboard
     schedule: {interval: weekly}
+    # Revisit when the Next.js lint parser supports TypeScript 7's compiler interface.
+    ignore:
+      - dependency-name: typescript
+        versions: [">=7.0.0"]
   - package-ecosystem: pip
     directory: /apps/gateway
     schedule: {interval: weekly}

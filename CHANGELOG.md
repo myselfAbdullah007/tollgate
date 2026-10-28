@@ -40,3 +40,8 @@ No public release, paid-provider verification, or production security audit has 
 - Hardened browser route teardown and updated operational configuration/runbooks for the new controls.
 
 - Added a worker heartbeat healthcheck so Compose wait gates can verify the long-running worker.
+
+### Dependency maintenance — 2026-10-28
+
+- Integrated updates for CI/release actions, Python minimum versions, ESLint 10, Node types and Lucide icons; preserved 0.2 behavior and reconciled the dashboard lock under Node 22.
+- Retained TypeScript 5.9 because the proposed TypeScript 7 update breaks the installed lint parser; added a targeted Dependabot ignore pending compatible tooling.
