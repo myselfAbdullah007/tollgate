@@ -48,4 +48,6 @@ Final release gate: worker heartbeat healthcheck is enabled; full Compose `up --
 
 ## Dependency PR work — 2026-10-28
 
-The 14-PR review is tracked in docs/pr-review-2026-10-28.md and ADR 0008. Thirteen compatible PR heads are integrated locally; TypeScript 7 is excluded after clean local and remote lint failures. Do not remove lint coverage to force the upgrade. Reconciled npm lock must pass clean Node 22 npm ci; host-only package-lock generation previously missed optional native entries. Live provider tests and image publication are not part of this maintenance task.
+The 14-PR review is tracked in docs/pr-review-2026-10-28.md and ADR 0008. Thirteen compatible PRs are merged into main; PR 13 is closed without merging after clean local and remote TypeScript 7 lint failures. Do not remove lint coverage to force the upgrade. Reconciled npm lock must pass clean Node 22 npm ci; host-only package-lock generation previously missed optional native entries. Live provider tests and image publication are not part of this maintenance task.
+
+PR resolution completed: source 46151a5 passed CI 40685934917 (gateway/dashboard/Compose smoke). Local checks: 79 infrastructure tests, 70 memory tests with 9 expected skips, 11 browser tests, static checks/build and inspected screenshots. Final GitHub open-PR count is zero. Running application containers were not redeployed; temporary 3188/8188 validation services were stopped.

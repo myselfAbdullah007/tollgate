@@ -40,4 +40,4 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Review all 14 open dependency PRs and reproduce the TypeScript 7 blocker.
 - [x] Integrate the 13 compatible PR heads and reconcile manifests/lockfile without losing mainline fixes.
 - [x] Verify clean Node 22 install, gateway tests, infrastructure tests, static checks and production build.
-- [ ] Finish browser/visual and remote CI gates, merge compatible PRs, close the incompatible compiler PR and verify open count.
+- [x] Finish browser/visual and remote CI gates, merge 13 compatible PRs, close incompatible PR 13 and verify zero open PRs.
