@@ -53,3 +53,23 @@ The expanded audit found issues outside that passing coverage. The original `scr
 Remote main CI for 172ac2a [failed](https://github.com/myselfAbdullah007/tollgate/actions/runs/40670735966) while parsing the PostgreSQL service health command, before backend tests. Local checks and Dependabot jobs must not be reported as a successful remote CI run.
 
 Measured readability/sidebar evidence and reproduced policy/state/API gaps are in [the audit report](audits/2026-10-28/REVIEW.md). [IMPROVEMENT_PLAN.md](../IMPROVEMENT_PLAN.md) contains the proposed remedies and acceptance checks. Findings are still open; no application fix is claimed by these observation probes.
+
+## 0.2 implementation validation — 2026-10-28
+
+The historical findings above describe the old baseline. F01–F13 now have implemented fixes; the improvement plan's final status section distinguishes delivered foundations from remaining staging/scale work.
+
+| Check | Actual result |
+|---|---|
+| `make test` | 70 passed, 9 infrastructure-only skips in 61.73 s |
+| `make integration` against Tollgate PostgreSQL/Redis | 79 passed in 69.91 s; no skips |
+| `make check` | Ruff, mypy (22 source files), ESLint and TypeScript pass |
+| Optimized production build | `npm run build --prefix apps/dashboard` succeeded |
+| Expanded browser suite against isolated development ports 3188/8188 | 10 passed in 33.4 s |
+| Visual diagnostics | Five viewports (1440×900, 1366×768, 1280×720, 1024×600, 390×844): account/sign-out controls visible, no document horizontal overflow; zero measured direct-text contrast failures on overview and six additional console pages |
+| Manual image inspection | Desktop 1280×720 and mobile 390×844 screenshots inspected; readable text and reachable account controls |
+
+Regression coverage includes policy preservation/revisions, workspace state, routing identifiers, optional tool fields, effective preview/date filters, exact pricing, invalid-usage estimates, scoped usage credentials, roles/sessions, metadata audits, transactional notifications/signatures, request limits, concurrent admission, transient accounting failure, recovery fencing, reconciliation drift/reservations and malformed-event quarantine. First 11 targeted defect tests were observed failing on the unchanged baseline before fixes. All provider tests use mock/recorded transports; no paid call was made.
+
+Evidence: [implementation screenshots and measurements](audits/2026-10-28-implementation/ui-measurements.json). Contrast measurements are diagnostics, not an independent WCAG assessment. Playwright used the existing Chromium 1208 executable through `PLAYWRIGHT_CHROMIUM_EXECUTABLE`; the default newly requested browser binary was absent and that failed launch was not counted as a pass.
+
+Docker rebuild/deployment smoke and remote main CI are recorded below when completed. They are not inferred from these local results. Existing monthly demo ledger data is preserved; optional new feature tags default to `general` / `production` in reports for legacy rows. Another project's services have not been stopped or modified.

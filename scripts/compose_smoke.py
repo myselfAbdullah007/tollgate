@@ -1,7 +1,7 @@
 """Exercise a running Compose stack with only the built-in mock provider."""
 import asyncio
 import json
-import time
+import uuid
 import httpx
 
 
@@ -12,7 +12,7 @@ async def main():
         r = await c.post('/admin/v1/auth/login', json={'email': 'admin@tollgate.local', 'password': 'tollgate-demo-2026'})
         r.raise_for_status()
         c.headers['X-Tollgate-Admin'] = '1'
-        suffix = str(time.time_ns())
+        suffix = "".join(chr(97 + int(c, 16)) for c in uuid.uuid4().hex)
         alias = 'smoke-' + suffix
         r = await c.post('/admin/v1/tenants/default/aliases', json={'name': alias, 'allow_degrade': True,
             'tiers': [['mock/outage', 'mock/backup'], ['mock/balanced'], ['mock/economy']]})

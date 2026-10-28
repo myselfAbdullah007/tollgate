@@ -1,27 +1,26 @@
 # Roadmap
 
-## Current release: 0.1
+## Current release: 0.2
 
-Text gateway, customer budgets and degradation, provider fallback, reversible regex/checksum redaction including streams, exact cache, durable worker, monthly PostgreSQL ledger, admin console, local mock demo, Compose and automated tests.
+The original text gateway and console plus readable/reachable navigation, lossless revisioned policy editing, workspace state protection, effective-policy preview, precise versioned pricing, SQL reporting, scoped usage keys, signed alerts, self-service sessions/passwords, deployment-wide roles and recovery controls. See CHANGELOG.md and IMPROVEMENT_PLAN.md for acceptance scope.
 
-## Before a public production release
+## Before paid production traffic
 
-- Owner confirms project name, GitHub/GHCR namespace, domain and private security disclosure contact.
-- Verify chosen live model IDs and current pricing; run explicitly authorized live-provider smoke tests.
-- Independent authentication, privacy, concurrency and accessibility review.
-- Benchmark representative production traffic and define SLOs.
-- Capacity tuning: transaction batch insert, bounded retention for event streams, SQL-native pagination/aggregation for very large admin datasets.
-- Formalize encrypted-key rotation and backup/restore automation.
-- Configure public HTTPS hosting; publish signed multi-platform images/SBOM through the manual release workflow.
+- Verify chosen live model IDs/current prices and run explicitly authorized capped provider smoke tests; bundled prices are illustrative.
+- Independent authentication, privacy, concurrency and accessibility review; configure TLS and private disclosure/backup procedures.
+- Representative load/soak tests and workload-specific SLOs, including failure/recovery with realistic history.
+- Automate backup/restore and rehearse the maintenance-only encrypted-secret rotation runbook.
+- Bounded stream retention, incremental/checkpointed reconciliation, ledger batching and larger customer/config collection pagination. SQL request-log paging and usage aggregates are already implemented.
 
-## Next integrations
+## Business workflow follow-ups
 
-Presidio names/addresses via NER, AWS KMS envelope encryption, signed customer budget/degradation webhooks, OpenTelemetry collector/Jaeger, more detector formats (including IPv6), model-specific tokenizers and fractional price precision, user/role administration and tenant-specific dashboard identities.
+- Independent project/environment budgets and credentials (current tags are reporting metadata).
+- Explicit upgrade/proration/overage consent, plan-change previews and per-feature quality evaluation/canaries.
+- Transactional configuration import, richer lifecycle provisioning, customer usage widget, owner role-management UI and workspace-specific memberships.
+- Validated model capabilities and tokenizers; opt-in capped credential tests.
 
-## Deliberately outside 0.1
+## Optional integrations
 
-Semantic caching, embeddings, images, audio, Stripe billing sync, SSO, prompt management, jailbreak detection, Helm/Kubernetes distribution, per-tenant dashboard logins. These are intentional boundaries, not hidden partial implementations.
+Presidio names/addresses via NER, AWS KMS, tracing, Stripe sync, SSO, semantic caching, embeddings/media/audio and Helm. Signed webhooks, fractional price precision and basic deployment-wide roles are implemented, not future placeholders.
 
-## Review-driven implementation order
-
-[IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md) supersedes a feature-first sequence with explicit release gates: main CI and regression baseline; policy/workspace safety and readability/sidebar; routing/preview/date/tier correctness; precise cost and recovery controls; useful business reporting/alerts; then scale and integrations. The review findings remain open until their acceptance checks pass.
+Public hosting and signed multi-platform image publication remain separate operator activities. No live provider or production capacity certification is implied by local mock testing.

@@ -36,6 +36,16 @@ class FastPath:
         self.rates: dict[str, deque] = defaultdict(deque)
         self.cache: dict[str, tuple] = {}
         self.failures: dict[str, list] = defaultdict(list)
+        self.inflight: dict[str, dict] = defaultdict(dict)
+
+    async def initialized(self, key):
+        return bool(await self.redis.exists("spend:" + key)) if self.redis else key in self.spends
+
+    async def reserved(self, key):
+        if self.redis:
+            values = await cast(Awaitable[list], self.redis.hvals("reserved:" + key))
+            return sum(int(v) for v in values)
+        return sum(v[0] for v in self.reservations[key].values() if v[1] > time.time())
 
     async def initialize(self, key, ledger):
         if self.redis:
@@ -172,3 +182,35 @@ class FastPath:
             await self.redis.delete("failures:" + target)
         else:
             self.failures.pop(target, None)
+
+    async def acquire(self, scope, id, limit):
+        if self.redis:
+            return bool(
+                await evaluate(
+                    self.redis,
+                    """
+                redis.call('ZREMRANGEBYSCORE',KEYS[1],'-inf',ARGV[1])
+                if redis.call('ZCARD',KEYS[1])>=tonumber(ARGV[3]) then return 0 end
+                redis.call('ZADD',KEYS[1],tonumber(ARGV[1])+180,ARGV[2])
+                redis.call('EXPIRE',KEYS[1],600)
+                return 1
+            """,
+                    1,
+                    "inflight:" + scope,
+                    time.time(),
+                    id,
+                    limit,
+                )
+            )
+        async with self.lock:
+            self.inflight[scope] = {k: v for k, v in self.inflight[scope].items() if v > time.time()}
+            if len(self.inflight[scope]) >= limit:
+                return False
+            self.inflight[scope][id] = time.time() + 180
+            return True
+
+    async def release(self, scope, id):
+        if self.redis:
+            await self.redis.zrem("inflight:" + scope, id)
+        else:
+            self.inflight[scope].pop(id, None)

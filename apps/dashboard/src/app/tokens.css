@@ -1,0 +1,194 @@
+/* Foreground colors live here, so older layout rules cannot reintroduce faint text. */
+:root {
+  --text-primary: #242333;
+  --text-secondary: #51495e;
+  --text-muted: #62596e;
+  --text-accent: #6039a6;
+  --text-success: #246348;
+  --text-warning: #795000;
+  --text-danger: #9c3030;
+  --ink: #242333;
+  --muted: #62596e;
+}
+body,
+button,
+input,
+select,
+textarea {
+  color: var(--text-primary);
+}
+a {
+  color: inherit;
+}
+:is(
+  p,
+  small,
+  td,
+  label,
+  legend,
+  kbd,
+  .muted,
+  .eyebrow,
+  .nav-label,
+  .stat-top,
+  .stat-foot,
+  .stat-card > small,
+  .budget-meter,
+  .data-status,
+  .plan-exhaust,
+  .plan-feature,
+  .mini-stats,
+  .help-note,
+  .info-banner,
+  .form-hint,
+  .chart-summary span,
+  .chart-legend,
+  .chart-footer,
+  .protection-note,
+  .page-footer,
+  .breadcrumb,
+  .workspace-switch small,
+  .user-menu small,
+  .top-docs
+) {
+  color: var(--text-secondary);
+}
+:is(
+  h1,
+  h2,
+  h3,
+  strong,
+  .stat-value,
+  .name-cell strong,
+  .spend-amount,
+  .request-id
+) {
+  color: var(--text-primary);
+}
+:is(
+  th,
+  .cell-small,
+  .budget-total,
+  .name-cell small,
+  .footer-version,
+  .footer-separator,
+  .table-pagination,
+  .protection-row small,
+  .mini-stats .right
+) {
+  color: var(--text-muted);
+}
+:is(
+  .text-link,
+  .text-button,
+  .back-link,
+  .insight-banner > a,
+  .chart-footer a,
+  .gateway-status a,
+  .nav-item.active,
+  .tier-pill,
+  .tier-pill small,
+  .plan-tag,
+  .provider-models > code,
+  .subtle-tag,
+  .response-meta,
+  .response-meta code,
+  .response-empty > span,
+  .count-badge,
+  .nav-item small,
+  .nav-item .tiny-badge,
+  .ladder-step > span,
+  .setup-steps li > span,
+  .setup-steps a,
+  .demo-login button
+) {
+  color: var(--text-accent);
+}
+:is(.avatar, .workspace-avatar, .top-avatar, .user-avatar) {
+  color: #5c456d;
+}
+.avatar.color-1 {
+  color: #6e502f;
+}
+.avatar.color-2 {
+  color: #365b49;
+}
+.avatar.color-3 {
+  color: #45517c;
+}
+.avatar.color-4 {
+  color: #713e62;
+}
+:is(.badge.green, .protection-icon.green, .live-dot) {
+  color: var(--text-success);
+}
+.badge.purple {
+  color: var(--text-accent);
+}
+.badge.neutral {
+  color: var(--text-secondary);
+}
+:is(.badge.amber, .tier-1, .tier-1 small, .budget-meter.warning > span) {
+  color: var(--text-warning);
+}
+:is(
+  .badge.red,
+  .tier-2,
+  .tier-2 small,
+  .budget-meter.danger > span,
+  .error-banner,
+  .btn.danger-quiet
+) {
+  color: var(--text-danger);
+}
+:is(
+  .btn,
+  .select-wrap,
+  .form-field input,
+  .form-field select,
+  .form-field textarea
+) {
+  border-color: #9587a4;
+}
+.btn.primary,
+.btn.primary:hover,
+.btn.primary :is(span, strong),
+.btn.danger {
+  color: #fff;
+}
+.btn.primary:hover {
+  background: #57309d;
+}
+.icon-btn {
+  color: #5c4c6c;
+}
+.nav-item:hover {
+  color: var(--text-accent);
+}
+input::placeholder,
+textarea::placeholder,
+.table-search input::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+.form-field input[readonly] {
+  color: #63576f;
+}
+.code-block,
+.code-block :is(pre, code, span, .icon-btn) {
+  color: #eee6fa;
+}
+:focus-visible {
+  outline: 3px solid #7654cc;
+  outline-offset: 3px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid #a78bd4;
+  border-color: #6039a6;
+}
+::selection {
+  background: #e1d5fc;
+  color: #242333;
+}

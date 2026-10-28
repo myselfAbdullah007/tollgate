@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,6 +14,7 @@ class Settings(BaseSettings):
     cookie_secure: bool = False
     allowed_origin: str = "http://localhost:3187"
     port: int = 8187
+    max_concurrent_requests: int = Field(default=100, ge=1, le=10000)
     bootstrap_file: str = ""
     presidio_url: str = ""
     kms_key_id: str = ""

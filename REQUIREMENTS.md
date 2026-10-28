@@ -26,4 +26,14 @@ The brief's exact file tree is a suggested architecture rather than a requiremen
 
 Token fallback uses conservative UTF-8 byte bounds rather than a provider-specific tokenizer. Costs and estimates are explicit. Redis worker reads batches of up to 500; each event commits its ledger and rollup transaction individually for reliable replay. Throughput batch insertion remains a future optimization.
 
-Per-tenant dashboard identities, Presidio, KMS, tracing, webhooks and public release/deployment are tracked in ROADMAP.md; they are not silently stubbed. Name/domain reservation and publishing need owner identity and are not performed.
+Per-tenant dashboard identities, Presidio, KMS, tracing and public release/deployment are tracked in ROADMAP.md; they are not silently stubbed. Name/domain reservation and publishing need owner identity and are not performed.
+
+## 0.2 acceptance additions
+
+- Lossless policy edits, revision conflicts, effective preview, scoped workspace state and real date/customer filters have automated regression coverage.
+- Readable semantic foregrounds and a scrolling sidebar with pinned account controls are measured at desktop/mobile viewports.
+- Integer micro-USD charges use versioned integer per-million-token rates with ceiling division; missing/invalid usage is marked estimated. Rates remain illustrative.
+- Feature/environment metadata powers SQL reports; optional customer revenue supports AI contribution only, excluding other COGS.
+- Customer-bound usage keys expose only their own allowance/usage and cannot invoke chat. Environment tags do not create security or budget isolation.
+- Transactional threshold events have signed HTTPS webhooks, bounded retries/deduplication and metadata delivery history. Notifications contain no prompts or answers.
+- Deployment-wide owner/admin/viewer roles, self password/session controls, audit metadata, CLI reset and maintenance-only encrypted-secret rotation are implemented. Workspace-specific memberships remain deferred.

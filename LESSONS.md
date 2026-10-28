@@ -10,3 +10,8 @@
 - Generic `[role=alert]` selectors include Next.js's empty route announcer. Assert the application's error banner rather than treating every framework announcement as an error.
 - Sandboxing may block asynchronous SQLite wakeups or Chromium socket operations. Escalate the relevant test command after the actual failure; do not mark it passing or modify unrelated services.
 - Bundle fonts so a self-hosted administrative console does not depend on a third-party stylesheet request.
+
+- A passing smoke suite did not protect policy arrays, workspace switching, actual date filters or routing metadata. Preserve failing reproductions and add focused regressions before calling findings resolved.
+- Foreground declarations scattered through layout CSS defeated color fixes. Keep semantic foregrounds in one final token stylesheet and measure rendered text across pages.
+- Pricing precision and recovery markers must preserve integer money and in-flight reservations. Normalize invalid usage rather than accepting negative provider counts.
+- A configured credential is not a verified connection; a budget tier is eligibility, not proof of an actual served model. Label evidence precisely.

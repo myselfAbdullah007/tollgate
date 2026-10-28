@@ -25,11 +25,12 @@ Public release, external accounts, live provider verification, optional integrat
 - [x] Measure contrast and sidebar reachability at desktop/mobile viewports.
 - [x] Probe policy round trips, workspace state, effective preview, date filtering and tier truthfulness.
 - [x] Write IMPROVEMENT_PLAN.md with priorities, business needs, phases and acceptance checks.
-- [ ] Phase 0: repair main CI quoting and add deterministic/regression fixtures.
-- [ ] Phase 1: preserve policies/workspace state; fix sidebar and text readability.
-- [ ] Phase 2: correct metadata redaction, optional/tool translation, preview, date filtering and operational labels.
-- [ ] Phase 3: complete pricing precision, accounting/recovery, concurrency and administration readiness.
-- [ ] Phase 4: deliver feature/customer cost reporting, usage endpoints and signed alerts.
+- [x] Phase 0: repair main CI quoting and add deterministic/regression fixtures.
+- [x] Phase 1: preserve policies/workspace state; fix sidebar and text readability.
+- [x] Phase 2: correct metadata redaction, optional/tool translation, preview, date filtering and operational labels.
+- [x] Implement Phase 3 foundations: pricing precision, accounting/recovery, concurrency and account/session administration.
+- [ ] Complete independent staging/security/capacity review before paid-traffic readiness.
+- [x] Phase 4: deliver feature/customer cost reporting, usage endpoints and signed alerts.
 - [ ] Phase 5: expand scale/team/integrations only after the earlier release gates pass.
 
 Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are deliberately not marked complete merely because current smoke tests pass.

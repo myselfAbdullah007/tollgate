@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 — 2026-10-28
+
+- Fixed unreadable foreground colors and sidebar scrolling; pinned account controls, improved mobile focus/navigation, and preserved workspace/filter context.
+- Preserved every privacy category and degradation step in plan edits; added stale-revision conflicts and workspace-safe form/loading state.
+- Fixed routing identifier redaction, null tool calls, Anthropic system text parts, effective-policy preview, log date filters, customer log links and misleading tier/provider labels.
+- Added feature/environment cost reports, customer AI contribution from optional supplied revenue, actual routing counters and budget reset/reservation information.
+- Added customer-bound read-only usage keys, idempotent customer provisioning and secret-free configuration export/dry-run validation.
+- Added signed budget/degradation webhooks with durable deduplication, bounded retries and delivery history; public HTTPS destinations are validated and DNS-pinned.
+- Added owner/admin/viewer accounts, session revocation, password change/reset, encrypted-secret rotation and metadata-only administrative audit history.
+- Added versioned fractional price rates with integer micro-USD charges, bounded ingress/concurrency, estimated-usage validation, accounting retries/recovery fencing and poison-event quarantine.
+- Repaired CI service quoting and deterministic deployment smoke fixtures. Expanded backend, database, browser and visual regression coverage.
+
 ## 0.1.0 — 2026-10-28 (unreleased)
 
 - Added customer-aware OpenAI-compatible text gateway and four provider choices, including a key-free mock.

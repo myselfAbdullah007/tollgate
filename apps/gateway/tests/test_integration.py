@@ -81,3 +81,25 @@ async def test_postgres_partition_worker_and_no_pii(integration_app):
             assert "integration@example.com" not in (await app.state.fast.redis.get(key))
         stream = await app.state.fast.redis.xrange("tollgate:events")
         assert "integration@example.com" not in json.dumps(stream)
+
+
+async def test_reconcile_clears_drift_without_erasing_reservations(integration_app):
+    from tollgate.worker import reconcile
+
+    app = integration_app
+    key = "audit-" + uuid.uuid4().hex + ":no-ledger:2026-10"
+    await app.state.fast.initialize(key, 999)
+    await app.state.fast.reserve(key, "active", 10000, [], [100])
+    await reconcile(app.state.repo, app.state.fast)
+    assert await app.state.fast.spend(key) == 0
+    assert await app.state.fast.reserved(key) == 100
+    await app.state.fast.settle(key, "active", 0)
+
+
+async def test_malformed_stream_event_does_not_stop_delivery(integration_app):
+    app = integration_app
+    id = await app.state.fast.redis.xadd("tollgate:events", {"event": "not-json"})
+    await run_worker(app.state.repo, app.state.fast, once=True)
+    dead = await app.state.fast.redis.xrange("tollgate:dead-letter")
+    assert any(fields["source_id"] == id for _, fields in dead)
+    assert not await app.state.fast.redis.xrange("tollgate:events", min=id, max=id)

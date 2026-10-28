@@ -2,7 +2,7 @@ import {createRequire} from 'node:module';
 import {mkdir, writeFile} from 'node:fs/promises';
 const require = createRequire(import.meta.url);
 const {chromium} = require('../apps/dashboard/node_modules/playwright');
-const directory = 'docs/audits/2026-10-28';
+const directory = process.env.TOLLGATE_AUDIT_DIR || 'docs/audits/2026-10-28';
 await mkdir(directory, {recursive: true});
 const browser = await chromium.launch(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? {executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE} : {});
 const page = await browser.newPage();
@@ -12,13 +12,7 @@ await page.getByRole('button', {name: 'Use demo credentials'}).click();
 await page.getByRole('button', {name: 'Sign in to workspace'}).click();
 await page.getByRole('heading', {name: 'Overview', exact: true}).waitFor();
 await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
-const results = [];
-for (const viewport of [{width:1440,height:900},{width:1366,height:768},{width:1280,height:720},{width:1024,height:600},{width:390,height:844}]) {
- await page.setViewportSize(viewport);
- await page.goto(base + '/');
- await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
- await page.evaluate(() => document.fonts.ready);
- const measurements = await page.evaluate(() => {
+const measure = async () => await page.evaluate(() => {
    const rect = selector => {const element=document.querySelector(selector), box=element.getBoundingClientRect(), style=getComputedStyle(element); return {top:box.top,bottom:box.bottom,left:box.left,right:box.right,height:box.height,clientHeight:element.clientHeight,scrollHeight:element.scrollHeight,overflowY:style.overflowY,fullyVisible:box.top>=0&&box.bottom<=innerHeight&&box.left>=0&&box.right<=innerWidth};};
    const rgba = color => (color.match(/[\d.]+/g)||[]).map(Number);
    const blend = (foreground, background) => {const alpha=foreground[3]??1;return foreground.slice(0,3).map((v,i)=>v*alpha+background[i]*(1-alpha));};
@@ -35,12 +29,22 @@ for (const viewport of [{width:1440,height:900},{width:1366,height:768},{width:1
    }
    return {sidebar:rect('.sidebar'),bottom:rect('.sidebar-bottom'),userMenu:rect('.user-menu'),signOut:rect('button[aria-label="Sign out"]'),documentOverflow:document.documentElement.scrollWidth>innerWidth,contrastFailures:contrast};
  });
+const results = [];
+for (const viewport of [{width:1440,height:900},{width:1366,height:768},{width:1280,height:720},{width:1024,height:600},{width:390,height:844}]) {
+ await page.setViewportSize(viewport);
+ await page.goto(base + '/');
+ await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
+ await page.evaluate(() => document.fonts.ready);
+ if (viewport.width<760) { await page.getByRole('button',{name:'Open navigation'}).click(); await page.waitForFunction(()=>document.querySelector('.sidebar').getBoundingClientRect().left>=0); }
+ const measurements = await measure();
  results.push({viewport,...measurements});
  await page.screenshot({path:`${directory}/overview-${viewport.width}x${viewport.height}.png`,fullPage:false});
+ if (viewport.width<760) await page.keyboard.press('Escape');
 }
 await page.setViewportSize({width:1440,height:900});
-for(const route of ['playground','plans','providers','customers','settings']) {
+for(const route of ['playground','plans','providers','customers','settings','insights']) {
  await page.goto(base + '/' + route); await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
+ const measured=await measure(); results.push({viewport:{width:1440,height:900},route,...measured});
  await page.screenshot({path:`${directory}/${route}.png`,fullPage:true});
 }
 await writeFile(`${directory}/ui-measurements.json`,JSON.stringify(results,null,2)+'\n');

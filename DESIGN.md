@@ -23,3 +23,9 @@ Light neutral canvas, white bordered panels, restrained violet actions, green pr
 ## Accessibility and feedback
 
 Visible focus states, labeled inputs, real buttons/links, focus-contained dialogs with Escape, status/error semantics, skip-to-content, minimum readable operational text, reduced-motion support. Table actions have descriptive accessible names. Automated functional checks do not substitute for an independent accessibility audit; WCAG certification is not claimed.
+
+## 0.2 operational usability
+
+Foreground colors live in `apps/dashboard/src/app/tokens.css`: neutral primary/secondary text, violet actions and semantic status colors. Operational text is at least 12px, ordinary text 13px, table headers 11px. Sidebar uses viewport height, an independently scrolling middle section and pinned account controls; the drawer traps focus and closes on navigation/Escape. Insights & alerts groups feature costs and delivery state. Customer budget tiers are explicitly eligibility; served tiers come from request history. Settings includes self-service security and owner setup. Forms retain complete policy arrays and use revision conflicts rather than overwriting concurrent changes. Workspace changes reset scoped forms and cancel stale loads.
+
+The contrast script is a diagnostic for direct text on computed backgrounds. It does not certify all states, gradients, focus indicators or full WCAG conformance.

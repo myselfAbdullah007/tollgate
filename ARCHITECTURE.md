@@ -41,3 +41,11 @@ The vault detects all text parts and tool arguments, deduplicates values, and as
 Next.js proxies `/api/*` to the internal gateway, keeping browser session cookies same-origin. CSRF checks verify origin and require an admin request header on writes. CORS is restricted to configured origins. Compose uses an isolated project/network/volumes and nonconflicting published ports. Docker images run as non-root. Optional Prometheus/Grafana do not expose model data.
 
 See docs/operations.md for recovery and docs/adr/ for tradeoffs.
+
+## 0.2 extensions
+
+`pricing.py` stores versioned integer micro-USD rates per million tokens and rounds each charge upward. `limits.py` bounds request bytes and idle upload time; the fast path limits in-flight requests per workspace. Configuration writes use revision comparison and database row locks; key lookup has a hash-expression index. Logs are filtered/paged in SQL and reporting aggregates the full selected range rather than a sampled prefix.
+
+Accounting retries idempotent settlement. If fast-path settlement fails, authoritative SQL accounting and a recovery marker commit together; admission is fenced until worker reconciliation incorporates captured markers. Reservations survive reconciliation. This improves single-store failures but cannot durably record an outcome if Redis and PostgreSQL both fail simultaneously. Operators must monitor failures. Reconciliation still scans history and retained events; checkpointing/retention remain scale work.
+
+`notifications.py` creates deduplicated alert outbox records in the ledger transaction. Worker delivery runs separately from ledger ingestion, with HMAC timestamp/body signatures, public-address validation, pinned DNS, no redirects and bounded retries. Delivery is at least once; receivers deduplicate by event id. `admin_security.py` manages deployment-wide roles and self-service security. Vaults and provider plaintext remain request-local. Feature/environment tags affect reporting only. `business.tsx`, `editor.tsx` and `ui.tsx` separate business/security views, policy forms and shared controls from dashboard orchestration.

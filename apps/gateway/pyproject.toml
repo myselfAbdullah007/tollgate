@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tollgate"
-version = "0.1.0"
+version = "0.2.0"
 description = "Meter, limit, and protect AI usage per customer"
 requires-python = ">=3.12"
 dependencies = ["fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "sqlalchemy[asyncio]>=2.0,<3", "alembic>=1.15,<2", "aiosqlite>=0.21,<1", "asyncpg>=0.30,<1", "redis>=6,<8", "cryptography>=46,<49", "argon2-cffi>=23,<26", "httpx>=0.28,<1", "pydantic-settings>=2.8,<3", "pyyaml>=6,<7"]

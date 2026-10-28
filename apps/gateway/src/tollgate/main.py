@@ -9,6 +9,7 @@ from typing import cast
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import JSONResponse, PlainTextResponse
 from sqlalchemy import text
 
@@ -17,9 +18,10 @@ from .config import Settings
 from .db import Database, now
 from .fastpath import FastPath
 from .pipeline import Pipeline
-from .providers import ENV_KEYS, PRICES, Providers
+from .pricing import RATES as PRICES
+from .providers import ENV_KEYS, Providers
 from .redaction import BlockedPII, Vault
-from .repository import Repository
+from .repository import Repository, RevisionConflict
 from .security import Crypto, digest, new_key, verify_password
 from .seed import seed
 
@@ -33,7 +35,7 @@ def create_app(settings=None):
         settings.master_key or base64.b64encode(bytes.fromhex(digest("tollgate-local-demo-only"))).decode()
     )
     providers = Providers(repo, crypto, settings.enable_mock_provider)
-    pipeline = Pipeline(repo, fast, providers)
+    pipeline = Pipeline(repo, fast, providers, settings.max_concurrent_requests)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -45,8 +47,11 @@ def create_app(settings=None):
             await fast.redis.aclose()
         await db.engine.dispose()
 
-    app = FastAPI(title="Tollgate", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Tollgate", version="0.2.0", lifespan=lifespan, docs_url=None)
     app.state.repo, app.state.fast, app.state.pipeline = repo, fast, pipeline
+    from .limits import IngressLimits
+
+    app.add_middleware(IngressLimits)
     origins = [v.strip() for v in settings.allowed_origin.split(",")]
     if settings.demo:
         origins += ["http://localhost:3187", "http://127.0.0.1:3187"]
@@ -65,11 +70,27 @@ def create_app(settings=None):
         ],
     )
 
+    from redis.exceptions import RedisError
+
+    @app.exception_handler(RedisError)
+    async def fast_path_unavailable(request, exc):
+        return JSONResponse(
+            {"detail": "Gateway accounting is temporarily unavailable"},
+            status_code=503,
+            headers={"Retry-After": "5"},
+        )
+
+    @app.exception_handler(RevisionConflict)
+    async def conflict(request, exc):
+        return JSONResponse({"detail": str(exc)}, status_code=409)
+
+    @app.get("/docs", include_in_schema=False)
+    async def api_docs():
+        return get_swagger_ui_html(openapi_url="openapi.json", title="Tollgate API reference")
+
     @app.middleware("http")
     async def guard(request, call_next):
         if request.method in ("POST", "PATCH", "PUT", "DELETE"):
-            if int(request.headers.get("content-length", "0")) > 300000:
-                return JSONResponse({"detail": "Request too large"}, status_code=413)
             if request.url.path.startswith("/admin/"):
                 origin = request.headers.get("origin")
                 if origin and origin not in (*origins, str(request.base_url).rstrip("/")):
@@ -84,6 +105,28 @@ def create_app(settings=None):
         response.headers["Referrer-Policy"] = "same-origin"
         if request.url.path.startswith("/admin/"):
             response.headers["Cache-Control"] = "no-store"
+            actor = getattr(request.state, "user", None)
+            if (
+                actor
+                and request.method in ("POST", "PUT", "PATCH", "DELETE")
+                and response.status_code < 400
+                and "/auth/" not in request.url.path
+            ):
+                from .db import uid
+
+                parts = request.url.path.split("/")
+                tenant = parts[4] if len(parts) > 4 and parts[3] == "tenants" else "default"
+                await repo.put(
+                    "audit",
+                    uid(),
+                    {
+                        "actor_id": actor["id"],
+                        "method": request.method,
+                        "resource": request.url.path,
+                        "status": response.status_code,
+                    },
+                    tenant,
+                )
         return response
 
     async def session(request: Request):
@@ -91,7 +134,17 @@ def create_app(settings=None):
         row = await repo.find("session", digest(token), "global") if token else None
         if not row or row["expires_at"] <= time.time():
             raise HTTPException(401, "Please sign in")
-        if request.method != "GET" and row["role"] == "viewer":
+        current = await repo.find("user", row["email"], "global")
+        if not current or current.get("disabled"):
+            raise HTTPException(401, "Account unavailable")
+        row["role"] = current["role"]
+        request.state.user = current
+        if (
+            request.method != "GET"
+            and row["role"] == "viewer"
+            and not request.url.path.startswith("/admin/v1/auth/")
+            and request.url.path != "/admin/v1/pii/preview"
+        ):
             raise HTTPException(403, "Viewer accounts cannot change configuration")
         return row
 
@@ -100,12 +153,12 @@ def create_app(settings=None):
         if not authorization.startswith("Bearer "):
             raise HTTPException(401, "Bearer API key required")
         hashed = digest(authorization[7:])
-        # Read the authoritative store so revocation takes effect immediately.
-        tenants = await repo.records("tenant", "global")
-        for tenant in tenants:
-            for key in await repo.records("key", tenant["name"]):
-                if secrets.compare_digest(key["key_hash"], hashed) and not key.get("revoked_at"):
-                    return tenant["name"], key["id"]
+        key = await repo.key_by_hash(hashed)
+        if key and not key.get("revoked_at"):
+            if key.get("scope", "gateway") == "usage" and request.url.path != "/v1/usage":
+                raise HTTPException(403, "This key can only read its customer's usage")
+            request.state.key = key
+            return key["tenant_id"], key["id"]
         raise HTTPException(401, "Invalid or revoked API key")
 
     async def ensure_tenant(tenant_id):
@@ -114,7 +167,7 @@ def create_app(settings=None):
 
     @app.get("/healthz")
     async def health():
-        return {"status": "ok", "version": "0.1.0", "demo": settings.demo}
+        return {"status": "ok", "version": "0.2.0", "demo": settings.demo}
 
     @app.get("/readyz")
     async def ready():
@@ -130,6 +183,24 @@ def create_app(settings=None):
             }
         except Exception as exc:
             raise HTTPException(503, "Storage unavailable") from exc
+
+    @app.get("/admin/v1/status", dependencies=[Depends(session)])
+    async def system_status():
+        readiness = await ready()
+        worker, pending = "inline", 0
+        if fast.redis:
+            stamp = await fast.redis.get("tollgate:worker-heartbeat")
+            worker = "running" if stamp and time.time() - float(stamp) < 60 else "unavailable"
+            try:
+                groups = await cast(Awaitable[list], fast.redis.xinfo_groups("tollgate:events"))
+                pending = sum(
+                    int(g.get("pending", 0)) + int(g.get("lag", 0) or 0)
+                    for g in groups
+                    if g["name"] == "ledger"
+                )
+            except Exception:
+                worker = "starting"
+        return dict(readiness, worker=worker, pending_events=pending, checked_at=now())
 
     @app.get("/metrics", response_class=PlainTextResponse)
     async def metrics():
@@ -162,7 +233,9 @@ def create_app(settings=None):
     @app.post("/admin/v1/auth/login")
     async def login(body: schemas.Login, request: Request, response: Response):
         ip = request.client.host if request.client else "unknown"
-        if not await fast.rate_limit(["login:" + ip], [10]):
+        if not await fast.rate_limit(
+            ["login:" + ip, "login-account:" + digest(body.email.lower())], [60, 10]
+        ):
             raise HTTPException(429, "Too many login attempts", headers={"Retry-After": "60"})
         user = await repo.find("user", body.email, "global")
         if not user or not verify_password(user["password_hash"], body.password):
@@ -229,7 +302,8 @@ def create_app(settings=None):
         plan = await repo.find("plan", row["plan"], tenant)
         period = datetime.now(UTC).strftime("%Y-%m")
         key = f"{tenant}:{row['name']}:{period}"
-        await fast.initialize(key, await repo.spend(tenant, row["name"], period))
+        if not await fast.initialized(key):
+            await fast.initialize(key, await repo.spend(tenant, row["name"], period))
         spend = await fast.spend(key)
         budget = (
             row.get("budget_override") if row.get("budget_override") is not None else plan["monthly_budget"]
@@ -242,6 +316,13 @@ def create_app(settings=None):
             budget=budget,
             ratio=ratio,
             tier=tier,
+            eligible_tier=tier,
+            reserved=await fast.reserved(key),
+            remaining=max(0, budget - spend),
+            reset_at=(datetime.now(UTC).replace(day=28) + __import__("datetime").timedelta(days=4))
+            .replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            .isoformat(),
+            pii_mode=plan["pii_mode"],
             status="exhausted" if spend >= budget else "degraded" if tier else "healthy",
         )
 
@@ -279,6 +360,7 @@ def create_app(settings=None):
 
     @app.get("/admin/v1/tenants/{tenant_id}/plans", dependencies=[Depends(session)])
     async def plans(tenant_id: str):
+        await ensure_tenant(tenant_id)
         return await repo.records("plan", tenant_id)
 
     @app.post("/admin/v1/tenants/{tenant_id}/plans", dependencies=[Depends(session)])
@@ -312,6 +394,7 @@ def create_app(settings=None):
 
     @app.get("/admin/v1/tenants/{tenant_id}/aliases", dependencies=[Depends(session)])
     async def aliases(tenant_id: str):
+        await ensure_tenant(tenant_id)
         return await repo.records("alias", tenant_id)
 
     @app.post("/admin/v1/tenants/{tenant_id}/aliases", dependencies=[Depends(session)])
@@ -338,6 +421,7 @@ def create_app(settings=None):
 
     @app.get("/admin/v1/tenants/{tenant_id}/keys", dependencies=[Depends(session)])
     async def keys(tenant_id: str):
+        await ensure_tenant(tenant_id)
         return [
             {k: v for k, v in row.items() if k != "key_hash"} for row in await repo.records("key", tenant_id)
         ]
@@ -347,11 +431,20 @@ def create_app(settings=None):
         await ensure_tenant(tenant_id)
         if await repo.find("key", body.name, tenant_id):
             raise HTTPException(409, "Choose a unique key name")
+        if body.scope == "usage" and not body.customer:
+            raise HTTPException(422, "A usage key requires a customer ID")
         raw = new_key()
         row = await repo.put(
             "key",
             body.name,
-            {"key_hash": digest(raw), "prefix": raw[:16], "revoked_at": None, "last_used_at": None},
+            {
+                "key_hash": digest(raw),
+                "prefix": raw[:16],
+                "revoked_at": None,
+                "last_used_at": None,
+                "scope": body.scope,
+                "customer": body.customer,
+            },
             tenant_id,
         )
         return dict({k: v for k, v in row.items() if k != "key_hash"}, key=raw)
@@ -365,6 +458,14 @@ def create_app(settings=None):
         await repo.put("key", row["name"], row, tenant_id, id)
         return {"ok": True}
 
+    def range_start(days):
+        from datetime import timedelta
+
+        return (
+            datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
+            - timedelta(days=max(1, min(days, 90)) - 1)
+        ).isoformat()
+
     @app.get("/admin/v1/tenants/{tenant_id}/logs", dependencies=[Depends(session)])
     async def logs(
         tenant_id: str,
@@ -373,39 +474,73 @@ def create_app(settings=None):
         q: str = "",
         offset: int = 0,
         limit: int = 50,
+        days: int | None = None,
+        start: str | None = None,
+        end: str | None = None,
+        feature: str | None = None,
+        environment: str | None = None,
     ):
-        rows = await repo.logs(tenant_id, customer, limit=10000)
-        rows = [
-            r
-            for r in rows
-            if (not status or r["status"] == status)
-            and (not q or q.lower() in str([r["id"], r["customer_id"], r["model"], r["alias"]]).lower())
-        ]
-        return {"items": rows[max(0, offset) : max(0, offset) + max(1, min(limit, 200))], "total": len(rows)}
+        await ensure_tenant(tenant_id)
+
+        def stamp(value):
+            if not value:
+                return None
+            try:
+                parsed = datetime.fromisoformat(value)
+                if parsed.tzinfo is None:
+                    parsed = parsed.replace(tzinfo=UTC)
+                return parsed.astimezone(UTC).isoformat()
+            except ValueError as exc:
+                raise HTTPException(422, "Use an ISO date/time") from exc
+
+        return await repo.log_page(
+            tenant_id,
+            offset=max(0, offset),
+            limit=max(1, min(limit, 200)),
+            customer=customer,
+            status=status,
+            q=q,
+            since=stamp(start) or (range_start(days) if days else None),
+            until=stamp(end),
+            feature=feature,
+            environment=environment,
+        )
 
     @app.get("/admin/v1/tenants/{tenant_id}/usage", dependencies=[Depends(session)])
     async def usage(tenant_id: str, days: int = 14):
-        from datetime import timedelta
+        await ensure_tenant(tenant_id)
+        return await repo.usage(tenant_id, range_start(days))
 
-        days = max(1, min(days, 90))
-        since = (datetime.now(UTC) - timedelta(days=days)).isoformat()
-        rows = await repo.logs(tenant_id, limit=10000, since=since)
-        daily = await repo.daily(tenant_id)
-        selected = [d for d in daily if d["day"] >= since[:10]]
+    @app.get("/v1/usage")
+    async def customer_usage(request: Request, identity=Depends(api_key)):
+        key = request.state.key
+        external = (
+            key.get("customer") if key.get("scope") == "usage" else request.headers.get("x-tollgate-customer")
+        )
+        if not external:
+            raise HTTPException(400, "Customer ID required")
+        row = await repo.find("customer", external, identity[0])
+        if not row:
+            raise HTTPException(404, "Customer not found")
+        stats = await customer_stats(row, identity[0])
         return {
-            "requests": sum(d["requests"] for d in selected),
-            "cost": sum(d["cost"] for d in selected),
-            "pii_protected": sum(sum(r.get("pii_counts", {}).values()) for r in rows),
-            "cache_hits": sum(r.get("cache_hit", False) for r in rows),
-            "avg_latency_ms": round(sum(r["latency_ms"] for r in rows) / max(1, len(rows))),
-            "errors": sum(r["status"] == "error" for r in rows),
-            "daily": selected,
-            "recent": rows[:6],
-            "sampled": len(rows) == 10000,
+            k: stats[k]
+            for k in (
+                "name",
+                "plan",
+                "spend",
+                "budget",
+                "reserved",
+                "remaining",
+                "reset_at",
+                "status",
+                "eligible_tier",
+            )
         }
 
     @app.get("/admin/v1/providers", dependencies=[Depends(session)])
     async def get_providers(tenant_id: str = "default"):
+        await ensure_tenant(tenant_id)
         results = []
         for provider in ["openai", "anthropic", "google", "mock"]:
             row = await repo.find("provider", provider, tenant_id)
@@ -419,11 +554,12 @@ def create_app(settings=None):
                 {
                     "name": provider,
                     "configured": configured,
-                    "source": "environment"
-                    if os.getenv(ENV_KEYS.get(provider, ""), "")
-                    else "stored"
+                    "source": "stored"
                     if row
+                    else "environment"
+                    if os.getenv(ENV_KEYS.get(provider, ""), "")
                     else "built-in",
+                    "verified": provider == "mock" and settings.enable_mock_provider,
                     "models": [t for t in PRICES if t.startswith(provider + "/")],
                 }
             )
@@ -440,14 +576,87 @@ def create_app(settings=None):
         )
         return {"ok": True}
 
+    @app.get("/admin/v1/tenants/{tenant_id}/configuration", dependencies=[Depends(session)])
+    async def export_configuration(tenant_id: str):
+        await ensure_tenant(tenant_id)
+        result = {}
+        for kind, plural in (("plan", "plans"), ("alias", "aliases")):
+            result[plural] = [
+                {k: v for k, v in row.items() if k not in ("id", "tenant_id", "created_at", "revision")}
+                for row in await repo.records(kind, tenant_id)
+            ]
+        return result
+
+    @app.post("/admin/v1/tenants/{tenant_id}/configuration/validate", dependencies=[Depends(session)])
+    async def validate_configuration(tenant_id: str, body: schemas.Bootstrap):
+        await ensure_tenant(tenant_id)
+        return {"valid": True, "plans": len(body.plans), "aliases": len(body.aliases), "applied": False}
+
+    @app.get("/admin/v1/tenants/{tenant_id}/alerts", dependencies=[Depends(session)])
+    async def alerts_list(tenant_id: str):
+        await ensure_tenant(tenant_id)
+        return (await repo.records("alert", tenant_id))[-100:][::-1]
+
+    @app.get("/admin/v1/tenants/{tenant_id}/webhook", dependencies=[Depends(session)])
+    async def webhook_get(tenant_id: str):
+        await ensure_tenant(tenant_id)
+        row = await repo.find("webhook", "budget", tenant_id)
+        return (
+            {"url": row["url"], "enabled": row["enabled"], "configured": True}
+            if row
+            else {"url": "", "enabled": False, "configured": False}
+        )
+
+    @app.put("/admin/v1/tenants/{tenant_id}/webhook", dependencies=[Depends(session)])
+    async def webhook_save(tenant_id: str, body: schemas.WebhookConfig, user=Depends(session)):
+        await ensure_tenant(tenant_id)
+        if user["role"] != "owner":
+            raise HTTPException(403, "Owner access required to configure external delivery")
+        row = await repo.find("webhook", "budget", tenant_id)
+        secret = secrets.token_urlsafe(32) if not row else None
+        await repo.put(
+            "webhook",
+            "budget",
+            dict(
+                body.model_dump(),
+                encrypted_secret=row["encrypted_secret"] if row else crypto.encrypt(secret or ""),
+            ),
+            tenant_id,
+        )
+        return {"ok": True, **({"signing_secret": secret} if secret else {})}
+
+    @app.put(
+        "/admin/v1/tenants/{tenant_id}/customers/by-external/{external_id}", dependencies=[Depends(session)]
+    )
+    async def provision_customer(tenant_id: str, external_id: str, body: schemas.Customer):
+        await ensure_tenant(tenant_id)
+        if body.name != external_id or not await repo.find("plan", body.plan, tenant_id):
+            raise HTTPException(422, "External ID must match and plan must exist")
+        return await repo.put("customer", external_id, body.model_dump(exclude={"name"}), tenant_id)
+
     @app.post("/admin/v1/pii/preview", dependencies=[Depends(session)])
     async def preview(body: schemas.Preview):
-        vault = Vault(body.mode, body.block_categories)
+        mode, categories = body.mode, body.block_categories
+        if body.tenant_id and body.customer:
+            await ensure_tenant(body.tenant_id)
+            customer = await repo.find("customer", body.customer, body.tenant_id)
+            tenant = await repo.find("tenant", body.tenant_id, "global")
+            plan = await repo.find(
+                "plan", customer["plan"] if customer else tenant["default_plan"], body.tenant_id
+            )
+            mode, categories = plan["pii_mode"], plan.get("pii_block_categories", [])
+        vault = Vault(mode, categories)
         try:
             redacted = vault.transform(body.text)
         except BlockedPII as exc:
-            return {"blocked": True, "category": str(exc), "redacted": None, "counts": dict(vault.counts)}
-        return {"redacted": redacted, "counts": dict(vault.counts), "blocked": False}
+            return {
+                "blocked": True,
+                "category": str(exc),
+                "redacted": None,
+                "counts": dict(vault.counts),
+                "effective_mode": mode,
+            }
+        return {"redacted": redacted, "counts": dict(vault.counts), "blocked": False, "effective_mode": mode}
 
     @app.post("/admin/v1/tenants/{tenant_id}/playground", dependencies=[Depends(session)])
     async def playground(tenant_id: str, body: schemas.ChatRequest):
@@ -456,4 +665,7 @@ def create_app(settings=None):
             body.model_dump(exclude_none=True), tenant_id, body.user or "playground"
         )
 
+    from .admin_security import routes as security_routes
+
+    app.include_router(security_routes(repo, session))
     return app

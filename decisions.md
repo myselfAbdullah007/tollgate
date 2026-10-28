@@ -14,3 +14,5 @@
 | 2026-10-28 | Bundle fonts locally | Avoid external font requests and offline rendering regressions |
 | 2026-10-28 | Keep optional NER/KMS explicit on roadmap | Unsupported settings fail clearly rather than pretending to protect data |
 | 2026-10-28 | Prioritize policy safety, readable/reachable controls and truthful operational state before feature expansion | Proposed delivery order and acceptance gates; [ADR 0006](docs/adr/0006-operational-trust.md), IMPROVEMENT_PLAN.md |
+
+| 2026-10-28 | Versioned precise pricing, scoped usage keys, transactional signed alerts and explicit deployment-wide roles | Useful business controls without implying billing accuracy or workspace identity isolation; [ADR 0007](docs/adr/0007-business-controls.md) |

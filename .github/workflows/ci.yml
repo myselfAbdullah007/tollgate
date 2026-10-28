@@ -10,16 +10,16 @@ jobs:
         image: postgres:16.13-alpine
         env: {POSTGRES_USER: tollgate, POSTGRES_PASSWORD: tollgate-local-only, POSTGRES_DB: tollgate}
         ports: ['55487:5432']
-        options: --health-cmd 'pg_isready -U tollgate' --health-interval 3s --health-retries 20
+        options: --health-cmd "pg_isready -U tollgate" --health-interval 3s --health-retries 20
       redis:
         image: redis:7.4.8-alpine
         ports: ['63987:6379']
-        options: --health-cmd 'redis-cli ping' --health-interval 3s --health-retries 20
+        options: --health-cmd "redis-cli ping" --health-interval 3s --health-retries 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - run: python -m venv .venv && .venv/bin/pip install -e 'apps/gateway[dev]'
+      - run: python -m venv .venv && .venv/bin/pip install -r apps/gateway/requirements-dev.lock && .venv/bin/pip install --no-deps -e 'apps/gateway[dev]'
       - run: .venv/bin/ruff check --config apps/gateway/pyproject.toml apps/gateway
       - run: .venv/bin/mypy --config-file apps/gateway/pyproject.toml apps/gateway/src
       - run: .venv/bin/pytest -c apps/gateway/pyproject.toml apps/gateway/tests -q
@@ -37,7 +37,7 @@ jobs:
       - run: npm run build --prefix apps/dashboard
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - run: python -m venv .venv && .venv/bin/pip install -e apps/gateway
+      - run: python -m venv .venv && .venv/bin/pip install -r apps/gateway/requirements.lock && .venv/bin/pip install --no-deps -e apps/gateway
       - run: npx --prefix apps/dashboard playwright install --with-deps chromium
       - name: Start demo and exercise browser flows
         run: |

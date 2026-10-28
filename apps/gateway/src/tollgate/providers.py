@@ -5,11 +5,9 @@ import json
 import os
 import time
 import uuid
-from pathlib import Path
 from typing import Any
 
 import httpx
-import yaml
 
 BASES = {
     "openai": "https://api.openai.com/v1",
@@ -17,36 +15,18 @@ BASES = {
     "anthropic": "https://api.anthropic.com/v1",
 }
 ENV_KEYS = {"openai": "OPENAI_API_KEY", "anthropic": "ANTHROPIC_API_KEY", "google": "GEMINI_API_KEY"}
-# Illustrative configurable prices: micro-USD/token. Review config/pricing.yaml before real traffic.
-PRICES = {
-    "mock/premium": (3, 15),
-    "mock/balanced": (1, 5),
-    "mock/economy": (1, 2),
-    "mock/backup": (3, 15),
-    "mock/outage": (3, 15),
-    "openai/gpt-4.1": (2, 8),
-    "openai/gpt-4.1-mini": (1, 2),
-    "anthropic/claude-sonnet-4-20250514": (3, 15),
-    "anthropic/claude-3-5-haiku-20241022": (1, 4),
-    "google/gemini-2.5-flash": (1, 3),
-}
-
-
-pricing_path = Path(os.getenv("TOLLGATE_PRICING_FILE", "config/pricing.yaml"))
-if pricing_path.exists():
-    configured_prices = yaml.safe_load(pricing_path.read_text())
-    if not isinstance(configured_prices, dict) or any(
-        not isinstance(v, list) or len(v) != 2 or any(type(n) is not int or n < 0 for n in v)
-        for v in configured_prices.values()
-    ):
-        raise ValueError("Pricing must contain pairs of nonnegative integer micro-USD/token")
-    PRICES.update({k: tuple(v) for k, v in configured_prices.items()})
 
 
 class ProviderError(Exception):
     def __init__(self, status=502):
         self.status = status
         super().__init__("Provider request failed")
+
+
+def valid_usage(value):
+    return isinstance(value, dict) and all(
+        type(value.get(k)) is int and value[k] >= 0 for k in ("prompt_tokens", "completion_tokens")
+    )
 
 
 def token_count(value):
@@ -65,11 +45,17 @@ def envelope(model, message, usage, finish="stop"):
     )
 
 
+def text_content(value):
+    if isinstance(value, list):
+        return "\n".join(p["text"] for p in value)
+    return value or ""
+
+
 def anthropic_payload(request, model):
     system, messages = [], []
     for m in request["messages"]:
         if m["role"] in ("system", "developer"):
-            system.append(m.get("content", ""))
+            system.append(text_content(m.get("content")))
             continue
         if m["role"] == "tool":
             messages.append(

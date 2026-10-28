@@ -111,6 +111,28 @@ class Vault:
             return {k: self.transform(v) for k, v in value.items()}
         return value
 
+    def request(self, request):
+        """Traverse data fields only; routing/tool identities are protocol metadata."""
+        import copy
+
+        result = copy.deepcopy(request)
+        for message in result["messages"]:
+            content = message.get("content")
+            if isinstance(content, str):
+                message["content"] = self.transform(content)
+            elif isinstance(content, list):
+                for part in content:
+                    part["text"] = self.transform(part["text"])
+            for call in message.get("tool_calls") or []:
+                call["function"]["arguments"] = self.transform(call["function"]["arguments"])
+        for tool in result.get("tools") or []:
+            fn = tool["function"]
+            if "description" in fn:
+                fn["description"] = self.transform(fn["description"])
+            if "parameters" in fn:
+                fn["parameters"] = self.transform(fn["parameters"])
+        return result
+
     def restore(self, text):
         return TOKEN.sub(lambda m: self.values.get(m.group(), "[redacted]"), text)
 

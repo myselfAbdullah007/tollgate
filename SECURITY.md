@@ -25,3 +25,13 @@ Review model availability and prices before live traffic. An application budget 
 ## Known limitations
 
 No SSO, independent tenant dashboard identity, full compliance workflow, WAF, secret rotation automation, KMS, NER, distributed tracing, or comprehensive data-classification guarantee. Metadata includes customer external IDs; do not use sensitive contact information as those identifiers. Operator-supplied labels are metadata and are retained. Review retention for ledger partitions, Redis events, caches and backups.
+
+## 0.2 operational controls
+
+All admin writes retain session/CSRF enforcement. Viewer accounts can perform their own password/session operations and privacy preview, but cannot write configuration. Owner alone manages accounts and webhook secrets. Roles apply across the deployment; selecting a workspace does not authorize a separate tenant identity.
+
+Webhook destinations require public HTTPS port 443 with no URL credentials; every resolved address is checked, the connection is pinned, original Host/TLS server name retained, redirects disabled. Receivers verify `t=<unix>,v1=<hex HMAC-SHA256>` against `timestamp + "." + raw_body`, enforce their own freshness window and deduplicate the body event id. Secrets are encrypted and shown once. Delivery is bounded to five attempts; operators should inspect failed delivery history.
+
+Use `tollgate reset-password --help` for interactive recovery. For master-key rotation, stop only Tollgate gateway/worker, retain the old key securely, supply current `TOLLGATE_MASTER_KEY` and new `TOLLGATE_NEW_MASTER_KEY`, run `tollgate rotate-master-key --maintenance`, update the running services' master key and restart them. The database re-encryption is transactional; back up the database and rehearse recovery first. Do not rotate while old-key processes are running. No production rotation was performed during development.
+
+Ingress is limited to 300 KB and 15 seconds idle between body chunks. Per-workspace concurrent request defaults to 100. Pricing/model configuration remains operator-reviewed; this release does not establish live provider billing accuracy or workload capacity. Recovery fencing reduces single-store accounting risk; simultaneous loss of both accounting stores still requires operator response.

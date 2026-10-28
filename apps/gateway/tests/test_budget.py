@@ -71,3 +71,12 @@ async def test_circuit_breaker(fast):
     for _ in range(5):
         await fast.failure(key)
     assert await fast.breaker_open(key)
+
+
+async def test_inflight_limits_release_capacity(fast):
+    key = "test-concurrency-" + uuid.uuid4().hex
+    assert await fast.acquire(key, "one", 1)
+    assert not await fast.acquire(key, "two", 1)
+    await fast.release(key, "one")
+    assert await fast.acquire(key, "two", 1)
+    await fast.release(key, "two")

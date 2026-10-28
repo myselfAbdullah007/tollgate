@@ -11,15 +11,18 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 from .db import now, uid
 from .fastpath import BudgetExhausted
-from .providers import PRICES, ProviderError, token_count
+from .pricing import VERSION as PRICE_VERSION
+from .pricing import cost
+from .providers import ProviderError, token_count, valid_usage
 from .redaction import BlockedPII, StreamRestorer, Vault
 
 logger = logging.getLogger("tollgate.pipeline")
 
 
 class Pipeline:
-    def __init__(self, repo, fast, providers):
+    def __init__(self, repo, fast, providers, max_concurrent=100):
         self.repo, self.fast, self.providers = repo, fast, providers
+        self.max_concurrent = max_concurrent
         self.requests = 0
         self.errors = 0
 
@@ -36,8 +39,27 @@ class Pipeline:
         return customer
 
     async def execute(self, request, tenant, external, key_id="playground"):
+        lease, acquired, streaming = uid(), False, False
         try:
-            return await self._execute(request, tenant, external, key_id)
+            if await self.repo.recovery_pending(tenant):
+                raise HTTPException(503, "Accounting recovery in progress", headers={"Retry-After": "5"})
+            acquired = await self.fast.acquire(tenant, lease, self.max_concurrent)
+            if not acquired:
+                raise HTTPException(429, "Too many in-flight requests", headers={"Retry-After": "1"})
+            response = await self._execute(request, tenant, external, key_id)
+            if isinstance(response, StreamingResponse):
+                iterator = response.body_iterator
+
+                async def guarded_stream():
+                    try:
+                        async for chunk in iterator:
+                            yield chunk
+                    finally:
+                        await asyncio.shield(self.fast.release(tenant, lease))
+
+                response.body_iterator = guarded_stream()
+                streaming = True
+            return response
         except HTTPException as exc:
             if exc.status_code in (400, 402, 422, 429):
                 event = {
@@ -75,6 +97,9 @@ class Pipeline:
                 except Exception:
                     logger.exception("Unable to record rejection %s", event["id"])
             raise
+        finally:
+            if acquired and not streaming:
+                await asyncio.shield(self.fast.release(tenant, lease))
 
     async def _execute(self, request, tenant, external, key_id="playground"):
         self.requests += 1
@@ -91,7 +116,9 @@ class Pipeline:
             raise HTTPException(429, "Rate limit reached", headers={"Retry-After": "60"})
         vault = Vault(plan["pii_mode"], plan.get("pii_block_categories"))
         try:
-            redacted = vault.transform({k: v for k, v in request.items() if k not in ("user",)})
+            redacted = vault.request(
+                {k: v for k, v in request.items() if k not in ("user", "feature", "environment")}
+            )
         except BlockedPII as exc:
             raise HTTPException(422, "Blocked sensitive category: " + str(exc)) from exc
         if vault.values and plan["pii_mode"] == "reversible":
@@ -104,44 +131,58 @@ class Pipeline:
             )
         period = datetime.now(UTC).strftime("%Y-%m")
         spend_key = f"{tenant}:{external}:{period}"
-        await self.fast.initialize(spend_key, await self.repo.spend(tenant, external, period))
+        if not await self.fast.initialized(spend_key):
+            await self.fast.initialize(spend_key, await self.repo.spend(tenant, external, period))
         budget = customer.get("budget_override")
         budget = plan["monthly_budget"] if budget is None else budget
         input_estimate = token_count(redacted)
         estimates = [
-            max(input_estimate * PRICES[t][0] + request["max_tokens"] * 4 * PRICES[t][1] for t in tier)
-            for tier in alias["tiers"]
+            max(cost(t, input_estimate, request["max_tokens"] * 4) for t in tier) for tier in alias["tiers"]
         ]
-        try:
-            tier, used, estimate = await self.fast.reserve(
-                spend_key,
-                request_id,
-                budget,
-                plan["degradation"],
-                estimates,
-                alias["allow_degrade"],
-                plan["on_exhausted"],
-                plan.get("overage_cap", 0),
-            )
-        except BudgetExhausted as exc:
-            raise HTTPException(
-                402, "Customer budget exhausted. Increase the budget or change the plan."
-            ) from exc
-        cache_key = hashlib.sha256(
-            json.dumps([tenant, alias["tiers"][tier], redacted], sort_keys=True).encode()
-        ).hexdigest()
-        cached = (
-            await self.fast.cached(cache_key)
-            if request.get("temperature") == 0 and plan["pii_mode"] != "off"
-            else None
-        )
-        target, fallback_count, hit = alias["tiers"][tier][0], 0, cached is not None
+
+        def key_for(level):
+            return hashlib.sha256(
+                json.dumps([tenant, alias["tiers"][level], redacted], sort_keys=True).encode()
+            ).hexdigest()
+
+        cached, tier = None, 0
+        if request.get("temperature") == 0 and plan["pii_mode"] != "off":
+            for level in range(len(alias["tiers"]) if alias["allow_degrade"] else 1):
+                cached = await self.fast.cached(key_for(level))
+                if cached:
+                    tier = level
+                    break
+        hit = cached is not None
+        if hit:
+            used, estimate = await self.fast.spend(spend_key), 0
+        else:
+            try:
+                tier, used, estimate = await self.fast.reserve(
+                    spend_key,
+                    request_id,
+                    budget,
+                    plan["degradation"],
+                    estimates,
+                    alias["allow_degrade"],
+                    plan["on_exhausted"],
+                    plan.get("overage_cap", 0),
+                )
+            except BudgetExhausted as exc:
+                raise HTTPException(
+                    402, "Customer budget exhausted. Increase the budget or change the plan."
+                ) from exc
+        cache_key = key_for(tier)
+        target, fallback_count = alias["tiers"][tier][0], 0
         event = {
             "id": request_id,
             "tenant_id": tenant,
             "customer_id": external,
             "api_key_id": key_id,
             "alias": request["model"],
+            "feature": request.get("feature", "general"),
+            "environment": request.get("environment", "production"),
+            "policy_revision": plan.get("revision", 1),
+            "pricing_version": PRICE_VERSION,
             "tier_served": tier,
             "pii_counts": dict(vault.counts),
             "created_at": now(),
@@ -164,7 +205,7 @@ class Pipeline:
             settled = True
             usage = usage or {}
             a, b = usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0)
-            actual = 0 if hit else estimate if conservative else a * PRICES[target][0] + b * PRICES[target][1]
+            actual = 0 if hit else estimate if conservative else cost(target, a, b)
             event.update(
                 provider=target.split("/")[0],
                 model=target,
@@ -178,12 +219,37 @@ class Pipeline:
                 http_status=502 if error else 200,
                 error_code="upstream_error" if error else None,
             )
+            memory_charged = False
+            for attempt in range(3):
+                try:
+                    if hit:
+                        if self.fast.redis:
+                            await self.fast.redis.xadd("tollgate:events", {"event": json.dumps(event)})
+                        else:
+                            await self.repo.write_event(event)
+                    else:
+                        if self.fast.redis:
+                            await self.fast.settle(spend_key, request_id, actual, event)
+                        else:
+                            if not memory_charged:
+                                memory_charged = bool(
+                                    await self.fast.settle(spend_key, request_id, actual, event)
+                                )
+                            if memory_charged:
+                                await self.repo.write_event(event)
+                    return
+                except Exception:
+                    if attempt < 2:
+                        await asyncio.sleep(0.05 * 2**attempt)
             try:
-                done = await self.fast.settle(spend_key, request_id, actual, event)
-                if done and not self.fast.redis:
-                    await self.repo.write_event(event)
+                # Preserve billed work in the authoritative ledger. A transactional
+                # recovery marker fences further paid admissions until Redis is rebuilt.
+                await self.repo.write_event(event, recovery=bool(self.fast.redis))
+                logger.error("Accounting request %s entered ledger recovery", request_id)
             except Exception:
-                logger.exception("Accounting failed for request %s; reservation retained", request_id)
+                logger.critical(
+                    "Accounting unavailable for request %s; manual reconciliation required", request_id
+                )
 
         try:
             if cached:
@@ -208,7 +274,8 @@ class Pipeline:
                                 timeout=max(1, 120 - (time.monotonic() - started)),
                             )
                         target, fallback_count = candidate, i
-                        await self.fast.success(tenant + ":" + candidate)
+                        if not request.get("stream"):
+                            await self.fast.success(tenant + ":" + candidate)
                         break
                     except (ProviderError, StopAsyncIteration, TimeoutError) as exc:
                         last_error = exc
@@ -246,11 +313,15 @@ class Pipeline:
                 )
             if request.get("temperature") == 0 and plan["pii_mode"] != "off" and not hit:
                 await self.fast.cache_put(cache_key, {"target": target, "result": result})
-            usage_estimated = not bool(result.get("usage"))
-            usage = result.get("usage") or {
-                "prompt_tokens": input_estimate,
-                "completion_tokens": token_count(result["choices"]),
-            }
+            usage_estimated = not valid_usage(result.get("usage"))
+            usage = (
+                result.get("usage")
+                if not usage_estimated
+                else {
+                    "prompt_tokens": input_estimate,
+                    "completion_tokens": token_count(result["choices"]),
+                }
+            )
             await account(usage, estimated=usage_estimated)
             result["usage"] = dict(
                 usage,
@@ -342,13 +413,14 @@ class Pipeline:
                             "tool_calls": [{"index": int(key.split(":")[1]), "function": {"arguments": tail}}]
                         }
                     )
-            usage_estimated = not bool(usage)
-            if not usage:
+            usage_estimated = not valid_usage(usage)
+            if usage_estimated:
                 usage = {
                     "prompt_tokens": input_estimate,
                     "completion_tokens": token_count(text),
                     "total_tokens": input_estimate + token_count(text),
                 }
+            await self.fast.success(event["tenant_id"] + ":" + target)
             await account(usage, estimated=usage_estimated)
             if cache_key and not hit:
                 await self.fast.cache_put(cache_key, {"target": target, "result": captured})
@@ -375,6 +447,7 @@ class Pipeline:
             raise
         except Exception:
             self.errors += 1
+            await self.fast.failure(event["tenant_id"] + ":" + target)
             yield 'data: {"error":{"message":"Provider stream interrupted","type":"upstream_error"}}\n\n'
         finally:
             if not hit and isinstance(result, tuple):

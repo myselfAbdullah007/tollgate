@@ -35,3 +35,9 @@ Confirmed release concerns: loss of extra privacy categories/thresholds in plan 
 Retest: make test 43 passed/6 expected skips, make integration 49 passed, static checks/build passed, five Docker browser tests passed. A controlled mock deployment probe passed fallback/stream/degradation/worker checks. The old timestamp-alias Compose smoke returned 422 during review, reproduced as routing-identifier redaction. Main GitHub CI for 172ac2a failed during PostgreSQL service health-command parsing; do not report it as green or confuse Dependabot success runs with CI.
 
 Do not silently weaken existing policies to simplify a form. Treat proposed fixes/acceptance tests as pending until implemented and validated. No paid provider verification or unrelated-service changes occurred in this review.
+
+## 0.2 implementation — 2026-10-28
+
+The latest section supersedes the review-only/current-running baseline above. F01–F13 are implemented with regressions. New source modules cover pricing, ingress bounds, account security, notifications and maintenance; UI shared/editor/business components and a single foreground token file keep future changes reviewable. Environment labels affect reports only. Roles are deployment-wide. Rate data is illustrative; tests use only mock/recorded transports. Account role editing is owner API only; UI creates accounts and manages self sessions/passwords. Export/validate does not import.
+
+Remaining work: realistic load/soak/SLOs, incremental reconciliation and bounded stream retention, batching, live-provider/model price review, workspace membership and independent project budgets, advanced quality/upgrade/billing integrations. Do not infer these from the presence of reports or roles. See the newest validation section for actual release results.
