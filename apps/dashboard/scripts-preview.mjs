@@ -1,0 +1,22 @@
+import {chromium} from 'playwright';
+(async () => {
+ const browser = await chromium.launch({executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE});
+ const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+ await page.goto('http://127.0.0.1:3187/login');
+ await page.getByRole('button',{name:'Use demo credentials'}).click();
+ await page.getByRole('button',{name:'Sign in to workspace'}).click();
+ await page.getByRole('heading',{name:'Overview',exact:true}).waitFor();
+ await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
+ await page.screenshot({path:'../../docs/screenshots/overview.png',fullPage:true});
+ await page.goto('http://127.0.0.1:3187/playground');
+ await page.getByRole('button',{name:'Preview redaction'}).click();
+ await page.getByRole('button',{name:'Send request'}).click();
+ await page.locator('.response-body').filter({hasText:'ali@example.com'}).waitFor();
+ await page.getByRole('button',{name:'Send request'}).waitFor();
+ await page.screenshot({path:'../../docs/screenshots/playground.png',fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('http://127.0.0.1:3187/');
+ await page.getByText('Connecting to your workspace…').waitFor({state:'hidden'});
+ await page.screenshot({path:'../../docs/screenshots/mobile.png',fullPage:true});
+ await browser.close();
+})();

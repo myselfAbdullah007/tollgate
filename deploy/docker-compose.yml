@@ -1,0 +1,85 @@
+name: tollgate
+x-backend: &backend
+  image: tollgate:local
+  build:
+    context: ..
+    dockerfile: apps/gateway/Dockerfile
+  environment: &env
+    TOLLGATE_DATABASE_URL: postgresql+asyncpg://tollgate:${POSTGRES_PASSWORD:-tollgate-local-only}@postgres:5432/tollgate
+    TOLLGATE_REDIS_URL: redis://redis:6379/0
+    TOLLGATE_DEMO: ${TOLLGATE_DEMO:-true}
+    TOLLGATE_ADMIN_EMAIL: ${TOLLGATE_ADMIN_EMAIL:-admin@tollgate.local}
+    TOLLGATE_ADMIN_PASSWORD: ${TOLLGATE_ADMIN_PASSWORD:-tollgate-demo-2026}
+    TOLLGATE_MASTER_KEY: ${TOLLGATE_MASTER_KEY:-}
+    TOLLGATE_ALLOWED_ORIGIN: ${TOLLGATE_ALLOWED_ORIGIN:-http://localhost:3187}
+    TOLLGATE_COOKIE_SECURE: ${TOLLGATE_COOKIE_SECURE:-false}
+    TOLLGATE_ENABLE_MOCK_PROVIDER: ${TOLLGATE_ENABLE_MOCK_PROVIDER:-true}
+    OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+  restart: unless-stopped
+  security_opt: [no-new-privileges:true]
+  networks: [tollgate]
+services:
+  postgres:
+    image: postgres:16.13-alpine
+    environment:
+      POSTGRES_USER: tollgate
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tollgate-local-only}
+      POSTGRES_DB: tollgate
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    ports: ["127.0.0.1:${TOLLGATE_POSTGRES_PORT:-55487}:5432"]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U tollgate]
+      interval: 3s
+      retries: 20
+    restart: unless-stopped
+    networks: [tollgate]
+  redis:
+    image: redis:7.4.8-alpine
+    command: [redis-server, --appendonly, 'yes', --appendfsync, always]
+    volumes: [redis_data:/data]
+    ports: ["127.0.0.1:${TOLLGATE_REDIS_PORT:-63987}:6379"]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 3s
+      retries: 20
+    restart: unless-stopped
+    networks: [tollgate]
+  migrate:
+    <<: *backend
+    command: [migrate]
+    restart: 'no'
+    healthcheck: {disable: true}
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  gateway:
+    <<: *backend
+    command: [serve]
+    ports: ["127.0.0.1:${TOLLGATE_PORT:-8187}:8187"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  worker:
+    <<: *backend
+    command: [worker]
+    healthcheck: {disable: true}
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  dashboard:
+    image: tollgate-dashboard:local
+    build:
+      context: ..
+      dockerfile: apps/dashboard/Dockerfile
+      args: {TOLLGATE_API_URL: 'http://gateway:8187'}
+    ports: ["127.0.0.1:${TOLLGATE_DASHBOARD_PORT:-3187}:3187"]
+    depends_on:
+      gateway: {condition: service_healthy}
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    networks: [tollgate]
+volumes:
+  postgres_data:
+  redis_data:
+networks:
+  tollgate:

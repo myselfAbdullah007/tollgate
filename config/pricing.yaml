@@ -1,0 +1,13 @@
+# Illustrative conservative per-token prices in integer micro-USD.
+# Verify provider pricing and model availability before enabling paid traffic.
+# Loaded at gateway startup; both reservations and settlement use this table.
+mock/premium: [3, 15]
+mock/backup: [3, 15]
+mock/outage: [3, 15]
+mock/balanced: [1, 5]
+mock/economy: [1, 2]
+openai/gpt-4.1: [2, 8]
+openai/gpt-4.1-mini: [1, 2]
+anthropic/claude-sonnet-4-20250514: [3, 15]
+anthropic/claude-3-5-haiku-20241022: [1, 4]
+google/gemini-2.5-flash: [1, 3]

@@ -1,0 +1,17 @@
+# Applied once, only to a fresh workspace. Money uses integer micro-USD.
+plans:
+  - name: Pro
+    monthly_budget: 50000000
+    rpm: 60
+    degradation: [{at: 0.8, tier: 1}, {at: 0.95, tier: 2}]
+    on_exhausted: block
+    overage_cap: 0
+    pii_mode: reversible
+    pii_block_categories: [CARD]
+aliases:
+  - name: smart
+    allow_degrade: true
+    tiers:
+      - [mock/premium, mock/backup]
+      - [mock/balanced]
+      - [mock/economy]

@@ -1,0 +1,17 @@
+services:
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    volumes: [./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro]
+    ports: ['127.0.0.1:9197:9090']
+    networks: [tollgate]
+    depends_on: [gateway]
+  grafana:
+    image: grafana/grafana:11.6.0
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:?Set GRAFANA_PASSWORD before enabling observability}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ['127.0.0.1:3197:3000']
+    networks: [tollgate]
