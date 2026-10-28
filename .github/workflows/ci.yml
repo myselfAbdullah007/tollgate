@@ -17,7 +17,7 @@ jobs:
         options: --health-cmd "redis-cli ping" --health-interval 3s --health-retries 20
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - run: python -m venv .venv && .venv/bin/pip install -r apps/gateway/requirements-dev.lock && .venv/bin/pip install --no-deps -e 'apps/gateway[dev]'
       - run: .venv/bin/ruff check --config apps/gateway/pyproject.toml apps/gateway
@@ -35,7 +35,7 @@ jobs:
       - run: npm ci --prefix apps/dashboard
       - run: npm run lint --prefix apps/dashboard && npm run typecheck --prefix apps/dashboard
       - run: npm run build --prefix apps/dashboard
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - run: python -m venv .venv && .venv/bin/pip install -r apps/gateway/requirements.lock && .venv/bin/pip install --no-deps -e apps/gateway
       - run: npx --prefix apps/dashboard playwright install --with-deps chromium
@@ -54,7 +54,7 @@ jobs:
     needs: [gateway, dashboard]
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - run: python -m venv .venv && .venv/bin/pip install -r apps/gateway/requirements.lock
       - name: Build and start isolated full stack
