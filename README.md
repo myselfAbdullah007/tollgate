@@ -118,10 +118,18 @@ The suite includes 300 concurrent reservations against a budget for 100 requests
 
 This is early-stage software with a working local and Compose application, not a security-audited public service. Dashboard identity is shared by the deployment; workspace selection is an administrative scope, not tenant-specific login isolation. Demo mode is deliberately local-only in Compose. Disable demo mode, supply a private owner password and master key, enable secure cookies behind TLS, configure real routing, and review prices before handling live traffic. Detailed settings are in [configuration](docs/configuration.md) and [SECURITY.md](SECURITY.md).
 
-Presidio NER, AWS KMS, signed webhooks, SSO, semantic caching, embeddings, media, Stripe sync, Helm, and tenant-specific dashboard logins are outside this release. [Public roadmap](ROADMAP.md). The working name has not been reserved or published on GitHub, GHCR, or a domain. Release publishing is manual and requires repository ownership and a private security disclosure contact.
+Presidio NER, AWS KMS, SSO, semantic caching, embeddings, media, Stripe sync, Helm, and tenant-specific dashboard logins are outside this release. [Public roadmap](ROADMAP.md). The source repository is published on GitHub; no domain reservation or public image/site deployment is claimed. Release publishing is manual and requires repository ownership and a private security disclosure contact.
 
 Apache-2.0. Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Review and next improvements
 
 The current [improvement plan](IMPROVEMENT_PLAN.md) prioritizes confirmed policy/workspace safety issues, readable text, reachable navigation, accurate routing/usage reporting and paid-traffic readiness. [Audit evidence](docs/audits/2026-10-28/REVIEW.md) distinguishes passing existing tests from newly reproduced defects and the initial remote CI setup failure. Planned changes are not represented as implemented fixes.
+
+## Improvements in 0.2
+
+The console now has stronger text contrast, a scrolling sidebar with pinned account controls, lossless revisioned policy forms, workspace-safe state and working date/customer filters. Insights & alerts reports feature/customer/model/environment cost and actual degradation; optional customer revenue shows AI contribution excluding other COGS.
+
+API keys can be bound to a customer for read-only allowance access. Settings provides password/session controls, owner account creation and opt-in signed budget webhooks. Provider configuration remains explicitly separate from live verification. Exact integer charges support fractional token rates, while concurrency/request bounds, settlement retries and recovery fencing improve failure handling.
+
+See [configuration](docs/configuration.md), [operations](docs/operations.md), [validation](docs/validation.md) and the [remaining roadmap](ROADMAP.md). Environment tags and deployment-wide roles do not imply separate workspace or production/development security boundaries.

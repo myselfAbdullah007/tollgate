@@ -15,6 +15,10 @@ test.beforeAll(async ({ browser, baseURL }) => {
   loginCookies = await page.context().cookies();
   await page.close();
 });
+test.afterEach(async ({ page }) => {
+  await page.unrouteAll({ behavior: "ignoreErrors" });
+});
+
 test.beforeEach(async ({ page, context }) => {
   await context.addCookies(loginCookies);
   await page.goto("/");
@@ -174,4 +178,47 @@ test("insights exposes actual routing and feature cost, settings expose secure o
   await expect(
     page.getByRole("heading", { name: "Your sessions" }),
   ).toBeVisible();
+});
+
+test("a superseding refresh does not turn a persisted customer save into an error", async ({
+  page,
+}) => {
+  await page.goto("/customers");
+  await expect(page.getByText("Connecting to your workspace…")).toBeHidden();
+  await page.getByRole("button", { name: "Edit Acme Inc." }).click();
+  const budget = page.getByRole("spinbutton", {
+    name: "Custom monthly budget (USD)",
+  });
+  const original = await budget.inputValue();
+  await budget.fill("81");
+  let holdReads = false;
+  await page.route(
+    "**/api/admin/v1/tenants/default/customers",
+    async (route) => {
+      if (holdReads && route.request().method() === "GET") {
+        await new Promise((resolve) => setTimeout(resolve, 700));
+      }
+      await route.continue();
+    },
+  );
+  holdReads = true;
+  const written = page.waitForResponse(
+    (response) =>
+      response.request().method() === "PATCH" &&
+      response.url().includes("/customers/"),
+  );
+  await page.getByRole("button", { name: "Save changes" }).click();
+  expect((await written).ok()).toBeTruthy();
+  // Refresh is a distinct read. It can supersede the save's read after the write commits.
+  await page.locator(".table-search input").fill("Acme", { force: true });
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("status")).toContainText("Changes saved");
+  await expect(page.locator("tbody")).toContainText("$81");
+  holdReads = false;
+  await page.getByRole("button", { name: "Edit Acme Inc." }).click();
+  await page
+    .getByRole("spinbutton", { name: "Custom monthly budget (USD)" })
+    .fill(original);
+  await page.getByRole("button", { name: "Save changes" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
 });

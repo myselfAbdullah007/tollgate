@@ -6,7 +6,7 @@ This repository has not been published and does not yet have an owner-supplied p
 
 ## Supported version
 
-0.1 is early-stage software for local evaluation and controlled self-hosted trials. It has automated security boundary tests, not an independent audit or compliance certification.
+0.2 is early-stage software for local evaluation and controlled self-hosted trials. It has automated security boundary tests, not an independent audit or compliance certification.
 
 ## Controls
 
@@ -24,7 +24,7 @@ Review model availability and prices before live traffic. An application budget 
 
 ## Known limitations
 
-No SSO, independent tenant dashboard identity, full compliance workflow, WAF, secret rotation automation, KMS, NER, distributed tracing, or comprehensive data-classification guarantee. Metadata includes customer external IDs; do not use sensitive contact information as those identifiers. Operator-supplied labels are metadata and are retained. Review retention for ledger partitions, Redis events, caches and backups.
+No SSO, independent tenant dashboard identity, full compliance workflow, WAF, unattended secret rotation, KMS, NER, distributed tracing, or comprehensive data-classification guarantee. Metadata includes customer external IDs; do not use sensitive contact information as those identifiers. Operator-supplied labels are metadata and are retained. Review retention for ledger partitions, Redis events, caches and backups.
 
 ## 0.2 operational controls
 

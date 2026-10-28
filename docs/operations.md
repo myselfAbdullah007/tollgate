@@ -25,13 +25,13 @@ Redis AOF is configured with `appendfsync always` in the provided Compose stack.
 
 On startup and every three minutes the worker reconstructs settled counters from a repeatable-read ledger snapshot plus stream events absent from that snapshot. A short global lease pauses new budget reservations/settlements, not provider generation. The commit checks lease identity atomically; expired snapshots cannot overwrite new charges. Active reservation hashes are untouched. Requests wait briefly; the lease auto-expires if the worker crashes. Current reconciliation loads ledger rows into memory and is intended for early-stage scale; large installations need SQL aggregation and bounded event retention.
 
-Reservations carry 180-second deadlines; request provider work has a 120-second total ceiling. A crashed process's reservation is removed on a later admission. An interrupted stream is conservatively charged at its reserved estimate, marked as estimated/error, rather than assuming the provider did no work. Cache hits cost zero but still require budget admission under the current pipeline policy.
+Reservations carry 180-second deadlines; request provider work has a 120-second total ceiling. A crashed process's reservation is removed on a later admission. An interrupted stream is conservatively charged at its reserved estimate, marked as estimated/error, rather than assuming the provider did no work. Deterministic privacy-enabled cache hits are checked before reservation and can be served at zero cost when budget is exhausted, while remaining inside the configured permitted tier range.
 
 Back up PostgreSQL **and** the Redis AOF volume. Complete Redis data loss after provider billing but before ledger delivery cannot be reconstructed exactly. Never attach an old Redis volume to a different ledger and assume balances are valid. Restore both stores together, start migration/worker, inspect pending events and counters, then admit traffic.
 
 ## Secrets and provider changes
 
-Use `make key` to generate a master key. Store it in your secret manager or protected environment. Backups without the master key cannot decrypt stored credentials. Rotation is a manual, reviewed decrypt/re-encrypt procedure; do not replace the environment key alone. Environment provider keys are fallbacks, and stored per-workspace credentials take precedence.
+Use `make key` to generate a master key. Store it in your secret manager or protected environment. Backups without the master key cannot decrypt stored credentials. Use the transactional `tollgate rotate-master-key --maintenance` command with current/new keys, after stopping only Tollgate gateway/worker; see SECURITY.md. Do not replace the environment key alone. Environment provider keys are fallbacks, and stored per-workspace credentials take precedence.
 
 The provider screen reports whether a key is configured; it does not claim an external health check was made. Test credentials/routing through the playground with a controlled budget after reviewing prices. No automatic paid health probes are performed.
 
@@ -51,3 +51,11 @@ docker compose -f deploy/docker-compose.yml up -d --no-build
 ```
 
 No host plugin installation is required for this fallback. Both images were exercised with this path in the local validation environment.
+
+## Accounting and alert operations in 0.2
+
+Settings shows readiness, worker heartbeat and pending delivery state. Settlement retries idempotently; a fallback SQL ledger transaction records a recovery marker and fences new requests for the workspace until reconciliation. Reconciliation clears only captured markers after a lease-validated counter update, retaining in-flight reservations. Simultaneous loss of both Redis and SQL still requires operator recovery. Malformed stream records are quarantined using source id/error metadata only.
+
+Webhook delivery runs separately from ledger ingestion, checks only public HTTPS destinations, signs each body and retries up to five times. Receivers must deduplicate event ids. Inspect failed alerts under Insights & alerts. Webhooks are disabled until an owner configures/enables them; no real destination was contacted during tests.
+
+Migration `0002` adds the authoritative API-key hash lookup index without rewriting stored credentials. Back up both stores before upgrades. The current worker retains events and scans history for reconciliation; representative capacity testing, checkpointing, batching and a reviewed retention policy remain pending.

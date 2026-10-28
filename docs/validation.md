@@ -73,3 +73,9 @@ Regression coverage includes policy preservation/revisions, workspace state, rou
 Evidence: [implementation screenshots and measurements](audits/2026-10-28-implementation/ui-measurements.json). Contrast measurements are diagnostics, not an independent WCAG assessment. Playwright used the existing Chromium 1208 executable through `PLAYWRIGHT_CHROMIUM_EXECUTABLE`; the default newly requested browser binary was absent and that failed launch was not counted as a pass.
 
 Docker rebuild/deployment smoke and remote main CI are recorded below when completed. They are not inferred from these local results. Existing monthly demo ledger data is preserved; optional new feature tags default to `general` / `production` in reports for legacy rows. Another project's services have not been stopped or modified.
+
+### Production browser timing correction
+
+CI run [40681148789](https://github.com/myselfAbdullah007/tollgate/actions/runs/40681148789) passed the gateway job but exposed a production browser race: a successful customer PATCH was followed by a read refresh that a delayed search load cancelled. The save dialog incorrectly surfaced the read cancellation as a failed write. The first Docker browser rerun reproduced it (8 passed, 2 failed, the other failure was unfinished intercepted-route teardown). These runs are recorded as failures.
+
+The loader now ignores only its own superseded read cancellation; real errors still propagate. A focused test deliberately overlaps save refresh and search refresh. Browser interception teardown ignores callbacks that finish after test teardown. Documentation and Compose configuration now expose the concurrency setting and current pricing/account/notification procedures.

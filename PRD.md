@@ -1,4 +1,4 @@
-# Product requirements: Tollgate 0.1
+# Product requirements: Tollgate 0.2
 
 ## Audience and problem
 
@@ -25,3 +25,12 @@ A developer can run the local mock demo and reach a functioning dashboard withou
 ## Release scope
 
 Text chat and tool calling, three provider adapters plus mock, budgets/limits, reversible privacy, routing, exact cache, admin operations, durable Compose topology, tests, documentation. This release is intended for local evaluation and controlled self-hosted trials. General production readiness requires the security and operational review described in SECURITY.md.
+
+## 0.2 business journeys
+
+8. Open Insights & alerts to find expensive features/customers/models, distinguish estimates and actual lower-tier service, and review customer AI contribution using an optional revenue reference.
+9. Create a customer-bound usage key so the SaaS can show remaining allowance without granting model access or exposing other customers.
+10. Configure signed budget alerts as an owner, verify the receiver signature and inspect delivery history before relying on notifications.
+11. Manage your password and sessions; owners create deployment-wide accounts, with API role/disable controls. Workspace membership remains a separate future requirement.
+
+Lossless policy forms, concurrent-edit conflicts, working date/customer filters and reachable readable controls are acceptance requirements. Complete production-scale, live-provider and independent security review remain outside the demonstrated local verification.

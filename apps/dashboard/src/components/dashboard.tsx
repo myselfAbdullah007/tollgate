@@ -179,39 +179,44 @@ export default function Dashboard({
     loadAbort.current = controller;
     const get = <T,>(path: string) =>
       api<T>(path, { signal: controller.signal });
-    const [u, t, c, p, a, k, v, stats, l, sys] = await Promise.all([
-      get<{ email: string; demo: boolean; role: string }>("/auth/me"),
-      get<Tenant[]>("/tenants"),
-      get<Customer[]>(`${base}/customers`),
-      get<Plan[]>(`${base}/plans`),
-      get<Alias[]>(`${base}/aliases`),
-      get<Key[]>(`${base}/keys`),
-      get<Provider[]>(`/providers?tenant_id=${tenant}`),
-      get<Usage>(`${base}/usage?days=${days}`),
-      get<{ items: Log[]; total: number }>(
-        `${base}/logs?limit=20&offset=${offset}&days=${days}&customer=${encodeURIComponent(customerFilter)}&q=${encodeURIComponent(query)}${filter === "success" || filter === "error" ? `&status=${filter}` : ""}`,
-      ),
-      get<{
-        status: string;
-        worker: string;
-        pending_events: number;
-        checked_at: string;
-      }>("/status"),
-    ]);
-    if (version !== loadVersion.current) return;
-    setUser(u);
-    setTenants(t);
-    setCustomers(c);
-    setPlans(p);
-    setAliases(a);
-    setKeys(k);
-    setProviders(v);
-    setUsage(stats);
-    setSystem(sys);
-    setLogs(l.items);
-    setTotalLogs(l.total);
-    setError("");
-    setLoading(false);
+    try {
+      const [u, t, c, p, a, k, v, stats, l, sys] = await Promise.all([
+        get<{ email: string; demo: boolean; role: string }>("/auth/me"),
+        get<Tenant[]>("/tenants"),
+        get<Customer[]>(`${base}/customers`),
+        get<Plan[]>(`${base}/plans`),
+        get<Alias[]>(`${base}/aliases`),
+        get<Key[]>(`${base}/keys`),
+        get<Provider[]>(`/providers?tenant_id=${tenant}`),
+        get<Usage>(`${base}/usage?days=${days}`),
+        get<{ items: Log[]; total: number }>(
+          `${base}/logs?limit=20&offset=${offset}&days=${days}&customer=${encodeURIComponent(customerFilter)}&q=${encodeURIComponent(query)}${filter === "success" || filter === "error" ? `&status=${filter}` : ""}`,
+        ),
+        get<{
+          status: string;
+          worker: string;
+          pending_events: number;
+          checked_at: string;
+        }>("/status"),
+      ]);
+      if (version !== loadVersion.current) return;
+      setUser(u);
+      setTenants(t);
+      setCustomers(c);
+      setPlans(p);
+      setAliases(a);
+      setKeys(k);
+      setProviders(v);
+      setUsage(stats);
+      setSystem(sys);
+      setLogs(l.items);
+      setTotalLogs(l.total);
+      setError("");
+      setLoading(false);
+    } catch (e) {
+      // A newer read owns the view; cancellation does not invalidate a completed write.
+      if (!controller.signal.aborted) throw e;
+    }
   }, [base, tenant, days, offset, query, filter, customerFilter]);
   useEffect(() => {
     if (section === "login") return;
