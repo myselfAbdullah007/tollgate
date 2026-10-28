@@ -64,7 +64,12 @@ services:
   worker:
     <<: *backend
     command: [worker]
-    healthcheck: {disable: true}
+    healthcheck:
+      test: [CMD, python, -c, "import os,time,redis; stamp=redis.Redis.from_url(os.environ['TOLLGATE_REDIS_URL']).get('tollgate:worker-heartbeat'); assert stamp and time.time()-float(stamp)<60"]
+      interval: 15s
+      timeout: 3s
+      start_period: 20s
+      retries: 4
     depends_on:
       migrate: {condition: service_completed_successfully}
   dashboard:

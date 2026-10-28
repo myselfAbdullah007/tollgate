@@ -33,3 +33,10 @@ No public release, paid-provider verification, or production security audit has 
 - Recorded confirmed sidebar/contrast issues, policy loss on plan save, stale workspace forms, routing-identifier redaction, validation/adapter gaps, ineffective date filtering and misleading tier labels.
 - Recorded the initial main CI service-health quoting failure separately from local passing checks.
 - Application fixes remain planned; this review does not claim the findings are resolved.
+
+### 0.2 production verification correction
+
+- Fixed cancelled background reads being reported as failed configuration saves after successful writes; added a deliberately overlapping search/save regression.
+- Hardened browser route teardown and updated operational configuration/runbooks for the new controls.
+
+- Added a worker heartbeat healthcheck so Compose wait gates can verify the long-running worker.
