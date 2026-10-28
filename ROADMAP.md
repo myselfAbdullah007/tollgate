@@ -21,3 +21,7 @@ Presidio names/addresses via NER, AWS KMS envelope encryption, signed customer b
 ## Deliberately outside 0.1
 
 Semantic caching, embeddings, images, audio, Stripe billing sync, SSO, prompt management, jailbreak detection, Helm/Kubernetes distribution, per-tenant dashboard logins. These are intentional boundaries, not hidden partial implementations.
+
+## Review-driven implementation order
+
+[IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md) supersedes a feature-first sequence with explicit release gates: main CI and regression baseline; policy/workspace safety and readability/sidebar; routing/preview/date/tier correctness; precise cost and recovery controls; useful business reporting/alerts; then scale and integrations. The review findings remain open until their acceptance checks pass.

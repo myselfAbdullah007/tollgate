@@ -13,3 +13,4 @@
 | 2026-10-28 | No prompt or answer retention | Metadata-only logs reduce privacy risk and still support operational diagnosis |
 | 2026-10-28 | Bundle fonts locally | Avoid external font requests and offline rendering regressions |
 | 2026-10-28 | Keep optional NER/KMS explicit on roadmap | Unsupported settings fail clearly rather than pretending to protect data |
+| 2026-10-28 | Prioritize policy safety, readable/reachable controls and truthful operational state before feature expansion | Proposed delivery order and acceptance gates; [ADR 0006](docs/adr/0006-operational-trust.md), IMPROVEMENT_PLAN.md |

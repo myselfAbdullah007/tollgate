@@ -1,0 +1,16 @@
+{
+  "readiness": {
+    "status": "ready",
+    "storage": "postgres",
+    "fast_path": "redis"
+  },
+  "stream_status": 200,
+  "fallback_model": "mock/backup",
+  "pii_restored": true,
+  "done": true,
+  "worker_delivery": true,
+  "pii_absent_from_ledger": true,
+  "fallback_count": 1,
+  "degradation_status": 200,
+  "degradation_tier": "2"
+}

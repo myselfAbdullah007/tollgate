@@ -1,0 +1,64 @@
+{
+  "plan_editor_roundtrip": {
+    "originalCategories": [
+      "CARD",
+      "EMAIL",
+      "SECRET"
+    ],
+    "submittedCategories": [
+      "CARD"
+    ],
+    "originalThresholds": [
+      {
+        "at": 0.6,
+        "tier": 1
+      },
+      {
+        "at": 0.8,
+        "tier": 2
+      },
+      {
+        "at": 0.95,
+        "tier": 3
+      }
+    ],
+    "submittedThresholds": [
+      {
+        "at": 0.6,
+        "tier": 1
+      },
+      {
+        "at": 0.8,
+        "tier": 2
+      }
+    ],
+    "productionWrites": "None; PATCH intercepted and fulfilled with fixture response"
+  },
+  "log_date_range": {
+    "requestUrls": [
+      "http://127.0.0.1:3187/api/admin/v1/tenants/default/logs?limit=20&offset=0&q=",
+      "http://127.0.0.1:3187/api/admin/v1/tenants/default/logs?limit=20&offset=0&q=",
+      "http://127.0.0.1:3187/api/admin/v1/tenants/default/logs?limit=20&offset=0&q=",
+      "http://127.0.0.1:3187/api/admin/v1/tenants/default/logs?limit=20&offset=0&q="
+    ],
+    "range": "Last 7 days",
+    "dateParameterSent": false
+  },
+  "customer_log_navigation": {
+    "customer": "cus_acme",
+    "href": "/logs",
+    "expected": "Customer-specific query preserved"
+  },
+  "workspace_settings_state": {
+    "before": "Acme workspace",
+    "selectedWorkspace": "Audit second workspace",
+    "displayNameInput": "Acme workspace",
+    "expected": "Input reinitializes for the newly selected workspace",
+    "productionWrites": "None; workspace supplied with intercepted GET fixtures"
+  },
+  "mobile_sidebar": {
+    "signOutBottom": 934.5,
+    "viewportHeight": 844,
+    "sidebarOverflow": "visible"
+  }
+}

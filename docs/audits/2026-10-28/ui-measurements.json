@@ -1,0 +1,8964 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 958,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 615.5,
+      "bottom": 958,
+      "left": 17,
+      "right": 226,
+      "height": 342.5,
+      "clientHeight": 343,
+      "scrollHeight": 343,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "userMenu": {
+      "top": 892,
+      "bottom": 958,
+      "left": 0,
+      "right": 243,
+      "height": 66,
+      "clientHeight": 65,
+      "scrollHeight": 65,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "signOut": {
+      "top": 910.5,
+      "bottom": 940.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "documentOverflow": false,
+    "contrastFailures": [
+      {
+        "text": "A",
+        "selector": "div.workspace-avatar",
+        "color": "rgb(122, 98, 159)",
+        "background": [
+          233,
+          228,
+          244
+        ],
+        "size": 13,
+        "ratio": 4.14,
+        "required": 4.5
+      },
+      {
+        "text": "Demo workspace",
+        "selector": "small.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          250,
+          250,
+          253
+        ],
+        "size": 10,
+        "ratio": 4.4,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "small.",
+        "color": "rgb(153, 149, 165)",
+        "background": [
+          238,
+          238,
+          243
+        ],
+        "size": 10,
+        "ratio": 2.52,
+        "required": 4.5
+      },
+      {
+        "text": "TRY IT",
+        "selector": "span.tiny-badge",
+        "color": "rgb(145, 132, 158)",
+        "background": [
+          240,
+          238,
+          245
+        ],
+        "size": 8,
+        "ratio": 3.04,
+        "required": 4.5
+      },
+      {
+        "text": "AD",
+        "selector": "div.user-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 10,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "Workspace",
+        "selector": "span.",
+        "color": "rgb(161, 157, 171)",
+        "background": [
+          254,
+          254,
+          255
+        ],
+        "size": 11,
+        "ratio": 2.63,
+        "required": 4.5
+      },
+      {
+        "text": "A",
+        "selector": "div.top-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 11,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "YOUR AI OPERATIONS, AT A GLANCE",
+        "selector": "div.eyebrow",
+        "color": "rgb(142, 132, 154)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 3.37,
+        "required": 4.5
+      },
+      {
+        "text": "A clear view of your AI usage. Every customer, every request, every dollar.",
+        "selector": "p.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 12,
+        "ratio": 4.3,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers have automatically moved to a more affordable model. No interruptions.",
+        "selector": "p.",
+        "color": "rgb(147, 115, 170)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.78,
+        "required": 4.5
+      },
+      {
+        "text": "View budget rules",
+        "selector": "a.",
+        "color": "rgb(143, 118, 165)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.76,
+        "required": 4.5
+      },
+      {
+        "text": "$",
+        "selector": "span.currency-icon",
+        "color": "rgb(162, 147, 185)",
+        "background": [
+          245,
+          242,
+          250
+        ],
+        "size": 17,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Across 229 requests",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Within your plan budgets",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "504 ms average response",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "All models, one gateway",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "2 on a lower-cost tier",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation active",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Redacted before reaching providers",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Customer data stays private",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Explore requests",
+        "selector": "a.",
+        "color": "rgb(154, 135, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.22,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "PII protection",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "89 values",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Response cache",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "14% hit rate",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Protection is on for all new requests",
+        "selector": "span.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          250,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.32,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "span.count-badge",
+        "color": "rgb(169, 157, 187)",
+        "background": [
+          244,
+          241,
+          248
+        ],
+        "size": 9,
+        "ratio": 2.28,
+        "required": 4.5
+      },
+      {
+        "text": "View all customers",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "PLAN",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MONTHLY SPEND",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "BUDGET USED",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL TIER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "OD",
+        "selector": "span.avatar.color-0",
+        "color": "rgb(173, 150, 194)",
+        "background": [
+          238,
+          231,
+          246
+        ],
+        "size": 11,
+        "ratio": 2.2,
+        "required": 4.5
+      },
+      {
+        "text": "cus_orbit",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Free",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $5",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "97%",
+        "selector": "span.",
+        "color": "rgb(195, 153, 131)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 2Economy",
+        "selector": "span.tier-pill.tier-2",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "Economy",
+        "selector": "small.",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "NS",
+        "selector": "span.avatar.color-1",
+        "color": "rgb(196, 168, 127)",
+        "background": [
+          246,
+          238,
+          227
+        ],
+        "size": 11,
+        "ratio": 1.97,
+        "required": 4.5
+      },
+      {
+        "text": "cus_notion",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "87%",
+        "selector": "span.",
+        "color": "rgb(192, 164, 105)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.4,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 1Balanced",
+        "selector": "span.tier-pill.tier-1",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "Balanced",
+        "selector": "small.",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "NA",
+        "selector": "span.avatar.color-2",
+        "color": "rgb(151, 180, 166)",
+        "background": [
+          233,
+          241,
+          238
+        ],
+        "size": 11,
+        "ratio": 1.95,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "72%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "VT",
+        "selector": "span.avatar.color-3",
+        "color": "rgb(154, 166, 204)",
+        "background": [
+          235,
+          237,
+          247
+        ],
+        "size": 11,
+        "ratio": 2.07,
+        "required": 4.5
+      },
+      {
+        "text": "cus_vercel",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Business",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $250",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "61%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "AI",
+        "selector": "span.avatar.color-4",
+        "color": "rgb(189, 155, 179)",
+        "background": [
+          242,
+          233,
+          240
+        ],
+        "size": 11,
+        "ratio": 2.08,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "46%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "View request logs",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "REQUEST / CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "STATUS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TOKENS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "COST",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "LATENCY",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TIME",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "01a18202…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "195 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:16 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181fe…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "182 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:11 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f3…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "183 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:59 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "185 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "smoke-1793181495576796370",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/backup",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "354",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0032",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "150 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f0…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "833",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$1.1621",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "391 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:56 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tollgate v0.1.0",
+        "selector": "span.",
+        "color": "rgb(173, 156, 190)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 2.41,
+        "required": 4.5
+      },
+      {
+        "text": "v0.1.0",
+        "selector": "span.footer-version",
+        "color": "rgb(191, 180, 201)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 1.88,
+        "required": 4.5
+      },
+      {
+        "text": "Meter. Limit. Protect. · Built for a better AI experience.",
+        "selector": "span.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.35,
+        "required": 4.5
+      },
+      {
+        "text": "·",
+        "selector": "span.footer-separator",
+        "color": "rgb(200, 191, 209)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 1.69,
+        "required": 4.5
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 768,
+      "left": 0,
+      "right": 244,
+      "height": 768,
+      "clientHeight": 768,
+      "scrollHeight": 958,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 615.5,
+      "bottom": 958,
+      "left": 17,
+      "right": 226,
+      "height": 342.5,
+      "clientHeight": 343,
+      "scrollHeight": 343,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "userMenu": {
+      "top": 892,
+      "bottom": 958,
+      "left": 0,
+      "right": 243,
+      "height": 66,
+      "clientHeight": 65,
+      "scrollHeight": 65,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "signOut": {
+      "top": 910.5,
+      "bottom": 940.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "documentOverflow": false,
+    "contrastFailures": [
+      {
+        "text": "A",
+        "selector": "div.workspace-avatar",
+        "color": "rgb(122, 98, 159)",
+        "background": [
+          233,
+          228,
+          244
+        ],
+        "size": 13,
+        "ratio": 4.14,
+        "required": 4.5
+      },
+      {
+        "text": "Demo workspace",
+        "selector": "small.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          250,
+          250,
+          253
+        ],
+        "size": 10,
+        "ratio": 4.4,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "small.",
+        "color": "rgb(153, 149, 165)",
+        "background": [
+          238,
+          238,
+          243
+        ],
+        "size": 10,
+        "ratio": 2.52,
+        "required": 4.5
+      },
+      {
+        "text": "TRY IT",
+        "selector": "span.tiny-badge",
+        "color": "rgb(145, 132, 158)",
+        "background": [
+          240,
+          238,
+          245
+        ],
+        "size": 8,
+        "ratio": 3.04,
+        "required": 4.5
+      },
+      {
+        "text": "AD",
+        "selector": "div.user-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 10,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "Workspace",
+        "selector": "span.",
+        "color": "rgb(161, 157, 171)",
+        "background": [
+          254,
+          254,
+          255
+        ],
+        "size": 11,
+        "ratio": 2.63,
+        "required": 4.5
+      },
+      {
+        "text": "A",
+        "selector": "div.top-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 11,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "YOUR AI OPERATIONS, AT A GLANCE",
+        "selector": "div.eyebrow",
+        "color": "rgb(142, 132, 154)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 3.37,
+        "required": 4.5
+      },
+      {
+        "text": "A clear view of your AI usage. Every customer, every request, every dollar.",
+        "selector": "p.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 12,
+        "ratio": 4.3,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers have automatically moved to a more affordable model. No interruptions.",
+        "selector": "p.",
+        "color": "rgb(147, 115, 170)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.78,
+        "required": 4.5
+      },
+      {
+        "text": "View budget rules",
+        "selector": "a.",
+        "color": "rgb(143, 118, 165)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.76,
+        "required": 4.5
+      },
+      {
+        "text": "$",
+        "selector": "span.currency-icon",
+        "color": "rgb(162, 147, 185)",
+        "background": [
+          245,
+          242,
+          250
+        ],
+        "size": 17,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Across 229 requests",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Within your plan budgets",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "504 ms average response",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "All models, one gateway",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "2 on a lower-cost tier",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation active",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Redacted before reaching providers",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Customer data stays private",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Explore requests",
+        "selector": "a.",
+        "color": "rgb(154, 135, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.22,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "PII protection",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "89 values",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Response cache",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "14% hit rate",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Protection is on for all new requests",
+        "selector": "span.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          250,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.32,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "span.count-badge",
+        "color": "rgb(169, 157, 187)",
+        "background": [
+          244,
+          241,
+          248
+        ],
+        "size": 9,
+        "ratio": 2.28,
+        "required": 4.5
+      },
+      {
+        "text": "View all customers",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "PLAN",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MONTHLY SPEND",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "BUDGET USED",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL TIER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "OD",
+        "selector": "span.avatar.color-0",
+        "color": "rgb(173, 150, 194)",
+        "background": [
+          238,
+          231,
+          246
+        ],
+        "size": 11,
+        "ratio": 2.2,
+        "required": 4.5
+      },
+      {
+        "text": "cus_orbit",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Free",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $5",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "97%",
+        "selector": "span.",
+        "color": "rgb(195, 153, 131)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 2Economy",
+        "selector": "span.tier-pill.tier-2",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "Economy",
+        "selector": "small.",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "NS",
+        "selector": "span.avatar.color-1",
+        "color": "rgb(196, 168, 127)",
+        "background": [
+          246,
+          238,
+          227
+        ],
+        "size": 11,
+        "ratio": 1.97,
+        "required": 4.5
+      },
+      {
+        "text": "cus_notion",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "87%",
+        "selector": "span.",
+        "color": "rgb(192, 164, 105)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.4,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 1Balanced",
+        "selector": "span.tier-pill.tier-1",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "Balanced",
+        "selector": "small.",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "NA",
+        "selector": "span.avatar.color-2",
+        "color": "rgb(151, 180, 166)",
+        "background": [
+          233,
+          241,
+          238
+        ],
+        "size": 11,
+        "ratio": 1.95,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "72%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "VT",
+        "selector": "span.avatar.color-3",
+        "color": "rgb(154, 166, 204)",
+        "background": [
+          235,
+          237,
+          247
+        ],
+        "size": 11,
+        "ratio": 2.07,
+        "required": 4.5
+      },
+      {
+        "text": "cus_vercel",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Business",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $250",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "61%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "AI",
+        "selector": "span.avatar.color-4",
+        "color": "rgb(189, 155, 179)",
+        "background": [
+          242,
+          233,
+          240
+        ],
+        "size": 11,
+        "ratio": 2.08,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "46%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "View request logs",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "REQUEST / CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "STATUS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TOKENS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "COST",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "LATENCY",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TIME",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "01a18202…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "195 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:16 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181fe…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "182 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:11 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f3…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "183 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:59 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "185 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "smoke-1793181495576796370",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/backup",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "354",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0032",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "150 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f0…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "833",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$1.1621",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "391 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:56 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tollgate v0.1.0",
+        "selector": "span.",
+        "color": "rgb(173, 156, 190)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 2.41,
+        "required": 4.5
+      },
+      {
+        "text": "v0.1.0",
+        "selector": "span.footer-version",
+        "color": "rgb(191, 180, 201)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 1.88,
+        "required": 4.5
+      },
+      {
+        "text": "Meter. Limit. Protect. · Built for a better AI experience.",
+        "selector": "span.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.35,
+        "required": 4.5
+      },
+      {
+        "text": "·",
+        "selector": "span.footer-separator",
+        "color": "rgb(200, 191, 209)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 1.69,
+        "required": 4.5
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 720,
+      "left": 0,
+      "right": 244,
+      "height": 720,
+      "clientHeight": 720,
+      "scrollHeight": 958,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 615.5,
+      "bottom": 958,
+      "left": 17,
+      "right": 226,
+      "height": 342.5,
+      "clientHeight": 343,
+      "scrollHeight": 343,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "userMenu": {
+      "top": 892,
+      "bottom": 958,
+      "left": 0,
+      "right": 243,
+      "height": 66,
+      "clientHeight": 65,
+      "scrollHeight": 65,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "signOut": {
+      "top": 910.5,
+      "bottom": 940.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "documentOverflow": false,
+    "contrastFailures": [
+      {
+        "text": "A",
+        "selector": "div.workspace-avatar",
+        "color": "rgb(122, 98, 159)",
+        "background": [
+          233,
+          228,
+          244
+        ],
+        "size": 13,
+        "ratio": 4.14,
+        "required": 4.5
+      },
+      {
+        "text": "Demo workspace",
+        "selector": "small.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          250,
+          250,
+          253
+        ],
+        "size": 10,
+        "ratio": 4.4,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "small.",
+        "color": "rgb(153, 149, 165)",
+        "background": [
+          238,
+          238,
+          243
+        ],
+        "size": 10,
+        "ratio": 2.52,
+        "required": 4.5
+      },
+      {
+        "text": "TRY IT",
+        "selector": "span.tiny-badge",
+        "color": "rgb(145, 132, 158)",
+        "background": [
+          240,
+          238,
+          245
+        ],
+        "size": 8,
+        "ratio": 3.04,
+        "required": 4.5
+      },
+      {
+        "text": "AD",
+        "selector": "div.user-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 10,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "Workspace",
+        "selector": "span.",
+        "color": "rgb(161, 157, 171)",
+        "background": [
+          254,
+          254,
+          255
+        ],
+        "size": 11,
+        "ratio": 2.63,
+        "required": 4.5
+      },
+      {
+        "text": "A",
+        "selector": "div.top-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 11,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "YOUR AI OPERATIONS, AT A GLANCE",
+        "selector": "div.eyebrow",
+        "color": "rgb(142, 132, 154)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 3.37,
+        "required": 4.5
+      },
+      {
+        "text": "A clear view of your AI usage. Every customer, every request, every dollar.",
+        "selector": "p.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 12,
+        "ratio": 4.3,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers have automatically moved to a more affordable model. No interruptions.",
+        "selector": "p.",
+        "color": "rgb(147, 115, 170)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.78,
+        "required": 4.5
+      },
+      {
+        "text": "View budget rules",
+        "selector": "a.",
+        "color": "rgb(143, 118, 165)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.76,
+        "required": 4.5
+      },
+      {
+        "text": "$",
+        "selector": "span.currency-icon",
+        "color": "rgb(162, 147, 185)",
+        "background": [
+          245,
+          242,
+          250
+        ],
+        "size": 17,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Across 229 requests",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Within your plan budgets",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "504 ms average response",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "All models, one gateway",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "2 on a lower-cost tier",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation active",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Redacted before reaching providers",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Customer data stays private",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Explore requests",
+        "selector": "a.",
+        "color": "rgb(154, 135, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.22,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "PII protection",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "89 values",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Response cache",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "14% hit rate",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Protection is on for all new requests",
+        "selector": "span.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          250,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.32,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "span.count-badge",
+        "color": "rgb(169, 157, 187)",
+        "background": [
+          244,
+          241,
+          248
+        ],
+        "size": 9,
+        "ratio": 2.28,
+        "required": 4.5
+      },
+      {
+        "text": "View all customers",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "PLAN",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MONTHLY SPEND",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "BUDGET USED",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL TIER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "OD",
+        "selector": "span.avatar.color-0",
+        "color": "rgb(173, 150, 194)",
+        "background": [
+          238,
+          231,
+          246
+        ],
+        "size": 11,
+        "ratio": 2.2,
+        "required": 4.5
+      },
+      {
+        "text": "cus_orbit",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Free",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $5",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "97%",
+        "selector": "span.",
+        "color": "rgb(195, 153, 131)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 2Economy",
+        "selector": "span.tier-pill.tier-2",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "Economy",
+        "selector": "small.",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "NS",
+        "selector": "span.avatar.color-1",
+        "color": "rgb(196, 168, 127)",
+        "background": [
+          246,
+          238,
+          227
+        ],
+        "size": 11,
+        "ratio": 1.97,
+        "required": 4.5
+      },
+      {
+        "text": "cus_notion",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "87%",
+        "selector": "span.",
+        "color": "rgb(192, 164, 105)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.4,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 1Balanced",
+        "selector": "span.tier-pill.tier-1",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "Balanced",
+        "selector": "small.",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "NA",
+        "selector": "span.avatar.color-2",
+        "color": "rgb(151, 180, 166)",
+        "background": [
+          233,
+          241,
+          238
+        ],
+        "size": 11,
+        "ratio": 1.95,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "72%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "VT",
+        "selector": "span.avatar.color-3",
+        "color": "rgb(154, 166, 204)",
+        "background": [
+          235,
+          237,
+          247
+        ],
+        "size": 11,
+        "ratio": 2.07,
+        "required": 4.5
+      },
+      {
+        "text": "cus_vercel",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Business",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $250",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "61%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "AI",
+        "selector": "span.avatar.color-4",
+        "color": "rgb(189, 155, 179)",
+        "background": [
+          242,
+          233,
+          240
+        ],
+        "size": 11,
+        "ratio": 2.08,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "46%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "View request logs",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "REQUEST / CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "STATUS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TOKENS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "COST",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "LATENCY",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TIME",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "01a18202…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "195 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:16 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181fe…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "182 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:11 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f3…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "183 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:59 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "185 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "smoke-1793181495576796370",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/backup",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "354",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0032",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "150 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f0…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "833",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$1.1621",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "391 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:56 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tollgate v0.1.0",
+        "selector": "span.",
+        "color": "rgb(173, 156, 190)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 2.41,
+        "required": 4.5
+      },
+      {
+        "text": "v0.1.0",
+        "selector": "span.footer-version",
+        "color": "rgb(191, 180, 201)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 1.88,
+        "required": 4.5
+      },
+      {
+        "text": "Meter. Limit. Protect. · Built for a better AI experience.",
+        "selector": "span.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.35,
+        "required": 4.5
+      },
+      {
+        "text": "·",
+        "selector": "span.footer-separator",
+        "color": "rgb(200, 191, 209)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 1.69,
+        "required": 4.5
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 600,
+      "left": 0,
+      "right": 216,
+      "height": 600,
+      "clientHeight": 600,
+      "scrollHeight": 958,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 615.5,
+      "bottom": 958,
+      "left": 12,
+      "right": 203,
+      "height": 342.5,
+      "clientHeight": 343,
+      "scrollHeight": 343,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "userMenu": {
+      "top": 892,
+      "bottom": 958,
+      "left": 0,
+      "right": 215,
+      "height": 66,
+      "clientHeight": 65,
+      "scrollHeight": 65,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "signOut": {
+      "top": 910.5,
+      "bottom": 940.5,
+      "left": 169,
+      "right": 199,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "documentOverflow": false,
+    "contrastFailures": [
+      {
+        "text": "A",
+        "selector": "div.workspace-avatar",
+        "color": "rgb(122, 98, 159)",
+        "background": [
+          233,
+          228,
+          244
+        ],
+        "size": 13,
+        "ratio": 4.14,
+        "required": 4.5
+      },
+      {
+        "text": "Demo workspace",
+        "selector": "small.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          250,
+          250,
+          253
+        ],
+        "size": 10,
+        "ratio": 4.4,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "small.",
+        "color": "rgb(153, 149, 165)",
+        "background": [
+          238,
+          238,
+          243
+        ],
+        "size": 10,
+        "ratio": 2.52,
+        "required": 4.5
+      },
+      {
+        "text": "TRY IT",
+        "selector": "span.tiny-badge",
+        "color": "rgb(145, 132, 158)",
+        "background": [
+          240,
+          238,
+          245
+        ],
+        "size": 8,
+        "ratio": 3.04,
+        "required": 4.5
+      },
+      {
+        "text": "AD",
+        "selector": "div.user-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 10,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "Workspace",
+        "selector": "span.",
+        "color": "rgb(161, 157, 171)",
+        "background": [
+          254,
+          254,
+          255
+        ],
+        "size": 11,
+        "ratio": 2.63,
+        "required": 4.5
+      },
+      {
+        "text": "A",
+        "selector": "div.top-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 11,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "YOUR AI OPERATIONS, AT A GLANCE",
+        "selector": "div.eyebrow",
+        "color": "rgb(142, 132, 154)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 3.37,
+        "required": 4.5
+      },
+      {
+        "text": "A clear view of your AI usage. Every customer, every request, every dollar.",
+        "selector": "p.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 12,
+        "ratio": 4.3,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers have automatically moved to a more affordable model. No interruptions.",
+        "selector": "p.",
+        "color": "rgb(147, 115, 170)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.78,
+        "required": 4.5
+      },
+      {
+        "text": "View budget rules",
+        "selector": "a.",
+        "color": "rgb(143, 118, 165)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 11,
+        "ratio": 3.76,
+        "required": 4.5
+      },
+      {
+        "text": "$",
+        "selector": "span.currency-icon",
+        "color": "rgb(162, 147, 185)",
+        "background": [
+          245,
+          242,
+          250
+        ],
+        "size": 17,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Across 229 requests",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Within your plan budgets",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "504 ms average response",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "All models, one gateway",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "2 on a lower-cost tier",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation active",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Redacted before reaching providers",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Customer data stays private",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Explore requests",
+        "selector": "a.",
+        "color": "rgb(154, 135, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.22,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "PII protection",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "89 values",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Response cache",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "14% hit rate",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Protection is on for all new requests",
+        "selector": "span.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          250,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.32,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "span.count-badge",
+        "color": "rgb(169, 157, 187)",
+        "background": [
+          244,
+          241,
+          248
+        ],
+        "size": 9,
+        "ratio": 2.28,
+        "required": 4.5
+      },
+      {
+        "text": "View all customers",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "PLAN",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MONTHLY SPEND",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "BUDGET USED",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL TIER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "OD",
+        "selector": "span.avatar.color-0",
+        "color": "rgb(173, 150, 194)",
+        "background": [
+          238,
+          231,
+          246
+        ],
+        "size": 11,
+        "ratio": 2.2,
+        "required": 4.5
+      },
+      {
+        "text": "cus_orbit",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Free",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $5",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "97%",
+        "selector": "span.",
+        "color": "rgb(195, 153, 131)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 2Economy",
+        "selector": "span.tier-pill.tier-2",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "Economy",
+        "selector": "small.",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "NS",
+        "selector": "span.avatar.color-1",
+        "color": "rgb(196, 168, 127)",
+        "background": [
+          246,
+          238,
+          227
+        ],
+        "size": 11,
+        "ratio": 1.97,
+        "required": 4.5
+      },
+      {
+        "text": "cus_notion",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "87%",
+        "selector": "span.",
+        "color": "rgb(192, 164, 105)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.4,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 1Balanced",
+        "selector": "span.tier-pill.tier-1",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "Balanced",
+        "selector": "small.",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "NA",
+        "selector": "span.avatar.color-2",
+        "color": "rgb(151, 180, 166)",
+        "background": [
+          233,
+          241,
+          238
+        ],
+        "size": 11,
+        "ratio": 1.95,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "72%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "VT",
+        "selector": "span.avatar.color-3",
+        "color": "rgb(154, 166, 204)",
+        "background": [
+          235,
+          237,
+          247
+        ],
+        "size": 11,
+        "ratio": 2.07,
+        "required": 4.5
+      },
+      {
+        "text": "cus_vercel",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Business",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $250",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "61%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "AI",
+        "selector": "span.avatar.color-4",
+        "color": "rgb(189, 155, 179)",
+        "background": [
+          242,
+          233,
+          240
+        ],
+        "size": 11,
+        "ratio": 2.08,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Pro",
+        "selector": "span.plan-tag",
+        "color": "rgb(150, 112, 177)",
+        "background": [
+          248,
+          246,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.73,
+        "required": 4.5
+      },
+      {
+        "text": "/ $50",
+        "selector": "span.budget-total",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "46%",
+        "selector": "span.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "Standard",
+        "selector": "small.",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "View request logs",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "REQUEST / CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "STATUS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TOKENS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "COST",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "LATENCY",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TIME",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "01a18202…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "195 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:16 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181fe…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "182 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:11 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f3…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "183 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:59 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "185 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "smoke-1793181495576796370",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/backup",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "354",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0032",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "150 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f0…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "833",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$1.1621",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "391 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:56 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tollgate v0.1.0",
+        "selector": "span.",
+        "color": "rgb(173, 156, 190)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 2.41,
+        "required": 4.5
+      },
+      {
+        "text": "v0.1.0",
+        "selector": "span.footer-version",
+        "color": "rgb(191, 180, 201)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 1.88,
+        "required": 4.5
+      },
+      {
+        "text": "Meter. Limit. Protect. · Built for a better AI experience.",
+        "selector": "span.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.35,
+        "required": 4.5
+      },
+      {
+        "text": "·",
+        "selector": "span.footer-separator",
+        "color": "rgb(200, 191, 209)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 1.69,
+        "required": 4.5
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 844,
+      "left": -244,
+      "right": 0,
+      "height": 844,
+      "clientHeight": 844,
+      "scrollHeight": 952,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "bottom": {
+      "top": 609.5,
+      "bottom": 952,
+      "left": -232,
+      "right": -13,
+      "height": 342.5,
+      "clientHeight": 343,
+      "scrollHeight": 343,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "userMenu": {
+      "top": 886,
+      "bottom": 952,
+      "left": -244,
+      "right": -1,
+      "height": 66,
+      "clientHeight": 65,
+      "scrollHeight": 65,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "signOut": {
+      "top": 904.5,
+      "bottom": 934.5,
+      "left": -47,
+      "right": -17,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": false
+    },
+    "documentOverflow": false,
+    "contrastFailures": [
+      {
+        "text": "A",
+        "selector": "div.workspace-avatar",
+        "color": "rgb(122, 98, 159)",
+        "background": [
+          233,
+          228,
+          244
+        ],
+        "size": 13,
+        "ratio": 4.14,
+        "required": 4.5
+      },
+      {
+        "text": "Demo workspace",
+        "selector": "small.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          250,
+          250,
+          253
+        ],
+        "size": 10,
+        "ratio": 4.4,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "small.",
+        "color": "rgb(153, 149, 165)",
+        "background": [
+          238,
+          238,
+          243
+        ],
+        "size": 10,
+        "ratio": 2.52,
+        "required": 4.5
+      },
+      {
+        "text": "TRY IT",
+        "selector": "span.tiny-badge",
+        "color": "rgb(145, 132, 158)",
+        "background": [
+          240,
+          238,
+          245
+        ],
+        "size": 8,
+        "ratio": 3.04,
+        "required": 4.5
+      },
+      {
+        "text": "AD",
+        "selector": "div.user-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 10,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "Workspace",
+        "selector": "span.",
+        "color": "rgb(161, 157, 171)",
+        "background": [
+          254,
+          254,
+          255
+        ],
+        "size": 11,
+        "ratio": 2.63,
+        "required": 4.5
+      },
+      {
+        "text": "A",
+        "selector": "div.top-avatar",
+        "color": "rgb(146, 115, 172)",
+        "background": [
+          234,
+          223,
+          247
+        ],
+        "size": 11,
+        "ratio": 3.11,
+        "required": 4.5
+      },
+      {
+        "text": "YOUR AI OPERATIONS, AT A GLANCE",
+        "selector": "div.eyebrow",
+        "color": "rgb(142, 132, 154)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 3.37,
+        "required": 4.5
+      },
+      {
+        "text": "A clear view of your AI usage. Every customer, every request, every dollar.",
+        "selector": "p.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 12,
+        "ratio": 4.3,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers have automatically moved to a more affordable model. No interruptions.",
+        "selector": "p.",
+        "color": "rgb(147, 115, 170)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 10,
+        "ratio": 3.78,
+        "required": 4.5
+      },
+      {
+        "text": "$",
+        "selector": "span.currency-icon",
+        "color": "rgb(162, 147, 185)",
+        "background": [
+          245,
+          242,
+          250
+        ],
+        "size": 17,
+        "ratio": 2.56,
+        "required": 4.5
+      },
+      {
+        "text": "Across 229 requests",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Within your plan budgets",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "504 ms average response",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "All models, one gateway",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "2 on a lower-cost tier",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation active",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Redacted before reaching providers",
+        "selector": "div.stat-foot",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Customer data stays private",
+        "selector": "small.",
+        "color": "rgb(154, 139, 166)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.17,
+        "required": 4.5
+      },
+      {
+        "text": "Explore requests",
+        "selector": "a.",
+        "color": "rgb(154, 135, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.22,
+        "required": 4.5
+      },
+      {
+        "text": "Graceful degradation",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "2 customers",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "PII protection",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "89 values",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Response cache",
+        "selector": "strong.",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "14% hit rate",
+        "selector": "span.protection-value",
+        "color": "rgb(140, 114, 159)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.18,
+        "required": 4.5
+      },
+      {
+        "text": "Protection is on for all new requests",
+        "selector": "span.",
+        "color": "rgb(126, 113, 141)",
+        "background": [
+          250,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 4.32,
+        "required": 4.5
+      },
+      {
+        "text": "9",
+        "selector": "span.count-badge",
+        "color": "rgb(169, 157, 187)",
+        "background": [
+          244,
+          241,
+          248
+        ],
+        "size": 9,
+        "ratio": 2.28,
+        "required": 4.5
+      },
+      {
+        "text": "View all customers",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "OD",
+        "selector": "span.avatar.color-0",
+        "color": "rgb(173, 150, 194)",
+        "background": [
+          238,
+          231,
+          246
+        ],
+        "size": 11,
+        "ratio": 2.2,
+        "required": 4.5
+      },
+      {
+        "text": "cus_orbit",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$4.85 of $5",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "97%",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "Free plan",
+        "selector": "span.",
+        "color": "rgb(170, 143, 190)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.84,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 2 · Economy",
+        "selector": "span.tier-pill.tier-2",
+        "color": "rgb(159, 114, 87)",
+        "background": [
+          252,
+          240,
+          233
+        ],
+        "size": 9,
+        "ratio": 3.74,
+        "required": 4.5
+      },
+      {
+        "text": "NS",
+        "selector": "span.avatar.color-1",
+        "color": "rgb(196, 168, 127)",
+        "background": [
+          246,
+          238,
+          227
+        ],
+        "size": 11,
+        "ratio": 1.97,
+        "required": 4.5
+      },
+      {
+        "text": "cus_notion",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$43.50 of $50",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "87%",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "Pro plan",
+        "selector": "span.",
+        "color": "rgb(170, 143, 190)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.84,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 1 · Balanced",
+        "selector": "span.tier-pill.tier-1",
+        "color": "rgb(157, 123, 60)",
+        "background": [
+          253,
+          248,
+          236
+        ],
+        "size": 9,
+        "ratio": 3.72,
+        "required": 4.5
+      },
+      {
+        "text": "NA",
+        "selector": "span.avatar.color-2",
+        "color": "rgb(151, 180, 166)",
+        "background": [
+          233,
+          241,
+          238
+        ],
+        "size": 11,
+        "ratio": 1.95,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$36.00 of $50",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "72%",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "Pro plan",
+        "selector": "span.",
+        "color": "rgb(170, 143, 190)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.84,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0 · Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "VT",
+        "selector": "span.avatar.color-3",
+        "color": "rgb(154, 166, 204)",
+        "background": [
+          235,
+          237,
+          247
+        ],
+        "size": 11,
+        "ratio": 2.07,
+        "required": 4.5
+      },
+      {
+        "text": "cus_vercel",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$152.50 of $250",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "61%",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "Business plan",
+        "selector": "span.",
+        "color": "rgb(170, 143, 190)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.84,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0 · Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "AI",
+        "selector": "span.avatar.color-4",
+        "color": "rgb(189, 155, 179)",
+        "background": [
+          242,
+          233,
+          240
+        ],
+        "size": 11,
+        "ratio": 2.08,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$23.02 of $50",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "46%",
+        "selector": "span.",
+        "color": "rgb(165, 138, 184)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 11,
+        "ratio": 3.03,
+        "required": 4.5
+      },
+      {
+        "text": "Pro plan",
+        "selector": "span.",
+        "color": "rgb(170, 143, 190)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 2.84,
+        "required": 4.5
+      },
+      {
+        "text": "Tier 0 · Standard",
+        "selector": "span.tier-pill.tier-0",
+        "color": "rgb(150, 115, 177)",
+        "background": [
+          246,
+          243,
+          250
+        ],
+        "size": 9,
+        "ratio": 3.55,
+        "required": 4.5
+      },
+      {
+        "text": "View request logs",
+        "selector": "a.text-link",
+        "color": "rgb(150, 114, 178)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 3.93,
+        "required": 4.5
+      },
+      {
+        "text": "REQUEST / CUSTOMER",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "MODEL",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "STATUS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TOKENS",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "COST",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "LATENCY",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "TIME",
+        "selector": "th.",
+        "color": "rgb(150, 128, 167)",
+        "background": [
+          252,
+          251,
+          254
+        ],
+        "size": 9,
+        "ratio": 3.43,
+        "required": 4.5
+      },
+      {
+        "text": "01a18202…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "195 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:16 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181fe…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "182 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "03:11 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f3…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "183 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:59 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_acme",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "528",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0047",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "185 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f2…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "smoke-1793181495576796370",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/backup",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "354",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$0.0032",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "150 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:58 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "01a181f0…",
+        "selector": "strong.request-id",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "cus_nova",
+        "selector": "small.cell-small",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 9,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "mock/premium",
+        "selector": "code.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Success",
+        "selector": "span.badge.green",
+        "color": "rgb(76, 133, 106)",
+        "background": [
+          240,
+          247,
+          243
+        ],
+        "size": 10,
+        "ratio": 3.96,
+        "required": 4.5
+      },
+      {
+        "text": "833",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "$1.1621",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "391 ms",
+        "selector": "td.",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "ms",
+        "selector": "span.muted",
+        "color": "rgb(138, 137, 152)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 3.44,
+        "required": 4.5
+      },
+      {
+        "text": "02:56 PM",
+        "selector": "td.nowrap",
+        "color": "rgb(136, 114, 151)",
+        "background": [
+          255,
+          255,
+          255
+        ],
+        "size": 10,
+        "ratio": 4.29,
+        "required": 4.5
+      },
+      {
+        "text": "Tollgate v0.1.0",
+        "selector": "span.",
+        "color": "rgb(173, 156, 190)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 9,
+        "ratio": 2.41,
+        "required": 4.5
+      },
+      {
+        "text": "v0.1.0",
+        "selector": "span.footer-version",
+        "color": "rgb(191, 180, 201)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 7,
+        "ratio": 1.88,
+        "required": 4.5
+      },
+      {
+        "text": "Meter. Limit. Protect. · Built for a better AI experience.",
+        "selector": "span.",
+        "color": "rgb(121, 115, 129)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 8,
+        "ratio": 4.35,
+        "required": 4.5
+      },
+      {
+        "text": "·",
+        "selector": "span.footer-separator",
+        "color": "rgb(200, 191, 209)",
+        "background": [
+          248,
+          249,
+          252
+        ],
+        "size": 8,
+        "ratio": 1.69,
+        "required": 4.5
+      }
+    ]
+  }
+]

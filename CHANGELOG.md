@@ -12,3 +12,12 @@
 - Fixed demo login origins for both localhost and 127.0.0.1; bundled fonts locally.
 
 No public release, paid-provider verification, or production security audit has been performed.
+
+## Review and improvement plan — 2026-10-28
+
+- Committed and pushed the initial application using the configured repository identity.
+- Added a prioritized business-readiness plan, measured UI audit, workflow fixtures, and isolated feature/deployment probes.
+- Reconfirmed 49 infrastructure-backed tests, five Docker browser flows, static checks and production build.
+- Recorded confirmed sidebar/contrast issues, policy loss on plan save, stale workspace forms, routing-identifier redaction, validation/adapter gaps, ineffective date filtering and misleading tier labels.
+- Recorded the initial main CI service-health quoting failure separately from local passing checks.
+- Application fixes remain planned; this review does not claim the findings are resolved.

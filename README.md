@@ -121,3 +121,7 @@ This is early-stage software with a working local and Compose application, not a
 Presidio NER, AWS KMS, signed webhooks, SSO, semantic caching, embeddings, media, Stripe sync, Helm, and tenant-specific dashboard logins are outside this release. [Public roadmap](ROADMAP.md). The working name has not been reserved or published on GitHub, GHCR, or a domain. Release publishing is manual and requires repository ownership and a private security disclosure contact.
 
 Apache-2.0. Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Review and next improvements
+
+The current [improvement plan](IMPROVEMENT_PLAN.md) prioritizes confirmed policy/workspace safety issues, readable text, reachable navigation, accurate routing/usage reporting and paid-traffic readiness. [Audit evidence](docs/audits/2026-10-28/REVIEW.md) distinguishes passing existing tests from newly reproduced defects and the initial remote CI setup failure. Planned changes are not represented as implemented fixes.

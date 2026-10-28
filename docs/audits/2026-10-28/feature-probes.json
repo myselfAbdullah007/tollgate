@@ -1,0 +1,44 @@
+{
+  "nullable_tool_calls": {
+    "status": 500,
+    "expected": "422 validation error, never 500"
+  },
+  "privacy_preview_policy": {
+    "preview_blocked": false,
+    "request_status": 422,
+    "expected": "Preview uses selected customer/plan CARD block rule"
+  },
+  "exhausted_cache_hit": {
+    "first_status": 200,
+    "cache_entries": 1,
+    "repeat_status": 402,
+    "policy": "Cache lookup follows reservation; business policy decision required"
+  },
+  "reported_vs_served_tier": {
+    "dashboard_customer_tier": 2,
+    "actual_quality_locked_request_tier": "0",
+    "status": 200
+  },
+  "log_date_filter": {
+    "requested_days": 7,
+    "old_record_days": 60,
+    "returned_total": 1,
+    "expected": "The displayed date range must constrain log results"
+  },
+  "anthropic_system_parts": {
+    "schema_accepts": true,
+    "exception": "TypeError",
+    "message": "sequence item 0: expected str instance, list found"
+  },
+  "routing_identifier_redaction": {
+    "alias_create_status": 200,
+    "request_status": 422,
+    "detail": "Blocked sensitive category: CARD",
+    "expected": "PII scanning must not treat configured routing identifiers as prompt data"
+  },
+  "unknown_workspace_collection": {
+    "status": 200,
+    "body": [],
+    "expected": "Consistent 404 for an unknown workspace"
+  }
+}

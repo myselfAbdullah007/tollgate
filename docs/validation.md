@@ -43,3 +43,13 @@ Implementation references: [FastAPI lifespan](https://fastapi.tiangolo.com/advan
 Both images built with Python 3.12 / Node 22. The migration job exited successfully; gateway, dashboard, PostgreSQL and Redis report healthy, and the worker is running. `.venv/bin/python scripts/compose_smoke.py` passed readiness (PostgreSQL + Redis), a forced outage/fallback, streaming restoration, durable worker delivery, and metadata PII exclusion. Services use 3187, 8187, 55487 and 63987. No unrelated project was stopped.
 
 Docker browser rerun: **5 passed in 9.9 seconds**, including every page and persisted writes against PostgreSQL/Redis.
+
+## Deeper review — 2026-10-28
+
+Retested the unchanged application baseline `172ac2a`: `make test` gave 43 passed and 6 expected infrastructure skips; `make integration` gave 49 passed in 22.13 seconds. `make check` and the optimized production build passed. Five browser tests against Docker passed in 12.7 seconds.
+
+The expanded audit found issues outside that passing coverage. The original `scripts/compose_smoke.py` returned 422 during this review because its numeric timestamp alias can trigger prompt PII scanning. An isolated alias reproduction confirmed the defect. A separate controlled deployment probe using alphabetic aliases passed streaming, fallback, Tier 2 degradation, PostgreSQL/Redis readiness and worker delivery. The earlier successful smoke record remains historical evidence, not proof against this intermittent defect.
+
+Remote main CI for 172ac2a [failed](https://github.com/myselfAbdullah007/tollgate/actions/runs/40670735966) while parsing the PostgreSQL service health command, before backend tests. Local checks and Dependabot jobs must not be reported as a successful remote CI run.
+
+Measured readability/sidebar evidence and reproduced policy/state/API gaps are in [the audit report](audits/2026-10-28/REVIEW.md). [IMPROVEMENT_PLAN.md](../IMPROVEMENT_PLAN.md) contains the proposed remedies and acceptance checks. Findings are still open; no application fix is claimed by these observation probes.

@@ -25,3 +25,13 @@ Actual commands, dates and results are maintained in docs/validation.md. Never i
 ## Current running setup
 
 The full Tollgate Compose stack is running on the ports above. Temporary local dev servers were stopped. Backend suite: 49 passing. Browser suite: 5 passing against both development mode and the full Docker stack. Docker verification is recorded in docs/validation.md. Full Compose streaming/fallback/worker smoke passed. Docker Buildx is absent on this host; use the documented `DOCKER_BUILDKIT=0` build fallback.
+
+## Review on 2026-10-28
+
+Baseline commit `172ac2a` was pushed to origin/main with the configured author/committer identity. IMPROVEMENT_PLAN.md and docs/audits/2026-10-28/REVIEW.md are the current prioritized backlog/evidence. The application was audited without implementing the planned changes.
+
+Confirmed release concerns: loss of extra privacy categories/thresholds in plan editor; stale settings after workspace switching; sidebar sign-out below the viewport without internal scroll; low text contrast; PII scanning routing aliases; null tool-call 500; Anthropic system-text-part translation; generic preview versus real policy; ineffective log dates; plan-derived tier labels presented as actual service.
+
+Retest: make test 43 passed/6 expected skips, make integration 49 passed, static checks/build passed, five Docker browser tests passed. A controlled mock deployment probe passed fallback/stream/degradation/worker checks. The old timestamp-alias Compose smoke returned 422 during review, reproduced as routing-identifier redaction. Main GitHub CI for 172ac2a failed during PostgreSQL service health-command parsing; do not report it as green or confuse Dependabot success runs with CI.
+
+Do not silently weaken existing policies to simplify a form. Treat proposed fixes/acceptance tests as pending until implemented and validated. No paid provider verification or unrelated-service changes occurred in this review.
