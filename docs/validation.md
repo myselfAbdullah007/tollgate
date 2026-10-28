@@ -72,7 +72,7 @@ Regression coverage includes policy preservation/revisions, workspace state, rou
 
 Evidence: [implementation screenshots and measurements](audits/2026-10-28-implementation/ui-measurements.json). Contrast measurements are diagnostics, not an independent WCAG assessment. Playwright used the existing Chromium 1208 executable through `PLAYWRIGHT_CHROMIUM_EXECUTABLE`; the default newly requested browser binary was absent and that failed launch was not counted as a pass.
 
-Docker rebuild/deployment smoke and remote main CI are recorded below when completed. They are not inferred from these local results. Existing monthly demo ledger data is preserved; optional new feature tags default to `general` / `production` in reports for legacy rows. Another project's services have not been stopped or modified.
+Docker rebuild/deployment smoke and remote main CI are recorded below. They are not inferred from these local results. Existing monthly demo ledger data is preserved; optional new feature tags default to `general` / `production` in reports for legacy rows. Another project's services have not been stopped or modified.
 
 ### Production browser timing correction
 
@@ -85,3 +85,7 @@ Corrected full-stack results: both Python 3.12 and Node 22 images built successf
 ### Compose wait health gate
 
 The corrected CI run [40681881074](https://github.com/myselfAbdullah007/tollgate/actions/runs/40681881074) passed gateway and dashboard jobs, then exposed a deployment gate issue: `compose up --wait` rejects a long-running worker with no healthcheck. The prior local `--wait` invocation had the same exit status despite healthy application endpoints; endpoint/smoke/browser results remain valid, but the wait command is not counted as passing. The worker now has a Redis-heartbeat freshness healthcheck rather than a disabled check. This verifies worker progress and lets clean-start deployment gates assess the service directly.
+
+### Final release gate
+
+`docker compose -f deploy/docker-compose.yml up -d --no-build --wait --wait-timeout 180` now exits **0**, including a healthy heartbeat-checked worker. The controlled smoke passes again. GitHub [CI run 40682693230](https://github.com/myselfAbdullah007/tollgate/actions/runs/40682693230) for source commit `2cae69f` completed **successfully**: gateway, dashboard (including all 11 browser tests) and fresh Compose build/start/smoke jobs all passed. This is the actual CI workflow, not a Dependabot result. Subsequent validation-record edits are documentation only.
