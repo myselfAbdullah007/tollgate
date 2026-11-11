@@ -1,5 +1,16 @@
 # Changelog
 
+## Image distribution — 2026-11-11
+
+- Added pull-only Compose for external PostgreSQL/Redis with gateway, worker,
+  migration and optional dashboard roles; reused the existing two application images.
+- Added required configuration, source-free deployment packaging, distribution
+  validation, a manual Docker Hub workflow defaulting to build-only, and CI smoke
+  coverage for non-demo prebuilt-image deployment.
+- Documented startup, external networking, fixed dashboard upstream, upgrades,
+  credentials and publication boundaries. No Docker Hub push or local container
+  runtime verification was performed; the Docker daemon is unavailable.
+
 ## 0.2.0 — 2026-10-28
 
 - Fixed unreadable foreground colors and sidebar scrolling; pinned account controls, improved mobile focus/navigation, and preserved workspace/filter context.
@@ -45,3 +56,17 @@ No public release, paid-provider verification, or production security audit has 
 
 - Integrated updates for CI/release actions, Python minimum versions, ESLint 10, Node types and Lucide icons; preserved 0.2 behavior and reconciled the dashboard lock under Node 22.
 - Retained TypeScript 5.9 because the proposed TypeScript 7 update breaks the installed lint parser; added a targeted Dependabot ignore pending compatible tooling.
+
+## Video documentation — 2026-11-09
+
+- Added `docs/Tollgate-Complete-Video-Description.docx`: detailed feature narration, screen directions, recording sequence, publishing description, glossary, and current limitations. Documentation only; no application behavior changed.
+
+### Illustrated video document — 2026-11-09
+
+- Embedded eight historical demo screenshots and four explanatory diagrams in the full video Word document, with captions and provenance. Retained Markdown source and diagram assets for maintenance.
+
+### Portable HTML document — 2026-11-09
+
+- Added a self-contained HTML edition of the illustrated video document with all twelve images and CSS embedded, responsive chapter navigation and print styles. No server or internet access is required to read it.
+
+- Configured the owner-provided Docker Hub namespace `myselfabii` in distribution examples, default packaging and manual workflow. Rebuilt the deployment archive; publication remains pending.

@@ -1,0 +1,59 @@
+name: tollgate
+
+# Pull-only application deployment. PostgreSQL and Redis are supplied externally.
+x-backend: &backend
+  image: ${TOLLGATE_IMAGE:?Set TOLLGATE_IMAGE to a published versioned backend image}
+  environment: &backend-env
+    TOLLGATE_DATABASE_URL: ${TOLLGATE_DATABASE_URL:?Set an external PostgreSQL URL}
+    TOLLGATE_REDIS_URL: ${TOLLGATE_REDIS_URL:?Set an external Redis URL}
+    TOLLGATE_MASTER_KEY: ${TOLLGATE_MASTER_KEY:?Set a base64-encoded 32-byte master key}
+    TOLLGATE_ADMIN_EMAIL: ${TOLLGATE_ADMIN_EMAIL:?Set the initial owner email}
+    TOLLGATE_ADMIN_PASSWORD: ${TOLLGATE_ADMIN_PASSWORD:?Set a private initial owner password}
+    TOLLGATE_DEMO: 'false'
+    TOLLGATE_PORT: '8187'
+    TOLLGATE_ALLOWED_ORIGIN: ${TOLLGATE_ALLOWED_ORIGIN:-http://localhost:3187}
+    TOLLGATE_COOKIE_SECURE: ${TOLLGATE_COOKIE_SECURE:-false}
+    TOLLGATE_ENABLE_MOCK_PROVIDER: ${TOLLGATE_ENABLE_MOCK_PROVIDER:-false}
+    TOLLGATE_MAX_CONCURRENT_REQUESTS: ${TOLLGATE_MAX_CONCURRENT_REQUESTS:-100}
+    OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+  restart: unless-stopped
+  security_opt: [no-new-privileges:true]
+  networks: [tollgate]
+
+services:
+  migrate:
+    <<: *backend
+    command: [migrate]
+    restart: 'no'
+    healthcheck: {disable: true}
+  gateway:
+    <<: *backend
+    command: [serve]
+    ports: ['${TOLLGATE_BIND_ADDRESS:-127.0.0.1}:${TOLLGATE_PORT:-8187}:8187']
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  worker:
+    <<: *backend
+    command: [worker]
+    healthcheck:
+      test: [CMD, python, -c, "import os,time,redis; stamp=redis.Redis.from_url(os.environ['TOLLGATE_REDIS_URL']).get('tollgate:worker-heartbeat'); assert stamp and time.time()-float(stamp)<60"]
+      interval: 15s
+      timeout: 3s
+      start_period: 20s
+      retries: 4
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  dashboard:
+    image: ${TOLLGATE_DASHBOARD_IMAGE:?Set TOLLGATE_DASHBOARD_IMAGE to the matching dashboard image}
+    profiles: [dashboard]
+    ports: ['${TOLLGATE_BIND_ADDRESS:-127.0.0.1}:${TOLLGATE_DASHBOARD_PORT:-3187}:3187']
+    depends_on:
+      gateway: {condition: service_healthy}
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    networks: [tollgate]
+
+networks:
+  tollgate:
