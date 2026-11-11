@@ -28,7 +28,7 @@ jobs:
         env: {OWNER: '${{ github.repository_owner }}'}
         run: echo "owner=${OWNER,,}" >> "$GITHUB_OUTPUT"
       - id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ghcr.io/${{ steps.namespace.outputs.owner }}/${{ matrix.image }}
           tags: |
