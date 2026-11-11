@@ -42,6 +42,17 @@ Next.js proxies `/api/*` to the internal gateway, keeping browser session cookie
 
 See docs/operations.md for recovery and docs/adr/ for tradeoffs.
 
+## Published-image distribution
+
+`deploy/compose.images.yml` is a pull-only application deployment with external
+PostgreSQL/Redis. One backend image supplies gateway, worker and migration roles;
+the dashboard is a separate optional image. Its build-time proxy uses the internal
+`gateway:8187` address. `scripts/package_distribution.py` creates a source-free
+configuration/docs archive. The manual Docker Hub workflow defaults to build-only;
+publication requires an explicit dispatch with pushing enabled. See
+`docs/image-distribution.md` and ADR 0010. Local container verification/publication
+remain pending where recorded in `docs/validation.md`.
+
 ## 0.2 extensions
 
 `pricing.py` stores versioned integer micro-USD rates per million tokens and rounds each charge upward. `limits.py` bounds request bytes and idle upload time; the fast path limits in-flight requests per workspace. Configuration writes use revision comparison and database row locks; key lookup has a hash-expression index. Logs are filtered/paged in SQL and reporting aggregates the full selected range rather than a sampled prefix.

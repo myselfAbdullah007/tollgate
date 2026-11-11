@@ -1,4 +1,4 @@
-.PHONY: install dev api dashboard test check key demo compose integration stop
+.PHONY: install dev api dashboard test check key demo compose integration stop distribution-check distribution-bundle
 install:
 	python3 -m venv .venv
 	.venv/bin/pip install -r apps/gateway/requirements-dev.lock
@@ -26,3 +26,7 @@ integration:
 	TEST_REDIS_URL=redis://localhost:63987/15 TEST_DATABASE_URL=postgresql+asyncpg://tollgate:tollgate-local-only@localhost:55487/tollgate .venv/bin/pytest apps/gateway/tests -q
 stop:
 	docker compose -f deploy/docker-compose.yml stop
+distribution-check:
+	.venv/bin/python scripts/check_distribution.py
+distribution-bundle:
+	.venv/bin/python scripts/package_distribution.py

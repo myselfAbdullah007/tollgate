@@ -1,0 +1,105 @@
+name: Docker Hub images (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Existing reviewed release tag, for example v0.2.0'
+        required: true
+        type: string
+      namespace:
+        description: 'Docker Hub user or organization owning both repositories'
+        default: myselfabii
+        required: true
+        type: string
+      publish:
+        description: 'Push images and sign their digests (false builds only)'
+        default: false
+        type: boolean
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate release inputs
+        env:
+          VERSION: ${{ inputs.version }}
+          NAMESPACE: ${{ inputs.namespace }}
+        run: |
+          [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Use a stable vMAJOR.MINOR.PATCH tag'; exit 1; }
+          [[ "$NAMESPACE" =~ ^[a-z0-9][a-z0-9_-]+$ ]] || { echo 'Use a lowercase Docker Hub namespace'; exit 1; }
+      - uses: actions/checkout@v7
+        with: {ref: '${{ inputs.version }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Validate selected release includes the deployment contract
+        run: |
+          test -f scripts/package_distribution.py
+          test -f docs/image-distribution.md
+          python scripts/check_distribution.py
+  images:
+    needs: validate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {image: tollgate, dockerfile: apps/gateway/Dockerfile}
+          - {image: tollgate-dashboard, dockerfile: apps/dashboard/Dockerfile}
+    steps:
+      - uses: actions/checkout@v7
+        with: {ref: '${{ inputs.version }}'}
+      - uses: docker/setup-qemu-action@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v4
+        if: inputs.publish
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: docker.io/${{ inputs.namespace }}/${{ matrix.image }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ inputs.version }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }}
+      - id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          platforms: linux/amd64,linux/arm64
+          push: ${{ inputs.publish }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: TOLLGATE_API_URL=http://gateway:8187
+          sbom: true
+          provenance: mode=max
+      - uses: sigstore/cosign-installer@v3
+        if: inputs.publish
+      - name: Sign published image digest
+        if: inputs.publish
+        env:
+          IMAGE: docker.io/${{ inputs.namespace }}/${{ matrix.image }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "$IMAGE@$DIGEST"
+
+  deployment-bundle:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with: {ref: '${{ inputs.version }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Package matching deployment configuration
+        env:
+          NAMESPACE: ${{ inputs.namespace }}
+          VERSION: ${{ inputs.version }}
+        run: python scripts/package_distribution.py --namespace "$NAMESPACE" --version "$VERSION"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: tollgate-deployment
+          path: dist/tollgate-deployment.tar.gz

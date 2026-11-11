@@ -97,3 +97,35 @@ See [PR review](pr-review-2026-10-28.md) for the 14-PR inventory and TypeScript 
 Dependency-batch browser check: 11 passed in 27.9 seconds against the optimized build on 3188/8188. Desktop/mobile screenshots inspected after the icon update; five viewport checks and six additional pages have zero measured direct-text contrast failures and no horizontal document overflow. Evidence: docs/audits/2026-10-28-prs/. Temporary validation servers stopped; running production containers were not replaced.
 
 Final dependency gate: [CI 40685934917](https://github.com/myselfAbdullah007/tollgate/actions/runs/40685934917) for source 46151a5 passed all three jobs: gateway, dashboard and fresh Compose smoke. The exact tested source was fast-forwarded into main. GitHub confirms 13 PRs merged (1–12, 14), compiler PR 13 closed without merging, zero open PRs. Subsequent documentation-only evidence updates do not change the verified dependency set. The manual image-publication workflow was not run; existing application containers and unrelated services were not redeployed.
+
+## Video document — 2026-11-09
+
+Documentation-only artifact: `docs/Tollgate-Complete-Video-Description.docx`. Generated with Pandoc from a temporary Markdown source. ZIP integrity, all packaged XML parsing, Pandoc DOCX-to-text conversion and representative chapter-presence checks passed. Feature descriptions were checked against current repository documents, gateway schemas/routes/pipeline, account security and dashboard components. Word rendering was not visually inspected. Application tests/build/browser checks were not rerun because application behavior and layout did not change. No paid calls, benchmarks, external delivery or deployment occurred.
+
+### Illustrated video document — 2026-11-09
+
+Added eight historical demo screenshots and four explanatory diagrams. Inspected screenshot and diagram contact sheets. Preserved source aspect ratios and bounded embedded sizes for document pages. DOCX archive/XML parsing, 12 embedded media objects, 12 drawing placements, and Pandoc round-trip caption/content checks passed. Word pagination was not visually rendered. No application changes, new screenshots, runtime tests or provider calls.
+
+### Standalone HTML edition — 2026-11-09
+
+Generated HTML from the illustrated Markdown with Pandoc standalone/embed-resources and inline responsive/print styles. Playwright initially could not find its expected bundled browser; reran successfully using installed `/opt/google/chrome/chrome`. Offline checks at 1440×1000 and 390×844 passed: all twelve images use data URLs and decode, 28 chapter links, working chapter navigation, zero HTTP(S) requests, and no horizontal document overflow. Inspected top/figure screenshots for both viewports. Output: 2,227,241 bytes. Application suites were not rerun; application source and runtime configuration were unchanged.
+
+## Pull-only image distribution — 2026-11-11
+
+- `make distribution-check`: passed Compose rendering and assertions for four pull-only application roles, shared backend image, external-store settings, migration ordering, worker heartbeat health, optional dashboard, loopback defaults, and rejection of each of seven missing required settings. No Docker daemon is needed for these checks.
+- `make distribution-bundle`: created `dist/tollgate-deployment.tar.gz`. Archive checks passed: exact allowlist (Compose, blank-secret environment example, README, license), custom namespace/version substitution, and invalid namespace/version rejection. No populated `.env`, application source, databases or generated credentials are included.
+- Ruff for the three new scripts and Python compilation: passed. Workflow YAML parsing, Bash syntax for all workflow command blocks and `git diff --check`: passed. These are local structural checks, not a completed GitHub Actions run or actionlint verification.
+- `make check`: passed Ruff, mypy (22 source files), ESLint and TypeScript. No application UI or gateway request behavior changed; no new browser interaction/layout verification or optimized dashboard build was required.
+- Container build, Redis/PostgreSQL integration and new prebuilt-image smoke: not run locally. Docker CLI/Compose are installed, but `/var/run/docker.sock` is absent and no working daemon was available. This is an unavailable check, not a pass. No daemon/service was started, stopped or reconfigured.
+- Added CI smoke for a fresh non-demo database using prebuilt local images, external CI stores and dashboard proxy; it checks key creation, mock fallback, streaming restoration, worker ledger delivery and metadata-only logs. This new CI path has not been executed here. The Docker Hub multi-platform build/publish workflow has not been dispatched; amd64/arm64 builds, signatures, registry visibility and publication remain unverified.
+- No paid provider calls, external webhook delivery, image push, GitHub push or public deployment occurred. Docker Hub namespace remains a placeholder unless subsequently supplied.
+
+Final local backend result: `make test` completed with **70 passed, 9 infrastructure skips in 183.92 seconds**. No infrastructure skip is treated as a passing infrastructure check.
+
+### Owner namespace follow-up — 2026-11-11
+
+User selected `myselfabii`. `make distribution-check distribution-bundle`, packaging-script Ruff and archive checks for default owner namespace, custom namespace/version override and blank secrets passed. Bundle now references `myselfabii/tollgate:0.2.0` and `myselfabii/tollgate-dashboard:0.2.0`. This supersedes the placeholder note above; registry existence/availability is not verified, and no image was pushed. Backend suites were not repeated for this packaging-default-only change.
+
+### Branch preparation — 2026-11-11
+
+Created `feat/dockerhub-distribution-and-project-guide` from main matching origin/main. Included the distribution implementation and requested illustrated documents; excluded the unrelated `nano.17345.save` file and ignored deployment build output. Removed generated HTML trailing whitespace and rechecked all 12 image sources remain embedded. Staged whitespace checks passed before commit.

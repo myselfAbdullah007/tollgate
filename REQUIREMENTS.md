@@ -28,6 +28,14 @@ Token fallback uses conservative UTF-8 byte bounds rather than a provider-specif
 
 Per-tenant dashboard identities, Presidio, KMS, tracing and public release/deployment are tracked in ROADMAP.md; they are not silently stubbed. Name/domain reservation and publishing need owner identity and are not performed.
 
+## Image distribution addition — 2026-11-11
+
+Pull-only Compose, external-store configuration, an optional dashboard, source-free
+deployment archive and a manual Docker Hub workflow are implemented. Compose and
+archive checks do not establish image build, runtime or registry availability.
+Actual image publication, multi-platform builds and container smoke remain pending
+until run successfully; see docs/image-distribution.md and docs/validation.md.
+
 ## 0.2 acceptance additions
 
 - Lossless policy edits, revision conflicts, effective preview, scoped workspace state and real date/customer filters have automated regression coverage.

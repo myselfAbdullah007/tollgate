@@ -3,6 +3,18 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
+  distribution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python scripts/check_distribution.py
+      - run: python scripts/package_distribution.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: tollgate-deployment
+          path: dist/tollgate-deployment.tar.gz
   gateway:
     runs-on: ubuntu-latest
     services:
@@ -60,6 +72,26 @@ jobs:
       - name: Build and start isolated full stack
         run: docker compose -f deploy/docker-compose.yml up -d --build --wait --wait-timeout 180
       - run: .venv/bin/python scripts/compose_smoke.py
+      - name: Stop only application roles before image-only verification
+        run: docker compose -f deploy/docker-compose.yml stop dashboard gateway worker migrate
+      - name: Create a fresh image-deployment database
+        run: docker compose -f deploy/docker-compose.yml exec -T postgres createdb -U tollgate tollgate_image_ci
+      - name: Start prebuilt images with external CI stores (no source build)
+        env:
+          TOLLGATE_IMAGE: tollgate:local
+          TOLLGATE_DASHBOARD_IMAGE: tollgate-dashboard:local
+          TOLLGATE_DATABASE_URL: postgresql+asyncpg://tollgate:tollgate-local-only@postgres:5432/tollgate_image_ci
+          TOLLGATE_REDIS_URL: redis://redis:6379/1
+          TOLLGATE_ADMIN_EMAIL: image-owner@example.invalid
+          TOLLGATE_ADMIN_PASSWORD: image-smoke-test-only
+          TOLLGATE_MASTER_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+          TOLLGATE_ENABLE_MOCK_PROVIDER: 'true'
+        run: docker compose -f deploy/compose.images.yml --profile dashboard up -d --pull never --wait --wait-timeout 180
+      - name: Exercise image-only deployment through dashboard proxy
+        env:
+          TOLLGATE_ADMIN_EMAIL: image-owner@example.invalid
+          TOLLGATE_ADMIN_PASSWORD: image-smoke-test-only
+        run: .venv/bin/python scripts/distribution_smoke.py
       - name: Inspect failed services
         if: failure()
         run: docker compose -f deploy/docker-compose.yml logs --tail=150

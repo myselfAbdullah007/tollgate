@@ -24,3 +24,9 @@ The original text gateway and console plus readable/reachable navigation, lossle
 Presidio names/addresses via NER, AWS KMS, tracing, Stripe sync, SSO, semantic caching, embeddings/media/audio and Helm. Signed webhooks, fractional price precision and basic deployment-wide roles are implemented, not future placeholders.
 
 Public hosting and signed multi-platform image publication remain separate operator activities. No live provider or production capacity certification is implied by local mock testing.
+
+The 2026-11-11 distribution work adds a pull-only external-store deployment bundle
+and manual Docker Hub build/publish workflow. This is packaging readiness, not a
+published image release. Run image builds, the non-demo image-deployment smoke,
+multi-platform verification and owner-authorized publication before advertising
+Docker Hub installation as available. See docs/image-distribution.md.

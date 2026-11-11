@@ -1,5 +1,15 @@
 # Implementation tasks
 
+## Image distribution — 2026-11-11
+
+- [x] Add a no-build application Compose file using external PostgreSQL/Redis.
+- [x] Package configuration/docs without source code, runtime secrets or databases.
+- [x] Add opt-in Docker Hub publishing, matching image versions and release instructions.
+- [x] Add daemon-free Compose/archive checks and a non-demo prebuilt-image CI smoke.
+- [x] Run local verification: 70 backend tests passed / 9 infrastructure skips, static checks and deployment-package checks passed.
+- [ ] Execute container build and fresh-database image smoke with a working Docker daemon.
+- [ ] Verify amd64/arm64 release builds and publish only with owner authorization and actual Docker Hub namespace.
+
 - [x] Read supplied ODT and map its feature requirements.
 - [x] Inspect running services; allocate separate Tollgate ports/network/volumes.
 - [x] Scaffold Python gateway, CLI, Next.js dashboard, configuration and examples.
@@ -41,3 +51,14 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Integrate the 13 compatible PR heads and reconcile manifests/lockfile without losing mainline fixes.
 - [x] Verify clean Node 22 install, gateway tests, infrastructure tests, static checks and production build.
 - [x] Finish browser/visual and remote CI gates, merge 13 compatible PRs, close incompatible PR 13 and verify zero open PRs.
+
+## Video documentation — 2026-11-09
+
+- [x] Create one Word document explaining the project and implemented features in detail for a full video.
+- [x] Validate DOCX archive/XML integrity and round-trip chapter content. No runtime checks were required for this documentation-only change.
+
+- [x] Illustrate the video document with eight existing screenshots and four explanatory diagrams; verify all twelve are embedded and source aspect ratios are preserved.
+
+- [x] Create a shareable standalone HTML edition; verify twelve embedded images offline, chapter navigation and desktop/mobile layout.
+
+- [x] Apply owner-provided Docker Hub namespace `myselfabii` and regenerate the deployment bundle. Container builds and publication remain pending.

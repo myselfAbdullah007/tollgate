@@ -25,6 +25,12 @@ The mock provider needs no external API key. Demo activity is clearly labeled an
 
 ### Docker
 
+To consume prebuilt images without a source checkout, use the
+[image distribution guide](docs/image-distribution.md). It provides a pull-only
+Compose deployment with external PostgreSQL/Redis and an optional dashboard.
+The configured Docker Hub namespace is `myselfabii`; image publication remains pending.
+The commands below are the existing source-build/demo deployment.
+
 ```sh
 cp .env.example .env
 make key >> .env

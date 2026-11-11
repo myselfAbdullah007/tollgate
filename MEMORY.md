@@ -51,3 +51,21 @@ Final release gate: worker heartbeat healthcheck is enabled; full Compose `up --
 The 14-PR review is tracked in docs/pr-review-2026-10-28.md and ADR 0008. Thirteen compatible PRs are merged into main; PR 13 is closed without merging after clean local and remote TypeScript 7 lint failures. Do not remove lint coverage to force the upgrade. Reconciled npm lock must pass clean Node 22 npm ci; host-only package-lock generation previously missed optional native entries. Live provider tests and image publication are not part of this maintenance task.
 
 PR resolution completed: source 46151a5 passed CI 40685934917 (gateway/dashboard/Compose smoke). Local checks: 79 infrastructure tests, 70 memory tests with 9 expected skips, 11 browser tests, static checks/build and inspected screenshots. Final GitHub open-PR count is zero. Running application containers were not redeployed; temporary 3188/8188 validation services were stopped.
+
+## Video documentation — 2026-11-09
+
+Created `docs/Tollgate-Complete-Video-Description.docx` at the user’s request. Includes narration, screen directions, detailed implemented features, scope boundaries, recording sequence, video description, glossary, and repository sources. DOCX integrity, XML parsing and Pandoc round-trip content checks passed. No application/service changes or new runtime/live-provider verification.
+
+The video document now embeds 12 images: eight existing 2026-10-28 demo captures and four new explanatory diagrams. Editable source is `docs/Tollgate-Complete-Video-Description.md`; diagram assets are in `docs/video-assets/`. ZIP/XML, image-count/placement and round-trip caption checks passed. Image contact sheets were visually inspected; Word pagination was not rendered.
+
+The portable edition is `docs/Tollgate-Complete-Video-Description.html` (~2.23 MB decimal). All twelve images and styles are embedded. Playwright with installed Google Chrome passed offline image loading, zero remote requests, chapter anchor navigation and no horizontal overflow at 1440×1000 and 390×844. Inspected desktop/mobile top and figure screenshots. No application or service changes.
+
+## Pull-only image distribution — 2026-11-11
+
+User requested image-based consumption without source checkout, accepting separate backend/dashboard packaging after discussion. Added `deploy/compose.images.yml` and `deploy/.env.images.example` for externally managed PostgreSQL/Redis, non-demo identities, required configuration, shared backend gateway/worker/migration roles and optional dashboard. Keep the internal `gateway:8187` address: dashboard rewrites remain build-time.
+
+`make distribution-check` validates config without a daemon; `make distribution-bundle` packages Compose, blank-secret example, instructions and license in `dist/tollgate-deployment.tar.gz`. Scripts and workflow structure checks passed; `make check` passed. The manual Docker Hub workflow defaults publish=false and selects an existing reviewed tag that must include packaging. CI now also defines a fresh-database image-only smoke; it has not run here. Docker daemon/socket unavailable, so local image builds, infrastructure smoke, multi-platform release and publication remain pending. No other services or paid providers were touched. Docker Hub namespace was requested asynchronously; keep placeholders until supplied. See ADR 0010 and docs/image-distribution.md.
+
+Final local backend result: `make test` completed with **70 passed, 9 infrastructure skips in 183.92 seconds**. No infrastructure skip is treated as a passing infrastructure check.
+
+Namespace follow-up: user supplied `myselfabii`. This supersedes the placeholder-namespace notes above. Environment examples, packaging default, Docker Hub workflow default and guide now use `myselfabii/tollgate` and `myselfabii/tollgate-dashboard`. Regenerated archive and reran Compose checks, packaging namespace/version override and blank-secret checks, and script Ruff successfully. Providing a namespace did not publish or authorize a registry push; build/runtime/publication checks remain pending.
