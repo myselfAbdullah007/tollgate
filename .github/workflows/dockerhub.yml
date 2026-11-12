@@ -1,5 +1,28 @@
-name: Docker Hub images (manual)
+name: Docker Hub images
 on:
+  workflow_call:
+    inputs:
+      source_ref:
+        description: 'Exact tested merge commit for automatic publication'
+        required: true
+        type: string
+      merge_build:
+        default: false
+        type: boolean
+      version:
+        default: ''
+        type: string
+      namespace:
+        default: myselfabii
+        type: string
+      publish:
+        default: false
+        type: boolean
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: false
+      DOCKERHUB_TOKEN:
+        required: false
   workflow_dispatch:
     inputs:
       version:
@@ -12,28 +35,43 @@ on:
         required: true
         type: string
       publish:
-        description: 'Push images and sign their digests (false builds only)'
+        description: 'Push versioned images and sign their digests (false builds only)'
         default: false
         type: boolean
 permissions:
   contents: read
   id-token: write
+concurrency:
+  group: dockerhub-${{ github.repository }}-${{ inputs.merge_build && 'main' || inputs.version }}
+  cancel-in-progress: false
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate release inputs
+      - name: Validate publication inputs and credentials
         env:
           VERSION: ${{ inputs.version }}
+          SOURCE_REF: ${{ inputs.source_ref }}
+          MERGE_BUILD: ${{ inputs.merge_build }}
           NAMESPACE: ${{ inputs.namespace }}
+          PUBLISH: ${{ inputs.publish }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Use a stable vMAJOR.MINOR.PATCH tag'; exit 1; }
+          if [[ "$MERGE_BUILD" == true ]]; then
+            [[ "$SOURCE_REF" =~ ^[0-9a-f]{40}$ ]] || { echo 'Automatic builds require an exact commit SHA'; exit 1; }
+          else
+            [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Use a stable vMAJOR.MINOR.PATCH tag'; exit 1; }
+          fi
           [[ "$NAMESPACE" =~ ^[a-z0-9][a-z0-9_-]+$ ]] || { echo 'Use a lowercase Docker Hub namespace'; exit 1; }
+          if [[ "$PUBLISH" == true ]]; then
+            test -n "$DOCKERHUB_USERNAME" && test -n "$DOCKERHUB_TOKEN" || { echo 'Configure repository Actions secrets DOCKERHUB_USERNAME and DOCKERHUB_TOKEN'; exit 1; }
+          fi
       - uses: actions/checkout@v7
-        with: {ref: '${{ inputs.version }}'}
+        with: {ref: '${{ inputs.merge_build && inputs.source_ref || inputs.version }}'}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
-      - name: Validate selected release includes the deployment contract
+      - name: Validate selected source includes the deployment contract
         run: |
           test -f scripts/package_distribution.py
           test -f docs/image-distribution.md
@@ -49,7 +87,7 @@ jobs:
           - {image: tollgate-dashboard, dockerfile: apps/dashboard/Dockerfile}
     steps:
       - uses: actions/checkout@v7
-        with: {ref: '${{ inputs.version }}'}
+        with: {ref: '${{ inputs.merge_build && inputs.source_ref || inputs.version }}'}
       - uses: docker/setup-qemu-action@v4
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v4
@@ -62,9 +100,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: docker.io/${{ inputs.namespace }}/${{ matrix.image }}
+          flavor: latest=false
           tags: |
-            type=semver,pattern={{version}},value=${{ inputs.version }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }}
+            type=raw,value=sha-${{ inputs.source_ref }},enable=${{ inputs.merge_build }}
+            type=semver,pattern={{version}},value=${{ inputs.version }},enable=${{ !inputs.merge_build }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }},enable=${{ !inputs.merge_build }}
       - id: build
         uses: docker/build-push-action@v6
         with:
@@ -91,15 +131,60 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with: {ref: '${{ inputs.version }}'}
+        with: {ref: '${{ inputs.merge_build && inputs.source_ref || inputs.version }}'}
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - name: Package matching deployment configuration
         env:
           NAMESPACE: ${{ inputs.namespace }}
           VERSION: ${{ inputs.version }}
-        run: python scripts/package_distribution.py --namespace "$NAMESPACE" --version "$VERSION"
+          SOURCE_REF: ${{ inputs.source_ref }}
+          MERGE_BUILD: ${{ inputs.merge_build }}
+        run: |
+          if [[ "$MERGE_BUILD" == true ]]; then
+            python scripts/package_distribution.py --namespace "$NAMESPACE" --image-tag "sha-$SOURCE_REF"
+          else
+            python scripts/package_distribution.py --namespace "$NAMESPACE" --version "$VERSION"
+          fi
       - uses: actions/upload-artifact@v7
         with:
-          name: tollgate-deployment
+          name: tollgate-deployment-release
           path: dist/tollgate-deployment.tar.gz
+
+  promote-latest:
+    needs: [images, deployment-bundle]
+    if: inputs.merge_build && inputs.publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check this is still the current main commit
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_REF: ${{ inputs.source_ref }}
+        run: |
+          head="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "$head" == "$SOURCE_REF" ]]; then
+            echo 'promote=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'promote=false' >> "$GITHUB_OUTPUT"
+            echo 'Newer main commit exists; keeping commit tags without overwriting latest.'
+          fi
+      - uses: docker/setup-buildx-action@v3
+        if: steps.current.outputs.promote == 'true'
+      - uses: docker/login-action@v4
+        if: steps.current.outputs.promote == 'true'
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Promote both successfully published images
+        if: steps.current.outputs.promote == 'true'
+        env:
+          NAMESPACE: ${{ inputs.namespace }}
+          SOURCE_REF: ${{ inputs.source_ref }}
+        run: |
+          for name in tollgate tollgate-dashboard; do
+            image="docker.io/$NAMESPACE/$name"
+            docker buildx imagetools create --tag "$image:latest" "$image:sha-$SOURCE_REF"
+          done

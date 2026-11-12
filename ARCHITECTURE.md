@@ -48,9 +48,10 @@ See docs/operations.md for recovery and docs/adr/ for tradeoffs.
 PostgreSQL/Redis. One backend image supplies gateway, worker and migration roles;
 the dashboard is a separate optional image. Its build-time proxy uses the internal
 `gateway:8187` address. `scripts/package_distribution.py` creates a source-free
-configuration/docs archive. The manual Docker Hub workflow defaults to build-only;
-publication requires an explicit dispatch with pushing enabled. See
-`docs/image-distribution.md` and ADR 0010. Local container verification/publication
+configuration/docs archive. Successful CI for a merged main PR calls the Docker
+Hub workflow with the exact tested commit, publishing commit tags and then
+promoting latest after both images succeed. Manual stable releases remain
+available. See `docs/image-distribution.md`, ADR 0010 and ADR 0011. Local container verification/publication
 remain pending where recorded in `docs/validation.md`.
 
 ## 0.2 extensions

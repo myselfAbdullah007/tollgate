@@ -103,3 +103,40 @@ jobs:
       - name: Stop this CI stack
         if: always()
         run: docker compose -f deploy/docker-compose.yml down
+
+  merged-pr:
+    needs: [distribution, gateway, dashboard, compose-smoke]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      publish: ${{ steps.merge.outputs.publish }}
+    steps:
+      - name: Confirm the tested commit came from a merged PR
+        id: merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          publish="$(gh api "repos/$REPOSITORY/commits/$EXPECTED_SHA/pulls" --jq 'any(.[]; .merged_at != null and .base.ref == "main" and .merge_commit_sha == env.EXPECTED_SHA)')"
+          echo "publish=$publish" >> "$GITHUB_OUTPUT"
+          if [[ "$publish" != true ]]; then
+            echo 'No matching merged PR; this main push will not publish images.'
+          fi
+
+  publish-images:
+    needs: merged-pr
+    if: needs.merged-pr.outputs.publish == 'true'
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/dockerhub.yml
+    with:
+      source_ref: ${{ github.sha }}
+      merge_build: true
+      namespace: myselfabii
+      publish: true
+    secrets: inherit

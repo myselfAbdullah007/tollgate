@@ -67,3 +67,11 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 
 - [x] Configure merge-to-main CI, PR-to-main checks and manual dispatch.
 - [x] Validate trigger structure and workflow shell syntax locally.
+
+## Automatic Docker Hub publication — 2026-11-12
+
+- [x] Gate automatic publication on successful integrated-commit CI and merged-PR identity.
+- [x] Add reusable multi-platform publication, exact SHA tags, latest promotion and matching archives.
+- [x] Validate workflows with actionlint, executable merge/credential/stale-run fixtures, archive tags and Compose checks.
+- [x] Configure repository DOCKERHUB_USERNAME secret to the owner-provided myselfabii.
+- [ ] Owner supplies DOCKERHUB_TOKEN in GitHub Actions secrets; confirm successful first merged-PR publication and registry availability.

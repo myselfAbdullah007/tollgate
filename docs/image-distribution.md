@@ -21,10 +21,11 @@ runs three roles: gateway (`serve`), background accounting worker (`worker`), an
 one-time migrations (`migrate`). The dashboard has its own image and optional
 `dashboard` Compose profile. PostgreSQL and Redis are not started by this file.
 
-Use matching explicit versions for backend and dashboard, for example
-`myselfabii/tollgate:0.2.0` and
-`myselfabii/tollgate-dashboard:0.2.0`, once published. Prefer version tags or
-verified digests over moving tags. Images are intended for Linux amd64 and arm64;
+Automatic merge builds publish matching `sha-<full-commit>` tags for backend and
+dashboard. The example defaults to `myselfabii/tollgate:latest` and
+`myselfabii/tollgate-dashboard:latest` for convenience after the first successful
+publication. Pin both images to the same commit tag or verified digests for
+repeatable production installs. Manual versioned releases remain available. Images are intended for Linux amd64 and arm64;
 architecture builds still need a successful release workflow before support is
 claimed for a particular release.
 
@@ -146,32 +147,59 @@ PostgreSQL and Redis remain externally owned and are untouched. Do not use globa
 Docker cleanup. Changing `.env` owner credentials does not reset an existing
 account; use the documented self-service/password-recovery tools.
 
-## Publisher instructions
+## Automatic publication after PR merges
+
+CI checks pull requests targeting `main` and runs again on the integrated `main`
+commit after a merge. After distribution checks, backend tests, dashboard checks
+and the Compose/image smoke all pass, CI confirms the exact commit belongs to a
+merged PR targeting `main` and calls the reusable **Docker Hub images** workflow.
+Direct main pushes, PR checks, failed CI, and manual CI runs do not automatically
+publish. Merge commits, squash merges and rebase merges are recognized through
+GitHub's associated-PR API and `merge_commit_sha`.
+
+The workflow checks out the exact tested SHA, builds backend and dashboard for
+Linux amd64/arm64, publishes `sha-<full-commit>` tags under `myselfabii`, requests
+SBOM/provenance attestations and signs image digests with GitHub OIDC. Both image
+build/sign jobs and the release bundle must succeed before a separate promotion
+job updates `latest` for both images. An older run checks current main and skips
+latest promotion if newer code has landed. The two repositories cannot be updated
+as one registry transaction; a promotion failure can temporarily leave different
+latest versions. Pin matching commit tags for reproducible deployments.
+
+Configure these repository Actions secrets before the first publishing run:
+
+- `DOCKERHUB_USERNAME`: the Docker Hub login with access to the `myselfabii` namespace.
+- `DOCKERHUB_TOKEN`: a Docker Hub access token allowed to write both `tollgate`
+  and `tollgate-dashboard` repositories. Keep the token in GitHub secrets.
+
+The workflow fails clearly when publication credentials are missing. Configuring
+this workflow does not create Docker Hub credentials or establish that a release
+has been published. The existing GHCR workflow remains separately manual.
+
+## Packaging and manual releases
 
 From the source repository, `make distribution-check` validates Compose without a
-daemon. `make distribution-bundle` creates `dist/tollgate-deployment.tar.gz` with
-the owner-selected `myselfabii` image references. To choose a release version:
+daemon. `make distribution-bundle` creates `dist/tollgate-deployment.tar.gz` using
+`latest`. For an exact merge build or manual stable release:
 
 ```sh
-.venv/bin/python scripts/package_distribution.py --namespace myselfabii --version 0.2.0
+.venv/bin/python scripts/package_distribution.py --image-tag sha-0123456789abcdef0123456789abcdef01234567
+.venv/bin/python scripts/package_distribution.py --version 0.2.0
 ```
 
-The namespace can be overridden with another lowercase namespace. This command reads only the example template;
-it never copies a populated `.env`, application source, databases or credentials.
+The SHA above is an illustration, not an available image. Use the actual published
+commit. These flags are mutually exclusive; a namespace override is supported.
+Packaging reads only the example template and never copies a populated `.env`,
+application source, databases or credentials.
 
-The manual **Docker Hub images (manual)** GitHub Actions workflow builds both
-images for amd64/arm64 from an existing reviewed release tag. The tag must include
-this packaging work. Configure repository secrets `DOCKERHUB_USERNAME` and
-`DOCKERHUB_TOKEN`; the token needs write access to both image repositories.
-Choose your namespace and tag, leaving **publish=false** for a build-only run.
-With explicit release approval, **publish=true** pushes version and major.minor
-tags, attaches build attestations, and signs image digests using GitHub OIDC.
-There is no automatic push on a branch commit and no implicit `latest` tag.
-Repository owners should restrict who can trigger releases and review the selected
-tag before dispatch. The existing GHCR workflow remains separate.
+The **Docker Hub images** workflow also supports manual dispatch from an existing
+reviewed `vMAJOR.MINOR.PATCH` tag. Leave `publish=false` for a build-only run; set it
+to true to publish version and major.minor tags. Manual versioned runs do not move
+`latest`. Do not reuse a stable version tag to represent each main merge.
 
-The workflow also uploads the deployment archive as a GitHub Actions artifact;
-it does not automatically create a public GitHub Release download. Give users the
-archive and the actual published image names/digests after a successful release.
-Docker Hub credentials are publication credentials, never application runtime
-environment variables. No image publication is performed by generating this bundle.
+Automatic publication uploads a `tollgate-deployment-release` Actions artifact
+whose environment example pins both images to that exact commit tag. Ordinary CI
+also produces a `tollgate-deployment` artifact with default image references.
+These artifacts are not automatic public GitHub Release downloads. Share a release
+archive and actual published references after the workflow succeeds. Docker Hub
+credentials are publishing credentials, never runtime application settings.

@@ -4,6 +4,10 @@ Date: 2026-11-11
 
 Status: Accepted for implementation; Docker Hub publication and runtime verification pending.
 
+Automatic Docker Hub publication after merged-PR CI is now specified in ADR 0011,
+superseding the manual-only publication portions below. Manual stable releases
+and the separately manual GHCR workflow remain supported.
+
 ## Context
 
 Users should run Tollgate from published container images without checking out its

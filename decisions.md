@@ -29,3 +29,5 @@
 | 2026-11-11 | Use owner-provided Docker Hub namespace `myselfabii` | Update distribution defaults without implying repository creation or publication; ADR 0010. |
 
 | 2026-11-12 | Run CI on main pushes/merges and PRs targeting main, plus manual dispatch | Validate integrated code while avoiding duplicate branch-push CI; registry publication remains a separate manual action. ADR 0010. |
+
+| 2026-11-12 | Automatically publish Docker Hub images after successful CI for merged main PRs | Explicit user clarification; exact-SHA tags, gated latest promotion and manual semver releases. Supersedes manual-only Docker Hub delivery; [ADR 0011](docs/adr/0011-automatic-dockerhub-publication.md). |

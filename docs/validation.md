@@ -133,3 +133,11 @@ Created `feat/dockerhub-distribution-and-project-guide` from main matching origi
 ## CI trigger configuration — 2026-11-12
 
 Parsed `.github/workflows/ci.yml` and asserted the exact event set: push limited to main, pull_request targeting main, and workflow_dispatch. Bash syntax checks passed for all existing CI command blocks. Confirmed Docker Hub and GHCR workflows still have manual-only triggers. No application code, UI or schema changed; backend/browser/container suites were not repeated. These local structural checks do not establish a successful hosted CI run.
+
+## Automatic Docker Hub publication — 2026-11-12
+
+Supersedes the earlier manual-only Docker Hub trigger assertion. User explicitly authorized publication on PR merge. Actionlint 1.7.12 passed the CI and Docker Hub workflows with shellcheck disabled; the official downloaded binary archive matched its published checksum. YAML parsing and all workflow Bash syntax checks passed.
+
+Executable local fixtures passed 5 merged-PR identity cases (matching merge, direct push, open PR, other base, other SHA), 5 credential/ref checks (including missing token rejection) and 2 current-main/latest checks. Packaging passed latest, full-SHA and semver archive checks, blank-secret checks and malformed/conflicting argument rejection. `make distribution-check distribution-bundle`, packaging-script Ruff and whitespace checks passed. Application backend/UI behavior did not change, so application suites were not repeated.
+
+DOCKERHUB_USERNAME was configured to myselfabii using GitHub secrets; no token value was received or printed. DOCKERHUB_TOKEN is not configured. No publishing workflow has been dispatched, no images pushed and no multi-platform/runtime success is claimed. Docker info still fails because /var/run/docker.sock is absent. Historical main run 43045734775 had successful gateway/distribution jobs but failed Playwright dependency installation from temporary DNS resolution failures for security.ubuntu.com; compose-smoke was skipped. This is a failed check, not evidence of a browser regression or a passing release gate.
