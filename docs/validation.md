@@ -129,3 +129,7 @@ User selected `myselfabii`. `make distribution-check distribution-bundle`, packa
 ### Branch preparation — 2026-11-11
 
 Created `feat/dockerhub-distribution-and-project-guide` from main matching origin/main. Included the distribution implementation and requested illustrated documents; excluded the unrelated `nano.17345.save` file and ignored deployment build output. Removed generated HTML trailing whitespace and rechecked all 12 image sources remain embedded. Staged whitespace checks passed before commit.
+
+## CI trigger configuration — 2026-11-12
+
+Parsed `.github/workflows/ci.yml` and asserted the exact event set: push limited to main, pull_request targeting main, and workflow_dispatch. Bash syntax checks passed for all existing CI command blocks. Confirmed Docker Hub and GHCR workflows still have manual-only triggers. No application code, UI or schema changed; backend/browser/container suites were not repeated. These local structural checks do not establish a successful hosted CI run.

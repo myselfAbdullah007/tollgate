@@ -62,3 +62,8 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Create a shareable standalone HTML edition; verify twelve embedded images offline, chapter navigation and desktop/mobile layout.
 
 - [x] Apply owner-provided Docker Hub namespace `myselfabii` and regenerate the deployment bundle. Container builds and publication remain pending.
+
+## CI triggers — 2026-11-12
+
+- [x] Configure merge-to-main CI, PR-to-main checks and manual dispatch.
+- [x] Validate trigger structure and workflow shell syntax locally.

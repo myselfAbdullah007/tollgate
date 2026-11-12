@@ -69,3 +69,7 @@ User requested image-based consumption without source checkout, accepting separa
 Final local backend result: `make test` completed with **70 passed, 9 infrastructure skips in 183.92 seconds**. No infrastructure skip is treated as a passing infrastructure check.
 
 Namespace follow-up: user supplied `myselfabii`. This supersedes the placeholder-namespace notes above. Environment examples, packaging default, Docker Hub workflow default and guide now use `myselfabii/tollgate` and `myselfabii/tollgate-dashboard`. Regenerated archive and reran Compose checks, packaging namespace/version override and blank-secret checks, and script Ruff successfully. Providing a namespace did not publish or authorize a registry push; build/runtime/publication checks remain pending.
+
+## CI triggers — 2026-11-12
+
+PR #28 is merged. On fresh branch `ci/run-on-main-merges` from origin/main, changed CI triggers from all pushes/PRs to main pushes, PRs targeting main, and manual dispatch. This covers merge commits, squash merges, rebase merges and direct main pushes without duplicate branch-push runs. Local YAML trigger assertions and workflow Bash syntax checks passed. No application behavior changed, so application suites were not repeated. Registry releases stay manual; asked the user separately whether successful merges should publish Docker Hub images, and no answer has arrived yet.

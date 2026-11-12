@@ -27,3 +27,5 @@
 | 2026-11-09 | Embed image data and CSS directly in a standalone HTML edition | User needs to send one file with its images; offline browser checks verify portability. See ADR 0009. |
 
 | 2026-11-11 | Use owner-provided Docker Hub namespace `myselfabii` | Update distribution defaults without implying repository creation or publication; ADR 0010. |
+
+| 2026-11-12 | Run CI on main pushes/merges and PRs targeting main, plus manual dispatch | Validate integrated code while avoiding duplicate branch-push CI; registry publication remains a separate manual action. ADR 0010. |

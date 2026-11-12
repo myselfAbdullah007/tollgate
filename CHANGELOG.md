@@ -70,3 +70,7 @@ No public release, paid-provider verification, or production security audit has 
 - Added a self-contained HTML edition of the illustrated video document with all twelve images and CSS embedded, responsive chapter navigation and print styles. No server or internet access is required to read it.
 
 - Configured the owner-provided Docker Hub namespace `myselfabii` in distribution examples, default packaging and manual workflow. Rebuilt the deployment archive; publication remains pending.
+
+## CI triggers — 2026-11-12
+
+- Run CI for pushes/merges to `main`, pull requests targeting `main`, and manual dispatch. Branch pushes no longer launch duplicate CI runs alongside PR checks. Registry publication remains manual pending explicit automation preference.

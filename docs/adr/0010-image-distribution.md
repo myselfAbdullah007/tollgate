@@ -42,3 +42,7 @@ cross-architecture success nor Docker Hub availability is claimed.
 ## Owner-selected namespace
 
 The user supplied `myselfabii` for Docker Hub. Use it as the environment-example, packaging and workflow default. Namespace selection does not establish registry availability or authorize pushing; publication remains pending.
+
+## CI event scope — 2026-11-12
+
+CI runs on pushes to main (including merged code), PRs targeting main, and manual dispatch. Feature branch pushes rely on PR checks. Registry publication stays manually dispatched; a successful CI run does not itself push images. Automatic registry delivery is a separate choice awaiting the user’s preference.
