@@ -77,3 +77,12 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Confirm both Docker Hub secret names are configured in GitHub Actions.
 - [x] Repair browser CI startup readiness after the PR trace exposed an early API health failure.
 - [ ] Confirm successful first merged-PR publication and registry availability.
+
+## Closed dependency PR remediation — 2026-11-12
+
+- [x] Inventory all fourteen closed updates and apply them in one tested replacement branch.
+- [x] Verify TypeScript 6 without weakening lint and preserve the separate TypeScript 7 deferral.
+- [x] Update cryptography locks and verify decryption of ciphertext produced by the old version.
+- [x] Patch minimatch audit findings with a scoped override and check clean Node 22 installation.
+- [x] Run backend/static/build/browser checks and inspect desktop/mobile screenshots; stop temporary servers.
+- [x] Complete hosted PostgreSQL/Redis (79 tests), dashboard (11 browser tests), Docker image builds and both deployment smokes in CI run 43175765228. Updated setup-python executes successfully; registry-publishing actions remain gated until merge.

@@ -33,3 +33,5 @@
 | 2026-11-12 | Automatically publish Docker Hub images after successful CI for merged main PRs | Explicit user clarification; exact-SHA tags, gated latest promotion and manual semver releases. Supersedes manual-only Docker Hub delivery; [ADR 0011](docs/adr/0011-automatic-dockerhub-publication.md). |
 
 | 2026-11-12 | Wait for gateway readiness and the dashboard proxy before CI browser login | PR #31 trace showed a startup health 500 hiding demo login; fail startup explicitly rather than starting tests with an unavailable API. |
+
+| 2026-11-12 | Apply closed dependency updates in a consolidated tested replacement, including a scoped minimatch security override | Closure did not install fixes; keep lint and accounting/privacy checks, verify TypeScript6 and ciphertext compatibility. [ADR0012](docs/adr/0012-dependency-update-remediation.md). |
