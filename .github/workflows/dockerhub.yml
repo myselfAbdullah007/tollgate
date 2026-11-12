@@ -69,7 +69,7 @@ jobs:
           fi
       - uses: actions/checkout@v7
         with: {ref: '${{ inputs.merge_build && inputs.source_ref || inputs.version }}'}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - name: Validate selected source includes the deployment contract
         run: |
@@ -132,7 +132,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with: {ref: '${{ inputs.merge_build && inputs.source_ref || inputs.version }}'}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - name: Package matching deployment configuration
         env:
