@@ -80,3 +80,5 @@ No public release, paid-provider verification, or production security audit has 
 - Publish both application images after all CI checks pass for an exact merged-main PR commit. PR checks, direct pushes and failed CI do not publish.
 - Add full-commit image tags, matching deployment artifacts and a separate latest promotion after both image builds/signatures succeed; stale runs skip latest updates. Keep manual semver releases and separate GHCR workflow.
 - Default deployment examples to latest and support exact SHA pins in the packaging command. Publication still needs a Docker Hub token; no successful hosted build or registry push is claimed.
+
+- Fixed a browser-CI startup race by waiting for gateway readiness and the dashboard API proxy before Playwright, and failing explicitly if either stays unavailable.

@@ -60,7 +60,19 @@ jobs:
         run: |
           TOLLGATE_DEMO=true .venv/bin/tollgate serve > /tmp/tollgate-api.log 2>&1 &
           npm run start --prefix apps/dashboard > /tmp/tollgate-ui.log 2>&1 &
-          for attempt in $(seq 1 60); do curl -fsS http://localhost:3187/login > /dev/null && break; sleep 1; done
+          ready=false
+          for attempt in $(seq 1 60); do
+            if curl --max-time 3 -fsS http://127.0.0.1:8187/readyz > /dev/null 2>&1 && \
+               curl --max-time 3 -fsS http://127.0.0.1:3187/api/healthz > /dev/null 2>&1; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [[ "$ready" != true ]]; then
+            cat /tmp/tollgate-api.log /tmp/tollgate-ui.log
+            exit 1
+          fi
           npm run test:e2e --prefix apps/dashboard
       - uses: actions/upload-artifact@v7
         if: failure()

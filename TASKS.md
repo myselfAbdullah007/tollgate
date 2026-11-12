@@ -74,4 +74,6 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Add reusable multi-platform publication, exact SHA tags, latest promotion and matching archives.
 - [x] Validate workflows with actionlint, executable merge/credential/stale-run fixtures, archive tags and Compose checks.
 - [x] Configure repository DOCKERHUB_USERNAME secret to the owner-provided myselfabii.
-- [ ] Owner supplies DOCKERHUB_TOKEN in GitHub Actions secrets; confirm successful first merged-PR publication and registry availability.
+- [x] Confirm both Docker Hub secret names are configured in GitHub Actions.
+- [x] Repair browser CI startup readiness after the PR trace exposed an early API health failure.
+- [ ] Confirm successful first merged-PR publication and registry availability.
