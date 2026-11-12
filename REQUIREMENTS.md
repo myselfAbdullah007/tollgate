@@ -36,6 +36,12 @@ archive checks do not establish image build, runtime or registry availability.
 Actual image publication, multi-platform builds and container smoke remain pending
 until run successfully; see docs/image-distribution.md and docs/validation.md.
 
+On 2026-11-12 the user authorized automatic Docker Hub publication after PR merges.
+Successful integrated-commit CI gates that publication. Exact commit tags and a
+separate latest promotion replace manual-only Docker Hub delivery; manual stable
+releases remain available. Credentials and a successful first hosted run are still
+required. See ADR 0011.
+
 ## 0.2 acceptance additions
 
 - Lossless policy edits, revision conflicts, effective preview, scoped workspace state and real date/customer filters have automated regression coverage.

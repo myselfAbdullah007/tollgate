@@ -69,3 +69,17 @@ User requested image-based consumption without source checkout, accepting separa
 Final local backend result: `make test` completed with **70 passed, 9 infrastructure skips in 183.92 seconds**. No infrastructure skip is treated as a passing infrastructure check.
 
 Namespace follow-up: user supplied `myselfabii`. This supersedes the placeholder-namespace notes above. Environment examples, packaging default, Docker Hub workflow default and guide now use `myselfabii/tollgate` and `myselfabii/tollgate-dashboard`. Regenerated archive and reran Compose checks, packaging namespace/version override and blank-secret checks, and script Ruff successfully. Providing a namespace did not publish or authorize a registry push; build/runtime/publication checks remain pending.
+
+## CI triggers — 2026-11-12
+
+PR #28 is merged. On fresh branch `ci/run-on-main-merges` from origin/main, changed CI triggers from all pushes/PRs to main pushes, PRs targeting main, and manual dispatch. This covers merge commits, squash merges, rebase merges and direct main pushes without duplicate branch-push runs. Local YAML trigger assertions and workflow Bash syntax checks passed. No application behavior changed, so application suites were not repeated. The user subsequently clarified that Docker Hub publication should happen automatically after PR merges; the implementation below supersedes manual-only Docker Hub publication.
+
+## Automatic Docker Hub publication — 2026-11-12
+
+User clarified that publication, not merely CI checks, must run when PRs merge. This explicitly supersedes prior manual-only Docker Hub delivery. On branch `ci/run-on-main-merges`, CI now gates a reusable Docker Hub workflow on all four check jobs plus associated-PR identity matching the tested main SHA. Builds exact SHA for amd64/arm64, signs digests, uploads a SHA-pinned release artifact, then promotes latest after both images and the archive succeed if main has not advanced. Manual stable releases remain; GHCR is separate. Default examples/package now use latest; --image-tag sha-<40hex> supports reproducible pins.
+
+Set repository DOCKERHUB_USERNAME secret to myselfabii; DOCKERHUB_TOKEN is still missing and must be supplied through GitHub settings. Local actionlint 1.7.12 (shellcheck disabled), YAML/Bash checks, 5 merge-gate/5 credential-ref/2 latest fixture cases, archive tag cases and Compose validation passed. No actual image builds or pushes occurred. Docker socket remains unavailable. Historical main CI run 43045734775 failed at Playwright dependency installation due DNS resolution of security.ubuntu.com; gateway and distribution passed, compose-smoke skipped. Do not bypass that failed check or claim publication success.
+
+## Publication credential and CI readiness follow-up — 2026-11-12
+
+User added DOCKERHUB_TOKEN. Confirmed both Docker Hub secret names exist via `gh secret list`; no value was read and authentication is not yet verified. PR #31 remains open. Its first CI run 43171942237 passed gateway/distribution but failed dashboard beforeAll: trace shows /api/healthz returned 500 before gateway startup completed, hiding the demo button. Improved CI readiness to wait for both gateway /readyz and dashboard /api/healthz before browser tests, failing explicitly after the bounded wait. Actionlint and executable wait-loop fixtures passed (delayed readiness, persistent API outage, persistent proxy outage). No application behavior or provider calls changed.

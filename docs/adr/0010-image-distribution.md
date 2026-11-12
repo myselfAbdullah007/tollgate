@@ -4,6 +4,10 @@ Date: 2026-11-11
 
 Status: Accepted for implementation; Docker Hub publication and runtime verification pending.
 
+Automatic Docker Hub publication after merged-PR CI is now specified in ADR 0011,
+superseding the manual-only publication portions below. Manual stable releases
+and the separately manual GHCR workflow remain supported.
+
 ## Context
 
 Users should run Tollgate from published container images without checking out its
@@ -42,3 +46,7 @@ cross-architecture success nor Docker Hub availability is claimed.
 ## Owner-selected namespace
 
 The user supplied `myselfabii` for Docker Hub. Use it as the environment-example, packaging and workflow default. Namespace selection does not establish registry availability or authorize pushing; publication remains pending.
+
+## CI event scope — 2026-11-12
+
+CI runs on pushes to main (including merged code), PRs targeting main, and manual dispatch. Feature branch pushes rely on PR checks. Registry publication stays manually dispatched; a successful CI run does not itself push images. Automatic registry delivery is a separate choice awaiting the user’s preference.

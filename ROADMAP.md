@@ -30,3 +30,7 @@ and manual Docker Hub build/publish workflow. This is packaging readiness, not a
 published image release. Run image builds, the non-demo image-deployment smoke,
 multi-platform verification and owner-authorized publication before advertising
 Docker Hub installation as available. See docs/image-distribution.md.
+
+Automatic post-merge Docker Hub publishing is configured as of 2026-11-12, gated
+by successful CI and merged-PR identity. First publication and multi-platform
+verification remain pending; the user has authorized this automated delivery.

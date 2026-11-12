@@ -27,3 +27,9 @@
 | 2026-11-09 | Embed image data and CSS directly in a standalone HTML edition | User needs to send one file with its images; offline browser checks verify portability. See ADR 0009. |
 
 | 2026-11-11 | Use owner-provided Docker Hub namespace `myselfabii` | Update distribution defaults without implying repository creation or publication; ADR 0010. |
+
+| 2026-11-12 | Run CI on main pushes/merges and PRs targeting main, plus manual dispatch | Validate integrated code while avoiding duplicate branch-push CI; registry publication remains a separate manual action. ADR 0010. |
+
+| 2026-11-12 | Automatically publish Docker Hub images after successful CI for merged main PRs | Explicit user clarification; exact-SHA tags, gated latest promotion and manual semver releases. Supersedes manual-only Docker Hub delivery; [ADR 0011](docs/adr/0011-automatic-dockerhub-publication.md). |
+
+| 2026-11-12 | Wait for gateway readiness and the dashboard proxy before CI browser login | PR #31 trace showed a startup health 500 hiding demo login; fail startup explicitly rather than starting tests with an unavailable API. |

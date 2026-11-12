@@ -62,3 +62,18 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Create a shareable standalone HTML edition; verify twelve embedded images offline, chapter navigation and desktop/mobile layout.
 
 - [x] Apply owner-provided Docker Hub namespace `myselfabii` and regenerate the deployment bundle. Container builds and publication remain pending.
+
+## CI triggers — 2026-11-12
+
+- [x] Configure merge-to-main CI, PR-to-main checks and manual dispatch.
+- [x] Validate trigger structure and workflow shell syntax locally.
+
+## Automatic Docker Hub publication — 2026-11-12
+
+- [x] Gate automatic publication on successful integrated-commit CI and merged-PR identity.
+- [x] Add reusable multi-platform publication, exact SHA tags, latest promotion and matching archives.
+- [x] Validate workflows with actionlint, executable merge/credential/stale-run fixtures, archive tags and Compose checks.
+- [x] Configure repository DOCKERHUB_USERNAME secret to the owner-provided myselfabii.
+- [x] Confirm both Docker Hub secret names are configured in GitHub Actions.
+- [x] Repair browser CI startup readiness after the PR trace exposed an early API health failure.
+- [ ] Confirm successful first merged-PR publication and registry availability.

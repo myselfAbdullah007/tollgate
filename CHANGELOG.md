@@ -70,3 +70,15 @@ No public release, paid-provider verification, or production security audit has 
 - Added a self-contained HTML edition of the illustrated video document with all twelve images and CSS embedded, responsive chapter navigation and print styles. No server or internet access is required to read it.
 
 - Configured the owner-provided Docker Hub namespace `myselfabii` in distribution examples, default packaging and manual workflow. Rebuilt the deployment archive; publication remains pending.
+
+## CI triggers — 2026-11-12
+
+- Run CI for pushes/merges to `main`, pull requests targeting `main`, and manual dispatch. Branch pushes no longer launch duplicate CI runs alongside PR checks. Post-merge Docker Hub delivery is configured in the automatic publication entry below.
+
+## Automatic Docker Hub delivery — 2026-11-12
+
+- Publish both application images after all CI checks pass for an exact merged-main PR commit. PR checks, direct pushes and failed CI do not publish.
+- Add full-commit image tags, matching deployment artifacts and a separate latest promotion after both image builds/signatures succeed; stale runs skip latest updates. Keep manual semver releases and separate GHCR workflow.
+- Default deployment examples to latest and support exact SHA pins in the packaging command. Publication still needs a Docker Hub token; no successful hosted build or registry push is claimed.
+
+- Fixed a browser-CI startup race by waiting for gateway readiness and the dashboard API proxy before Playwright, and failing explicitly if either stays unavailable.
