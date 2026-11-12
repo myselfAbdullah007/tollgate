@@ -106,7 +106,7 @@ jobs:
             type=semver,pattern={{version}},value=${{ inputs.version }},enable=${{ !inputs.merge_build }}
             type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }},enable=${{ !inputs.merge_build }}
       - id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ${{ matrix.dockerfile }}
