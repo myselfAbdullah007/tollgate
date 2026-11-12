@@ -85,4 +85,4 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Update cryptography locks and verify decryption of ciphertext produced by the old version.
 - [x] Patch minimatch audit findings with a scoped override and check clean Node 22 installation.
 - [x] Run backend/static/build/browser checks and inspect desktop/mobile screenshots; stop temporary servers.
-- [ ] Complete hosted PostgreSQL/Redis, image-build/smoke and updated action execution checks before merging.
+- [x] Complete hosted PostgreSQL/Redis (79 tests), dashboard (11 browser tests), Docker image builds and both deployment smokes in CI run 43175765228. Updated setup-python executes successfully; registry-publishing actions remain gated until merge.

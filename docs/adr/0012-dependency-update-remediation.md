@@ -2,7 +2,7 @@
 
 Date: 2026-11-12
 
-Status: Implemented locally; hosted integration validation pending.
+Status: Accepted; implemented and verified locally and by hosted CI 43175765228.
 
 Closing an update PR does not apply its fixes. Consolidate the fourteen closed
 updates into a tested replacement branch and PR, preserving application behavior
