@@ -82,3 +82,9 @@ No public release, paid-provider verification, or production security audit has 
 - Default deployment examples to latest and support exact SHA pins in the packaging command. Publication still needs a Docker Hub token; no successful hosted build or registry push is claimed.
 
 - Fixed a browser-CI startup race by waiting for gateway readiness and the dashboard API proxy before Playwright, and failing explicitly if either stays unavailable.
+
+## Dependency remediation — 2026-11-12
+
+- Applied all fourteen recently closed Dependabot proposals in a consolidated replacement branch: Python minimums/cryptography 50.0.2, TypeScript 6, frontend tools/icons and four GitHub Actions upgrades.
+- Patched a newly observed minimatch advisory through a scoped 10.x-to-11.0.8 override, preserving unaffected 3.x consumers and all lint checks. Final npm audit reports zero findings.
+- Verified existing AES-GCM credential ciphertext compatibility, clean Node 22 installation, backend/static/build/browser checks and desktop/mobile screenshots. Local Docker integration remains unavailable; see docs/pr-review-2026-11-12.md.
