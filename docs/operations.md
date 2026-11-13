@@ -21,9 +21,9 @@ Monthly partitions are created lazily by the writer under an advisory lock. Drop
 
 ## Durable accounting and recovery
 
-Redis AOF is configured with `appendfsync always` in the provided Compose stack. Settlement removes the request reservation, increments spend and XADDs its metadata event in one Lua execution. Pending events survive worker restarts. The worker claims stale pending events after 30 seconds and acknowledges after its ledger/rollup transaction. Event replay is idempotent.
+Redis AOF is configured with `appendfsync always` in the provided Compose stack. Settlement removes the request reservation, increments spend and XADDs its metadata event in one Lua execution. Pending events survive worker restarts. The worker claims stale pending events after 30 seconds and atomically acknowledges/deletes each entry after its ledger/rollup transaction. Event replay is idempotent.
 
-On startup and every three minutes the worker reconstructs settled counters from a repeatable-read ledger snapshot plus stream events absent from that snapshot. A short global lease pauses new budget reservations/settlements, not provider generation. The commit checks lease identity atomically; expired snapshots cannot overwrite new charges. Active reservation hashes are untouched. Requests wait briefly; the lease auto-expires if the worker crashes. Current reconciliation loads ledger rows into memory and is intended for early-stage scale; large installations need SQL aggregation and bounded event retention.
+On startup and every three minutes the worker captures at most 10,000 delivery events before a repeatable-read SQL snapshot, reconstructs settled counters from transactional daily rollups, and adds captured events absent from the ledger snapshot. A short global lease pauses new budget reservations/settlements, not provider generation. The commit checks lease identity atomically; expired snapshots cannot overwrite new charges. Active reservation hashes are untouched. Requests wait briefly; the lease auto-expires if the worker crashes. Reconciliation queries only captured event identities, with SQL aggregation over daily rollups. Larger backlogs defer rebuilding while delivery drains. Aggregate output still grows with customer-months, so workload capacity must be measured.
 
 Reservations carry 180-second deadlines; request provider work has a 120-second total ceiling. A crashed process's reservation is removed on a later admission. An interrupted stream is conservatively charged at its reserved estimate, marked as estimated/error, rather than assuming the provider did no work. Deterministic privacy-enabled cache hits are checked before reservation and can be served at zero cost when budget is exhausted, while remaining inside the configured permitted tier range.
 
@@ -37,9 +37,9 @@ The provider screen reports whether a key is configured; it does not claim an ex
 
 ## Observability
 
-`/healthz` reports process availability. `/readyz` checks database and Redis connectivity. `/metrics` exposes process-level gateway request/error counters. The optional observability overlay adds private-loopback Prometheus and Grafana. Log metadata never contains prompt/answer text. Request IDs connect headers with ledger rows. Detailed stage tracing and latency histograms are future work.
+`/healthz` reports process availability. `/readyz` checks database and Redis connectivity. `/metrics` exposes process-level gateway request/error counters, latency histograms, fallback attempts, uncertain costs, cache failures and accounting recovery/failure counters. Redis deployments also expose worker health, delivery backlog, retained entries and metric availability. The optional observability overlay adds private-loopback Prometheus and Grafana. Log metadata never contains prompt/answer text. Request IDs connect headers with ledger rows. Detailed stage tracing remains future work. Histograms include full request/stream lifetime, not isolated gateway overhead. Counter metrics reset with each gateway process; scrape each process separately when scaling.
 
-Retained Redis events currently grow with traffic; do not trim pending events. Add a reviewed acknowledged-event retention procedure before sustained high-volume deployment.
+Committed Redis events are deleted after SQL delivery. Legacy committed entries are retired in batches of 500. Never apply arbitrary MAXLEN trimming: pending entries must survive until committed. This private ledger stream supports one ledger consumer group, not external fan-out consumers.
 
 ## Docker hosts without Buildx
 
@@ -58,4 +58,21 @@ Settings shows readiness, worker heartbeat and pending delivery state. Settlemen
 
 Webhook delivery runs separately from ledger ingestion, checks only public HTTPS destinations, signs each body and retries up to five times. Receivers must deduplicate event ids. Inspect failed alerts under Insights & alerts. Webhooks are disabled until an owner configures/enables them; no real destination was contacted during tests.
 
-Migration `0002` adds the authoritative API-key hash lookup index without rewriting stored credentials. Back up both stores before upgrades. The current worker retains events and scans history for reconciliation; representative capacity testing, checkpointing, batching and a reviewed retention policy remain pending.
+Migration `0002` adds the authoritative API-key hash lookup index without rewriting stored credentials. Back up both stores before upgrades. The new worker uses rollups and bounded delivery snapshots; PostgreSQL/Redis verification and representative capacity testing remain mandatory before deployment. Further incremental rebuilds and ledger batching remain future work.
+
+## Production preflight and alerts
+
+Run `tollgate check-production` against the intended environment. It checks demo/mock
+flags, PostgreSQL/Redis configuration, secure cookies, HTTPS origins and owner/master
+key configuration without printing values or contacting providers. Exit 1 means at
+least one configuration gate failed; exit 0 is not a live deployment certification.
+
+The observability overlay loads `deploy/prometheus/alerts.yml`. Rules cover scrape
+outages, worker health, backlog, accounting failures and uncertain provider cost.
+Thresholds are initial operator defaults, not measured SLOs. Configure and test an
+Alertmanager/paging destination separately; no external messages are sent by setup.
+
+Upgrade gateway and worker together during maintenance. Old SQL-first reconciliation
+is incompatible with concurrent deletion by the new worker; mixed-version workers
+are unsupported. Back up SQL and Redis first and verify rollup integrity. The newest
+validation record identifies whether real infrastructure checks passed.

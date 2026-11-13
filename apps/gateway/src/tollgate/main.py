@@ -204,13 +204,34 @@ def create_app(settings=None):
 
     @app.get("/metrics", response_class=PlainTextResponse)
     async def metrics():
-        return (
+        output = (
             "# TYPE tollgate_requests_total counter\ntollgate_requests_total "
             + str(pipeline.requests)
             + "\n# TYPE tollgate_errors_total counter\ntollgate_errors_total "
             + str(pipeline.errors)
             + "\n"
         )
+        output += pipeline.metrics.render()
+        if fast.redis:
+            try:
+                stamp = await fast.redis.get("tollgate:worker-heartbeat")
+                groups = await fast.redis.xinfo_groups("tollgate:events")
+                pending = sum(
+                    int(g.get("pending", 0)) + int(g.get("lag", 0) or 0)
+                    for g in groups
+                    if g["name"] == "ledger"
+                )
+                values = {
+                    "worker_healthy": int(bool(stamp) and time.time() - float(stamp) < 60),
+                    "ledger_pending_events": pending,
+                    "retained_events": await fast.redis.xlen("tollgate:events"),
+                    "accounting_metrics_available": 1,
+                }
+            except Exception:
+                values = {"accounting_metrics_available": 0, "worker_healthy": 0}
+            for name, value in values.items():
+                output += f"# TYPE tollgate_{name} gauge\ntollgate_{name} {value}\n"
+        return output
 
     @app.post("/v1/chat/completions")
     async def chat(body: schemas.ChatRequest, request: Request, identity=Depends(api_key)):
@@ -238,7 +259,7 @@ def create_app(settings=None):
         ):
             raise HTTPException(429, "Too many login attempts", headers={"Retry-After": "60"})
         user = await repo.find("user", body.email, "global")
-        if not user or not verify_password(user["password_hash"], body.password):
+        if not user or user.get("disabled") or not verify_password(user["password_hash"], body.password):
             raise HTTPException(401, "Email or password is incorrect")
         token = secrets.token_urlsafe(32)
         await repo.put(

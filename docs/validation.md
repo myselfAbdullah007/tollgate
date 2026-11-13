@@ -163,3 +163,152 @@ All updated workflow inputs were compared with the four official action manifest
 ### Hosted dependency verification
 
 [CI run 43175765228](https://github.com/myselfAbdullah007/tollgate/actions/runs/43175765228) passed on dependency code commit `5a4f986`: gateway **79 passed in 80.48s** with PostgreSQL/Redis on Python 3.12; dashboard **11 browser tests passed in 30.8s**, clean install/lint/types/build passed; distribution passed; Docker builds and full-stack/image-only smokes passed. The image-only deployment used a fresh non-demo database and dashboard proxy, verifying key creation, mock fallback/stream restoration and durable metadata-only worker accounting. Source PR publication gates were skipped as intended. No registry publication or production deployment occurred. The following commit only records this evidence.
+
+
+## Market-readiness hardening — 2026-11-13
+
+Audit findings were converted into regressions before implementation: all nine
+initial cases failed on the original code. After correction, nine passed in
+48.18 s. Coverage includes unsupported options, pre-stream and non-stream timeout,
+timeout then fallback success, cancellation, confirmed rejections and cache outage.
+Four rollup/snapshot-ordering/backlog tests passed in 12.69 s. Expanded readiness
+suite (15 tests) passed in 69.97 s, including summed admission, failed stream cleanup,
+invalid partial usage, SSE usage flags, metrics and production configuration.
+
+First full backend run: `make test` **92 passed / 10 infrastructure skips in
+252.94 s**. `make check` passed Ruff, mypy (24 files), ESLint and TypeScript.
+Optimized production build passed separately. Browser suite against that build
+via Next CLI: **11 passed in 44.0 s**. The CLI emitted its standalone-output warning;
+a separate standalone-server verification is recorded below. No layout changes
+were made, so no new screenshot/layout inspection is claimed.
+
+`PYTEST_ADDOPTS=-x make integration` was attempted against Tollgate ports and
+**failed**, stopping after **16 passes / 1 failure in 73.20 s** when the first Redis
+case could not connect to localhost:63987. Docker's socket is absent. PostgreSQL,
+real Redis delivery/retention, container builds/smoke and restore rehearsals are not
+verified for these changes. This is a release blocker, not a passing skipped gate.
+
+Prometheus rules/config and observability overlay YAML parsed successfully;
+promtool and actual Prometheus/Alertmanager execution are not verified. The
+production preflight CLI was exercised with synthetic unsafe settings: exit 1,
+expected failed gates, and no password value in output. It makes no network calls.
+
+Browser services used temporary SQLite storage and ports 3188/8188, mock routing,
+and empty external provider credentials. No paid providers, outbound webhooks,
+production deployment, registry publication or unrelated services were used.
+Generated next-env.d.ts was restored; the pre-existing nano save file was untouched.
+
+
+Standalone production browser verification: **11 passed in 38.9 s**, using the
+built standalone server with its static assets copied into the generated output.
+Both temporary servers were stopped, their temporary database directory removed,
+and ports3188/8188 verified free. No screenshot/layout changes or provider calls.
+
+
+Final backend gate after the accounting metadata/cleanup refinements: `make test`
+**94 passed / 10 infrastructure skips in 289.21 s**. `make check` passed again
+(Ruff, mypy24 modules, ESLint and TypeScript). `git diff --check` passed; new local
+Markdown links resolve. The infrastructure failure above remains unresolved and
+must pass before deployment; mock snapshot tests do not substitute for it.
+
+
+## Real infrastructure follow-up — 2026-11-13
+
+Docker became available before this follow-up; no daemon or unrelated service was
+started/stopped. Existing Tollgate PostgreSQL16.13 and Redis7.4.8 containers were
+healthy. `make integration` first passed **104 tests in208.70s**, with no skips.
+Added three real-store regressions: commit/deletion during PostgreSQL repeatable-read
+snapshot, commit-before-ack crash-window recovery, and uncertain-attempt plus
+successful fallback settlement. Final `make integration`: **107 passed in285.40s**,
+no skips. `make check` passed (Ruff, mypy24 modules, ESLint, TypeScript).
+
+Built backend Python3.12 and dashboard Node22 images locally from current source,
+using distinct `readiness-validation` tags. Both Docker builds passed, including
+the separate dashboard optimized build. npm retained the documented ESLint peer
+warnings; no force/legacy dependency flags were used.
+
+Created temporary Compose configurations derived from repository deployment files
+with `validation-*` service names, a dedicated `tollgate_validation` network and
+fresh validation volumes, under project `tollgate`. Only ports3188/8188 were bound;
+original application/store services were untouched. Full-stack `up --wait` passed,
+including worker heartbeat. Mock-only Compose smoke passed streaming restoration,
+forced fallback, explicit usage events, cost metadata and durable metadata-only
+ledger delivery. Smoke now accepts `TOLLGATE_SMOKE_URL` for isolated ports.
+
+Worker outage/restart probe: stopped only validation-worker, completed a mock
+request, verified its event remained in Redis and absent from SQL, restarted the
+worker, and verified exactly one ledger event, deleted committed delivery and
+unchanged settled cost. This is an outage/restart check, not a backup/restore or
+power-loss durability certification.
+
+Prometheus3.2.1 `promtool check rules` passed all6 alert rules; `check config` passed
+with the mounted rule file. No external alert delivery was configured or attempted.
+
+First container browser run: **10 passed /1 failed in47.4s**. Trace showed two
+successful customer PATCHes followed by a keys GET500; dashboard logs reported an
+upstream ECONNRESET. The editor incorrectly kept a failed-save dialog open. Two
+focused regressions both failed against that image. The fix preserves successful
+mutation results and shows a separate refresh warning, while actual write failures
+remain form errors; non-JSON errors now have a readable HTTP status. No automatic
+write retry was added. Corrected verification is recorded below.
+
+
+Corrected dashboard image rebuilt successfully. Full production container browser
+suite: **13 passed in46.3s**, including both regressions that previously failed.
+Static checks passed again. No layout/style changes were made; browser checks
+include the existing mobile navigation and sidebar visibility assertions.
+
+Validated local image IDs (not registry publication): backend
+`sha256:6a1d0cb93e81ffad1a4f97e2f3d605cdf23e2b9a69a54209db3ea51f7691995c`,
+dashboard
+`sha256:ba8a153ea0034be593f5c85a0fc5fc96916f0b9e71e48f56f5fbc6c2251945cb`.
+
+
+Fresh non-demo pull-only verification also passed using the newly built images,
+a separate `tollgate_image_validation` database and Redis DB1 in the isolated
+validation stores. The configuration was derived from deploy/compose.images.yml
+with only validation service/network names, loopback ports and explicit synthetic
+credentials changed. `up --wait` passed; distribution_smoke.py passed dashboard
+proxy, key creation, mock fallback/stream restoration and durable metadata-only
+ledger delivery. This verifies local image consumption, not Docker Hub publication,
+arm64 runtime, production credentials or a real model provider.
+
+Cleanup completed: temporary validation containers, network and volumes removed; ports3188/8188 released. All pre-existing container IDs and states matched the baseline, and original Tollgate services remain healthy. Existing application images/services were not redeployed.
+
+
+## Detailed testing — 2026-11-13
+
+Expanded by 51 collected cases. Four defects reproduced in eight initial failing
+cases: malformed tool selection/description, non-443 webhook acceptance, disabled
+account session issuance, and missing recovery fence on an already-committed
+event. Fixed with regressions; ADR 0015 records the decisions.
+
+Final make test: 141 passed/17 infrastructure skips (224.08s). make integration:
+158 passed/no skips (275.73s). make check, separate production build and distribution
+configuration check passed. Container Playwright: 13 passed (44.1s). Visual audit:
+11 views, no measured contrast failures/document overflow; desktop and mobile
+screenshots inspected. Coverage: 83.6% statements, 67.9% branches; CLI subprocesses
+not included. Production npm audit and Python runtime-lock pip-audit reported no
+known vulnerabilities, not a security certification.
+
+440 mock requests passed (200 burst at concurrency20, 240 at 2rps over120s), all
+durably logged; observed p50/p95/p99 196.85/660.64/830.63ms. Worker interruption
+retained and delivered a pending event once. PostgreSQL/Redis outages returned
+readiness503 then200 after store restart. The disposable restart:no worker exited
+on Redis disconnect; production supervision behavior was not tested here.
+Quiesced SQL+RDB restore into isolated targets preserved442 records,1491096
+micro-USD, one pending delivery and123 micro-USD active reservation. Snapshot1.072s,
+restore/verify4.108s excludes provisioning/operator response and is not an RTO.
+
+Failed setup/tooling attempts are documented: browser startup connection refusal,
+dialect typing check, Decimal report serialization and mutable report counters.
+All were corrected and relevant checks repeated. Temporary test services, volumes,
+network and backup files removed; pre-existing container IDs/states unchanged,
+ports3188/8188 released. Existing deployed application remains unchanged.
+
+See [detailed report](audits/2026-11-13-detailed-testing/REPORT.md) for logs,
+coverage, screenshots, dependency reports, load/restore results and reproduction.
+Remaining: representative long soak/capacity, live providers/prices, intended
+production backup/secret recovery, independent security/privacy/accessibility
+review, runtime alerts/paging and commercial pilot evidence. Simultaneous loss of
+both accounting stores remains a surfaced manual reconciliation incident.

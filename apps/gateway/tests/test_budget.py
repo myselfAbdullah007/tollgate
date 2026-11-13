@@ -80,3 +80,20 @@ async def test_inflight_limits_release_capacity(fast):
     await fast.release(key, "one")
     assert await fast.acquire(key, "two", 1)
     await fast.release(key, "two")
+
+
+async def test_concurrent_settlement_retries_charge_once(fast):
+    key = "test-retries:" + uuid.uuid4().hex
+    await fast.initialize(key, 0)
+    await fast.reserve(key, "single", 1000, [], [100])
+    results = await asyncio.gather(*(fast.settle(key, "single", 37) for _ in range(50)))
+    assert sum(bool(result) for result in results) == 1
+    assert await fast.spend(key) == 37 and await fast.reserved(key) == 0
+
+
+async def test_concurrent_rate_admission_respects_both_scopes(fast):
+    key = "test-rates:" + uuid.uuid4().hex
+    results = await asyncio.gather(
+        *(fast.rate_limit([key, key + ":workspace"], [23, 17]) for _ in range(200))
+    )
+    assert sum(results) == 17

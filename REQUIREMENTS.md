@@ -51,3 +51,25 @@ required. See ADR 0011.
 - Customer-bound usage keys expose only their own allowance/usage and cannot invoke chat. Environment tags do not create security or budget isolation.
 - Transactional threshold events have signed HTTPS webhooks, bounded retries/deduplication and metadata delivery history. Notifications contain no prompts or answers.
 - Deployment-wide owner/admin/viewer roles, self password/session controls, audit metadata, CLI reset and maintenance-only encrypted-secret rotation are implemented. Workspace-specific memberships remain deferred.
+
+## Market-readiness hardening — 2026-11-13
+
+- Chat options outside the supported subset fail with 422 before provider work;
+  stream usage output honors `stream_options.include_usage`.
+- Atomic tier admission reserves all possible fallback attempts. Unknown billable
+  work after timeout/cancellation is recorded conservatively and explicitly, not
+  as zero; confirmed unbilled failures remain zero. Cache outages preserve success.
+- Post-commit delivery deletion, bounded legacy cleanup, stream-first snapshot
+  ordering and transactional rollup aggregation replace unbounded event retention
+  and full request-log loading. Real PostgreSQL/Redis integration and isolated
+  container smoke passed on2026-11-13; representative capacity remains unverified.
+- Fixed-cardinality operational metrics, Prometheus rules, offline production
+  configuration checks and a pilot checklist support operator readiness. They do
+  not establish live-provider accuracy, independent security review, recovery SLOs,
+  published images, external alert delivery or shared-hosting identity isolation.
+
+Detailed validation on 2026-11-13: 158 backend cases passed against PostgreSQL/Redis,
+13 container browser cases passed, and a small quiesced SQL+Redis RDB restoration
+preserved pending work and reservations. The 440-request mock exercise is bounded
+local evidence, not representative production capacity. See
+[the detailed report](docs/audits/2026-11-13-detailed-testing/REPORT.md).

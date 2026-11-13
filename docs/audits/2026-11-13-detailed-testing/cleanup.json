@@ -1,0 +1,9 @@
+{
+  "preexisting_containers_unchanged": true,
+  "baseline_container_count": 44,
+  "ports_free": {
+    "3188": true,
+    "8188": true
+  },
+  "temporary_containers_remaining": []
+}

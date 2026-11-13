@@ -10,7 +10,7 @@ The original text gateway and console plus readable/reachable navigation, lossle
 - Independent authentication, privacy, concurrency and accessibility review; configure TLS and private disclosure/backup procedures.
 - Representative load/soak tests and workload-specific SLOs, including failure/recovery with realistic history.
 - Automate backup/restore and rehearse the maintenance-only encrypted-secret rotation runbook.
-- Bounded stream retention, incremental/checkpointed reconciliation, ledger batching and larger customer/config collection pagination. SQL request-log paging and usage aggregates are already implemented.
+- Real PostgreSQL/Redis tests now cover post-commit retention, concurrent rollup snapshots and replay. Representative load/soak, further incremental counter rebuilding, ledger batching and larger customer/config collection pagination remain deferred.
 
 ## Business workflow follow-ups
 
@@ -34,3 +34,8 @@ Docker Hub installation as available. See docs/image-distribution.md.
 Automatic post-merge Docker Hub publishing is configured as of 2026-11-12, gated
 by successful CI and merged-PR identity. First publication and multi-platform
 verification remain pending; the user has authorized this automated delivery.
+
+Detailed testing follow-up (2026-11-13): bounded mock load and a coordinated
+small-fixture SQL/RDB restore are complete. Production-scale load, sustained
+soak, intended-deployment backup automation/PITR/secret recovery, live-provider
+verification and independent review remain release gates. See the detailed audit.

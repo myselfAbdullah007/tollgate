@@ -1,0 +1,157 @@
+name: tollgate
+services:
+  validation-postgres:
+    image: postgres:16.13-alpine
+    environment:
+      POSTGRES_USER: tollgate
+      POSTGRES_PASSWORD: tollgate-local-only
+      POSTGRES_DB: tollgate
+    volumes:
+    - validation_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+      - CMD-SHELL
+      - pg_isready -U tollgate
+      interval: 3s
+      retries: 20
+    restart: 'no'
+    networks:
+      validation:
+        aliases:
+        - postgres
+    depends_on: {}
+  validation-redis:
+    image: redis:7.4.8-alpine
+    command:
+    - redis-server
+    - --appendonly
+    - 'yes'
+    - --appendfsync
+    - always
+    volumes:
+    - validation_redis_data:/data
+    healthcheck:
+      test:
+      - CMD
+      - redis-cli
+      - ping
+      interval: 3s
+      retries: 20
+    restart: 'no'
+    networks:
+      validation:
+        aliases:
+        - redis
+    depends_on: {}
+  validation-migrate:
+    image: tollgate:readiness-validation
+    environment:
+      TOLLGATE_DATABASE_URL: postgresql+asyncpg://tollgate:tollgate-local-only@postgres:5432/tollgate
+      TOLLGATE_REDIS_URL: redis://redis:6379/0
+      TOLLGATE_DEMO: 'true'
+      TOLLGATE_ADMIN_EMAIL: admin@tollgate.local
+      TOLLGATE_ADMIN_PASSWORD: tollgate-demo-2026
+      TOLLGATE_MASTER_KEY: ''
+      TOLLGATE_ALLOWED_ORIGIN: http://localhost:3188,http://127.0.0.1:3188
+      TOLLGATE_ENABLE_MOCK_PROVIDER: 'true'
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GEMINI_API_KEY: ''
+    restart: 'no'
+    security_opt: &id001
+    - no-new-privileges:true
+    networks:
+      validation:
+        aliases:
+        - migrate
+    command:
+    - migrate
+    healthcheck:
+      disable: true
+    depends_on:
+      validation-postgres:
+        condition: service_healthy
+      validation-redis:
+        condition: service_healthy
+  validation-gateway:
+    image: tollgate:readiness-validation
+    environment:
+      TOLLGATE_DATABASE_URL: postgresql+asyncpg://tollgate:tollgate-local-only@postgres:5432/tollgate
+      TOLLGATE_REDIS_URL: redis://redis:6379/0
+      TOLLGATE_DEMO: 'true'
+      TOLLGATE_ADMIN_EMAIL: admin@tollgate.local
+      TOLLGATE_ADMIN_PASSWORD: tollgate-demo-2026
+      TOLLGATE_MASTER_KEY: ''
+      TOLLGATE_ALLOWED_ORIGIN: http://localhost:3188,http://127.0.0.1:3188
+      TOLLGATE_ENABLE_MOCK_PROVIDER: 'true'
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GEMINI_API_KEY: ''
+    restart: 'no'
+    security_opt: *id001
+    networks:
+      validation:
+        aliases:
+        - gateway
+    command:
+    - serve
+    depends_on:
+      validation-migrate:
+        condition: service_completed_successfully
+    ports:
+    - 127.0.0.1:8188:8187
+  validation-worker:
+    image: tollgate:readiness-validation
+    environment:
+      TOLLGATE_DATABASE_URL: postgresql+asyncpg://tollgate:tollgate-local-only@postgres:5432/tollgate
+      TOLLGATE_REDIS_URL: redis://redis:6379/0
+      TOLLGATE_DEMO: 'true'
+      TOLLGATE_ADMIN_EMAIL: admin@tollgate.local
+      TOLLGATE_ADMIN_PASSWORD: tollgate-demo-2026
+      TOLLGATE_MASTER_KEY: ''
+      TOLLGATE_ALLOWED_ORIGIN: http://localhost:3188,http://127.0.0.1:3188
+      TOLLGATE_ENABLE_MOCK_PROVIDER: 'true'
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GEMINI_API_KEY: ''
+    restart: 'no'
+    security_opt: *id001
+    networks:
+      validation:
+        aliases:
+        - worker
+    command:
+    - worker
+    healthcheck:
+      test:
+      - CMD
+      - python
+      - -c
+      - import os,time,redis; stamp=redis.Redis.from_url(os.environ['TOLLGATE_REDIS_URL']).get('tollgate:worker-heartbeat');
+        assert stamp and time.time()-float(stamp)<60
+      interval: 15s
+      timeout: 3s
+      start_period: 20s
+      retries: 4
+    depends_on:
+      validation-migrate:
+        condition: service_completed_successfully
+  validation-dashboard:
+    image: tollgate-dashboard:readiness-validation
+    depends_on:
+      validation-gateway:
+        condition: service_healthy
+    restart: 'no'
+    security_opt:
+    - no-new-privileges:true
+    networks:
+      validation:
+        aliases:
+        - dashboard
+    ports:
+    - 127.0.0.1:3188:3187
+volumes:
+  validation_postgres_data: {}
+  validation_redis_data: {}
+networks:
+  validation: {}

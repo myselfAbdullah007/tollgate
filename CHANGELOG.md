@@ -1,5 +1,36 @@
 # Changelog
 
+## Detailed-validation fixes — 2026-11-13
+
+- Validate tool descriptions and explicit selections before provider dispatch.
+- Enforce HTTPS port 443 for new and previously saved webhook destinations.
+- Reject disabled-user login before issuing a session.
+- Preserve recovery fencing when an accounting event already exists, without
+  duplicating charges. Add SQLite and PostgreSQL regressions.
+- Expand to 158 passing backend cases and 13 passing container browser checks;
+  record mock load, store outages, coordinated restore, coverage and dependency
+  audits in docs/audits/2026-11-13-detailed-testing/REPORT.md.
+
+## Unreleased market-readiness hardening — 2026-11-13
+
+- Reserve conservative estimates across each tier's fallback chain; retain unknown
+  provider costs after timeouts, cancellation and interrupted streams, including
+  failed attempts before successful fallback. Add explicit uncertain-cost metadata.
+- Reject unsupported top-level chat/stream options with 422 and honor SSE usage
+  requests. Missing Anthropic usage is estimated rather than fabricated as zero.
+- Preserve successful answers during cache write failures; settle interrupted work
+  even if stream cleanup raises.
+- Delete delivery entries only after SQL commit; bound legacy cleanup and retained
+  event snapshots; rebuild from transactional daily rollups with stream-first
+  ordering and unchanged reservation preservation.
+- Add operational metrics, Prometheus alert rules, offline production configuration
+  checks, an API compatibility matrix and a controlled-pilot launch checklist.
+- Real PostgreSQL/Redis verification now passes, including concurrent snapshot/deletion,
+  crash-window replay and uncertain fallback settlement. This is not a production
+  release or live-provider certification.
+- Fixed a container-discovered dashboard issue: committed writes remain successful
+  when refresh fails, with a separate warning; plain-text HTTP errors stay readable.
+
 ## Image distribution — 2026-11-11
 
 - Added pull-only Compose for external PostgreSQL/Redis with gateway, worker,
