@@ -222,3 +222,57 @@ test("a superseding refresh does not turn a persisted customer save into an erro
   await page.getByRole("button", { name: "Save changes" }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
 });
+
+test("a failed refresh reports a warning without replaying a successful save", async ({ page }) => {
+  await page.goto("/customers");
+  await expect(page.getByText("Connecting to your workspace…")).toBeHidden();
+  const endpoint = "/api/admin/v1/tenants/default/customers";
+  const original = (await (await page.request.get(endpoint)).json()).find(
+    (customer: { name: string }) => customer.name === "cus_acme",
+  );
+  let writes = 0;
+  page.on("request", (request) => {
+    if (request.method() === "PATCH" && request.url().includes("/customers/")) writes++;
+  });
+  try {
+    await page.getByRole("button", { name: "Edit Acme Inc." }).click();
+    await page.getByRole("spinbutton", { name: "Custom monthly budget (USD)" }).fill("82");
+    await page.route("**/api/admin/v1/tenants/default/keys", (route) =>
+      route.fulfill({ status: 500, contentType: "text/plain", body: "Internal Server Error" }),
+    );
+    await page.getByRole("button", { name: "Save changes" }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByRole("status")).toContainText("Changes saved");
+    await expect(page.locator(".error-banner")).toContainText("Changes were saved, but the workspace could not refresh");
+    const persisted = (await (await page.request.get(endpoint)).json()).find(
+      (customer: { name: string }) => customer.name === "cus_acme",
+    );
+    expect(persisted.budget_override).toBe(82_000_000);
+    expect(writes).toBe(1);
+  } finally {
+    await page.unrouteAll({ behavior: "ignoreErrors" });
+    const current = (await (await page.request.get(endpoint)).json()).find(
+      (customer: { name: string }) => customer.name === "cus_acme",
+    );
+    const restored = await page.request.patch(`${endpoint}/${original.id}`, {
+      headers: { "X-Tollgate-Admin": "1" },
+      data: { ...original, revision: current.revision },
+    });
+    expect(restored.ok()).toBeTruthy();
+  }
+});
+
+test("a non-JSON write failure remains a readable form error", async ({ page }) => {
+  await page.goto("/customers");
+  await expect(page.getByText("Connecting to your workspace…")).toBeHidden();
+  await page.getByRole("button", { name: "Edit Acme Inc." }).click();
+  await page.route("**/api/admin/v1/tenants/default/customers/*", async (route) => {
+    if (route.request().method() === "PATCH") {
+      await route.fulfill({ status: 500, contentType: "text/plain", body: "Internal Server Error" });
+    } else await route.continue();
+  });
+  await page.getByRole("button", { name: "Save changes" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(1);
+  await expect(page.getByRole("dialog").getByRole("alert")).toContainText("HTTP 500");
+  await expect(page.getByRole("dialog").getByRole("alert")).not.toContainText("Unexpected token");
+});

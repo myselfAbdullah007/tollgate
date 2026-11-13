@@ -333,7 +333,20 @@ export default function Dashboard({
       method,
       ...(value ? { body: JSON.stringify(value) } : {}),
     });
-    if (activeTenant.current === scope) await load();
+    if (activeTenant.current === scope) {
+      try {
+        await load();
+      } catch {
+        // The mutation already succeeded. Keep refresh failure visible without
+        // inviting the caller to replay a committed write or lose a once-shown key.
+        if (activeTenant.current === scope) {
+          setError(
+            "Changes were saved, but the workspace could not refresh. Use Refresh to reload the latest data.",
+          );
+          setLoading(false);
+        }
+      }
+    }
     return result;
   };
   const exportLogs = () => {

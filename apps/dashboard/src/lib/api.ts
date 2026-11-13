@@ -15,9 +15,19 @@ export async function api<T>(
     window.location.assign(new URL("/login", window.location.origin).href);
     throw new Error("Session expired. Please sign in.");
   }
-  const data = await response.json();
+  let data;
+  try {
+    data = await response.json();
+  } catch (error) {
+    if (options.signal?.aborted) throw error;
+    throw new Error(
+      response.ok
+        ? "The server returned an invalid response. Please refresh."
+        : `Request failed (HTTP ${response.status}). Please retry.`,
+    );
+  }
   if (!response.ok) {
-    const detail = data.detail;
+    const detail = data?.detail;
     throw new Error(
       typeof detail === "string"
         ? detail
