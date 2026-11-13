@@ -1,0 +1,24 @@
+
+> tollgate-dashboard@0.2.0 test:e2e
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:369797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/dashboard.spec.ts:27:1 › all dashboard pages load without browser errors (5.2s)
+  ✓   2 [chromium] › tests/dashboard.spec.ts:50:1 › search and edit a customer budget (7.6s)
+  ✓   3 [chromium] › tests/dashboard.spec.ts:71:1 › create a key shown once, then revoke it (2.2s)
+  ✓   4 [chromium] › tests/dashboard.spec.ts:90:1 › playground previews protection and restores streaming PII (2.0s)
+  ✓   5 [chromium] › tests/dashboard.spec.ts:107:1 › mobile navigation works without horizontal overflow (1.5s)
+  ✓   6 [chromium] › tests/improvements.spec.ts:31:1 › sidebar footer stays reachable at short desktop and mobile heights (1.4s)
+  ✓   7 [chromium] › tests/improvements.spec.ts:54:1 › plan editor round trip preserves all privacy categories and degradation steps (2.1s)
+  ✓   8 [chromium] › tests/improvements.spec.ts:95:1 › switching workspaces resets the settings form and preserves navigation scope (1.9s)
+  ✓   9 [chromium] › tests/improvements.spec.ts:139:1 › request date range reaches the API and customer context is retained (2.3s)
+  ✓  10 [chromium] › tests/improvements.spec.ts:161:1 › insights exposes actual routing and feature cost, settings expose secure operations (2.1s)
+  ✓  11 [chromium] › tests/improvements.spec.ts:183:1 › a superseding refresh does not turn a persisted customer save into an error (6.9s)
+  ✓  12 [chromium] › tests/improvements.spec.ts:226:1 › a failed refresh reports a warning without replaying a successful save (2.0s)
+  ✓  13 [chromium] › tests/improvements.spec.ts:265:1 › a non-JSON write failure remains a readable form error (1.7s)
+
+  13 passed (44.1s)

@@ -7,7 +7,7 @@
 - [x] Add opt-in Docker Hub publishing, matching image versions and release instructions.
 - [x] Add daemon-free Compose/archive checks and a non-demo prebuilt-image CI smoke.
 - [x] Run local verification: 70 backend tests passed / 9 infrastructure skips, static checks and deployment-package checks passed.
-- [ ] Execute container build and fresh-database image smoke with a working Docker daemon.
+- [x] Execute container builds and fresh-database image smoke with a working Docker daemon (2026-11-13 isolated validation).
 - [ ] Verify amd64/arm64 release builds and publish only with owner authorization and actual Docker Hub namespace.
 
 - [x] Read supplied ODT and map its feature requirements.
@@ -86,3 +86,33 @@ Detailed findings and estimates are in IMPROVEMENT_PLAN.md. Open items are delib
 - [x] Patch minimatch audit findings with a scoped override and check clean Node 22 installation.
 - [x] Run backend/static/build/browser checks and inspect desktop/mobile screenshots; stop temporary servers.
 - [x] Complete hosted PostgreSQL/Redis (79 tests), dashboard (11 browser tests), Docker image builds and both deployment smokes in CI run 43175765228. Updated setup-python executes successfully; registry-publishing actions remain gated until merge.
+
+
+## Market-readiness implementation — 2026-11-13
+
+- [x] Reproduce timeout accounting and silent API-option loss with failing regressions.
+- [x] Implement conservative attempt accounting, summed reservations and explicit uncertainty.
+- [x] Reject unsupported API options, honor SSE usage, and preserve success during cache outages.
+- [x] Implement post-commit stream retention, bounded legacy cleanup and stream-first rollup recovery.
+- [x] Add bounded-cardinality metrics, alert rules and offline production preflight.
+- [x] Document supported API behavior, upgrade constraints and controlled-pilot launch gates.
+- [x] Pass real PostgreSQL/Redis integration and container smoke for the new retention protocol (107 tests; worker outage/restart and metadata-only smoke).
+- [x] Validate Prometheus configuration and all six rules with promtool3.2.1.
+- [ ] Verify runtime alert firing and configure an owner-selected paging destination.
+- [x] Complete a quiesced small-fixture PostgreSQL/Redis backup restore and bounded 440-request mock load/soak.
+- [ ] Validate intended production backup/secret recovery, representative sustained capacity, and live models/prices.
+- [ ] Complete independent security/privacy review and owner-led pilot/commercial validation.
+
+- [x] Final local backend94 passing/10 infrastructure skips, static checks, separate
+  production build, and11 production standalone browser tests; stop temporary services.
+
+- [x] Reproduce and fix post-save refresh failures in the dashboard; 13 container browser tests passed.
+
+## Detailed testing — 2026-11-13
+
+- [x] Reproduce and fix tool-selection, webhook-port, disabled-login and duplicate-recovery-marker defects.
+- [x] Add 51 cases; run 158 real-store tests without skips, static checks and production build.
+- [x] Pass 13 container browser tests and inspect desktop/mobile screenshots; capture 11-view measurements.
+- [x] Record statement/branch coverage and scan runtime dependency locks for known vulnerabilities.
+- [x] Verify worker interruption, store-outage readiness, coordinated restore, and unchanged original services.
+- [x] Record limitations and reproduction artifacts in docs/audits/2026-11-13-detailed-testing/REPORT.md.

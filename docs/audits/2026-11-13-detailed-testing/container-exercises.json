@@ -1,0 +1,45 @@
+{
+  "load": {
+    "requests": 440,
+    "burst_requests": 200,
+    "burst_concurrency": 20,
+    "burst_seconds": 4.598333758000081,
+    "soak_requests": 240,
+    "soak_seconds": 120.00123045999862,
+    "target_soak_rps": 2,
+    "statuses": {
+      "200": 440
+    },
+    "failures": [],
+    "latency_ms": {
+      "p50": 196.8495820001408,
+      "p95": 660.6413449990214,
+      "p99": 830.6304549987544
+    }
+  },
+  "ledger_after_load": 440,
+  "worker_restart": {
+    "pending_while_stopped": 1,
+    "ledger_after_restart": 441
+  },
+  "validation-postgres_outage": {
+    "during": 503,
+    "recovered": 200
+  },
+  "validation-redis_outage": {
+    "during": 503,
+    "recovered": 200
+  },
+  "backup_restore": {
+    "backup_seconds": 1.072426351998729,
+    "restore_and_verify_seconds": 4.107834765000007,
+    "sql_bytes": 50026,
+    "redis_bytes": 63360,
+    "restored_logs": 442,
+    "restored_cost_micro_usd": 1491096,
+    "inflight_preserved": 123,
+    "pending_delivered": 1,
+    "snapshot_type": "quiesced PostgreSQL custom dump + Redis RDB; fresh database and Redis volume"
+  },
+  "followup_requests": 2
+}

@@ -93,3 +93,108 @@ Initial npm audit found ten moderate propagated minimatch entries. Scoped overri
 Local results: make test70 passed/9 infrastructure skips (114.21s), make check and optimized build pass, browser suite11/11 (43.2s) then standalone production11/11 (39.9s). Desktop/mobile/provider screenshots inspected in docs/audits/2026-11-12-dependencies; no mobile document overflow. Ports3188/8188 used with /tmp SQLite, explicit demo mock routing and empty provider keys; both servers stopped. No Docker daemon, so local integration/image builds remain unavailable. No paid calls, images published, other services changed or PRs merged. Report docs/pr-review-2026-11-12.md and ADR0012 contain scope and limitations.
 
 Hosted dependency verification completed: CI 43175765228 for `5a4f986` passed all required jobs: Python 3.12/real PostgreSQL-Redis79 tests (80.48s), browser11 tests (30.8s), clean install/static/build, distribution, Docker builds, and full-stack plus fresh image-only deployment smokes. Replacement PR #32 is open and unmerged. Updated publication action manifests are validated, but PR CI correctly skips publishing. A documentation-only commit records this run without changing tested dependency code.
+
+
+## Market-readiness implementation — 2026-11-13
+
+User approved action after the market audit. Local changes address both P0 findings:
+ChatRequest rejects unknown top-level options; bounded stream options honor usage
+output; tier reservations sum every candidate estimate so unknown billable work
+before fallback can be conservatively charged. Timeout/cancellation/empty streams
+retain costs; known local/4xx rejection stays zero. Events include uncertain_cost
+and cost_basis. Cache write failures preserve generated responses. Stream cleanup
+cannot bypass settlement. Missing Anthropic usage is not normalized to fake zeros.
+
+Worker deletes stream entries only after SQL commit, with bounded legacy cleanup.
+Reconciliation captures up to 10,000 retained events BEFORE its SQL snapshot and
+uses transactional daily rollups plus captured identities. Preserve reservations
+and lease checks; larger backlogs defer rebuilds while delivery drains. Mixed old
+SQL-first workers and new deletion workers are unsupported: upgrade together in
+maintenance with backups. Rollup aggregation/customer-month totals still have scale
+limits; do not claim fully incremental or arbitrary-scale recovery.
+
+Added fixed-cardinality metrics, Prometheus rules, check-production CLI, API
+compatibility docs, pilot launch gates and ADR0013. No UI layout changes. Real
+PostgreSQL/Redis verification is blocked locally: Docker socket absent; make
+integration failed at localhost:63987 after16 passing tests. Do not deploy the new
+retention protocol without successful infrastructure verification. Provider prices,
+capped live smoke, restore/load rehearsals, independent security review, registry
+publication, external paging and commercial/design-partner validation remain gates.
+See the newest docs/validation.md section for actual final check results.
+
+
+Final local results: make test94 passed/10 infrastructure skips (289.21s), make
+check and separate production build passed. Browser11/11 through Next CLI and
+11/11 through standalone production server (38.9s). Temporary services stopped,
+ports3188/8188 released, generated next-env restored. No commits, deployment,
+provider calls or external publication. New retention integration test is present
+but remains unexecuted against real stores until Tollgate infrastructure is available.
+
+
+## Real-store/container verification — 2026-11-13
+
+Supersedes the local Docker/integration blocker above: Docker was already running
+at this follow-up. Existing Tollgate stores were healthy. make integration104
+passed, then expanded integration107 passed/no skips (285.40s). New real-store
+regressions cover commit/delete during PostgreSQL snapshot, commit-before-ack
+replay and uncertain-cost fallback settlement. make check passed.
+
+Built local readiness-validation images without overwriting running local tags.
+Used only validation-* services under project tollgate, separate network/volumes,
+ports3188/8188, empty provider keys and mocks. Full-stack and fresh non-demo
+pull-only smokes passed. Worker outage/restart retained delivery, wrote exactly
+one ledger event, deleted committed delivery and preserved settled costs. Promtool
+3.2.1 validated config and6 rules; external alert delivery remains unconfigured.
+
+Initial container browser run10passed/1failed: both customer PATCHes succeeded,
+then a proxy keys GET returned500/ECONNRESET, incorrectly leaving a failed-save
+form. Two deterministic regressions failed before correction. save now returns
+successful mutation results even if refresh fails, with a separate workspace
+warning; actual write failures remain form errors. Non-JSON failures report HTTP
+status. No automatic mutation retry. ADR0014 records the distinction.
+Rebuilt production dashboard: all13 browser tests passed (46.3s). No layout changes.
+
+Do not claim paid-traffic readiness: backup/restore rehearsal, representative load,
+live models/prices, independent security/privacy review, external paging and
+commercial pilot validation remain. No registry push, deployment of the existing
+application, paid-provider call or unrelated-service modification occurred.
+
+Cleanup completed: temporary validation containers, network and volumes removed; ports3188/8188 released. All pre-existing container IDs and states matched the baseline, and original Tollgate services remain healthy. Existing application images/services were not redeployed.
+
+
+## Detailed testing — 2026-11-13
+
+Expanded by 51 collected cases. Four defects reproduced in eight initial failing
+cases: malformed tool selection/description, non-443 webhook acceptance, disabled
+account session issuance, and missing recovery fence on an already-committed
+event. Fixed with regressions; ADR 0015 records the decisions.
+
+Final make test: 141 passed/17 infrastructure skips (224.08s). make integration:
+158 passed/no skips (275.73s). make check, separate production build and distribution
+configuration check passed. Container Playwright: 13 passed (44.1s). Visual audit:
+11 views, no measured contrast failures/document overflow; desktop and mobile
+screenshots inspected. Coverage: 83.6% statements, 67.9% branches; CLI subprocesses
+not included. Production npm audit and Python runtime-lock pip-audit reported no
+known vulnerabilities, not a security certification.
+
+440 mock requests passed (200 burst at concurrency20, 240 at 2rps over120s), all
+durably logged; observed p50/p95/p99 196.85/660.64/830.63ms. Worker interruption
+retained and delivered a pending event once. PostgreSQL/Redis outages returned
+readiness503 then200 after store restart. The disposable restart:no worker exited
+on Redis disconnect; production supervision behavior was not tested here.
+Quiesced SQL+RDB restore into isolated targets preserved442 records,1491096
+micro-USD, one pending delivery and123 micro-USD active reservation. Snapshot1.072s,
+restore/verify4.108s excludes provisioning/operator response and is not an RTO.
+
+Failed setup/tooling attempts are documented: browser startup connection refusal,
+dialect typing check, Decimal report serialization and mutable report counters.
+All were corrected and relevant checks repeated. Temporary test services, volumes,
+network and backup files removed; pre-existing container IDs/states unchanged,
+ports3188/8188 released. Existing deployed application remains unchanged.
+
+See [detailed report](docs/audits/2026-11-13-detailed-testing/REPORT.md) for logs,
+coverage, screenshots, dependency reports, load/restore results and reproduction.
+Remaining: representative long soak/capacity, live providers/prices, intended
+production backup/secret recovery, independent security/privacy/accessibility
+review, runtime alerts/paging and commercial pilot evidence. Simultaneous loss of
+both accounting stores remains a surfaced manual reconciliation incident.

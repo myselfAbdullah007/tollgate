@@ -1,0 +1,13 @@
+.venv/bin/ruff check --config apps/gateway/pyproject.toml apps/gateway
+All checks passed!
+.venv/bin/mypy --config-file apps/gateway/pyproject.toml apps/gateway/src
+Success: no issues found in 24 source files
+npm run lint --prefix apps/dashboard
+
+> tollgate-dashboard@0.2.0 lint
+> eslint .
+
+npm run typecheck --prefix apps/dashboard
+
+> tollgate-dashboard@0.2.0 typecheck
+> tsc --noEmit

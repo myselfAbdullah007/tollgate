@@ -1,0 +1,34 @@
+TEST_REDIS_URL=redis://localhost:63987/15 TEST_DATABASE_URL=postgresql+asyncpg://tollgate:tollgate-local-only@localhost:55487/tollgate .venv/bin/pytest apps/gateway/tests -q
+........................................................................ [ 45%]
+........................................................................ [ 91%]
+..............                                                           [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.14.4-final-0 ________________
+
+Name                                          Stmts   Miss Branch BrPart  Cover
+-------------------------------------------------------------------------------
+apps/gateway/src/tollgate/__init__.py             0      0      0      0   100%
+apps/gateway/src/tollgate/admin_security.py      62     12     26      5    76%
+apps/gateway/src/tollgate/cli.py                 67     67     24      0     0%
+apps/gateway/src/tollgate/config.py              23      2      4      2    85%
+apps/gateway/src/tollgate/db.py                  76      0      6      0   100%
+apps/gateway/src/tollgate/fastpath.py           124      5     52      4    95%
+apps/gateway/src/tollgate/limits.py              31      3      8      1    90%
+apps/gateway/src/tollgate/main.py               416    106    112     19    70%
+apps/gateway/src/tollgate/maintenance.py         35     12     14      0    59%
+apps/gateway/src/tollgate/metrics.py             21      0      6      0   100%
+apps/gateway/src/tollgate/notifications.py       77      3     26      3    94%
+apps/gateway/src/tollgate/pipeline.py           293     25    118     13    90%
+apps/gateway/src/tollgate/preflight.py            9      0      0      0   100%
+apps/gateway/src/tollgate/pricing.py             23      4     10      4    76%
+apps/gateway/src/tollgate/providers.py          158     20     66     13    84%
+apps/gateway/src/tollgate/redaction.py          108     14     48      7    81%
+apps/gateway/src/tollgate/repository.py         183     32     46     20    70%
+apps/gateway/src/tollgate/schemas.py            165     12     58     10    88%
+apps/gateway/src/tollgate/security.py            29      1      2      1    94%
+apps/gateway/src/tollgate/seed.py                38      7     20      4    74%
+apps/gateway/src/tollgate/worker.py             125     14     46     10    86%
+-------------------------------------------------------------------------------
+TOTAL                                          2063    339    692    116    80%
+Coverage JSON written to file docs/audits/2026-11-13-detailed-testing/coverage.json
+158 passed in 275.73s (0:04:35)

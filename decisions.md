@@ -35,3 +35,9 @@
 | 2026-11-12 | Wait for gateway readiness and the dashboard proxy before CI browser login | PR #31 trace showed a startup health 500 hiding demo login; fail startup explicitly rather than starting tests with an unavailable API. |
 
 | 2026-11-12 | Apply closed dependency updates in a consolidated tested replacement, including a scoped minimatch security override | Closure did not install fixes; keep lint and accounting/privacy checks, verify TypeScript6 and ciphertext compatibility. [ADR0012](docs/adr/0012-dependency-update-remediation.md). |
+
+| 2026-11-13 | Reserve the fallback chain, record uncertain costs, reject unsupported chat options, and retire committed delivery events using stream-first rollup recovery | Audit regressions reproduced before correction; real infrastructure remains a release gate. [ADR 0013](docs/adr/0013-market-readiness.md). |
+
+| 2026-11-13 | Validate new images in isolated Tollgate services; distinguish committed writes from failed refresh reads | Real-store tests passed; container browser evidence exposed a proxy-read failure after a successful save. [ADR 0014](docs/adr/0014-save-refresh-boundary.md). |
+
+| 2026-11-13 | Enforce tool/webhook/login contracts and preserve recovery fences for duplicate committed events | Eight boundary regressions reproduced four defects; add mock load, outage and coordinated restore evidence. [ADR 0015](docs/adr/0015-detailed-validation-boundaries.md). |

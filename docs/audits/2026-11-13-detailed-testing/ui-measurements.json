@@ -1,0 +1,580 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 768,
+      "left": 0,
+      "right": 244,
+      "height": 768,
+      "clientHeight": 768,
+      "scrollHeight": 768,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 617,
+      "bottom": 768,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 710,
+      "bottom": 768,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 724.5,
+      "bottom": 754.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 720,
+      "left": 0,
+      "right": 244,
+      "height": 720,
+      "clientHeight": 720,
+      "scrollHeight": 720,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 569,
+      "bottom": 720,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 662,
+      "bottom": 720,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 676.5,
+      "bottom": 706.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1024,
+      "height": 600
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 600,
+      "left": 0,
+      "right": 216,
+      "height": 600,
+      "clientHeight": 600,
+      "scrollHeight": 600,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 446,
+      "bottom": 600,
+      "left": 12,
+      "right": 203,
+      "height": 154,
+      "clientHeight": 154,
+      "scrollHeight": 154,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 542,
+      "bottom": 600,
+      "left": 0,
+      "right": 215,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 556.5,
+      "bottom": 586.5,
+      "left": 169,
+      "right": 199,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "sidebar": {
+      "top": 0,
+      "bottom": 844,
+      "left": 0,
+      "right": 244,
+      "height": 844,
+      "clientHeight": 844,
+      "scrollHeight": 844,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 693,
+      "bottom": 844,
+      "left": 12,
+      "right": 231,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 786,
+      "bottom": 844,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 799.5,
+      "bottom": 831.5,
+      "left": 195,
+      "right": 227,
+      "height": 32,
+      "clientHeight": 32,
+      "scrollHeight": 32,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "playground",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "plans",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "providers",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "customers",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "settings",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "route": "insights",
+    "sidebar": {
+      "top": 0,
+      "bottom": 900,
+      "left": 0,
+      "right": 244,
+      "height": 900,
+      "clientHeight": 900,
+      "scrollHeight": 900,
+      "overflowY": "hidden",
+      "fullyVisible": true
+    },
+    "bottom": {
+      "top": 749,
+      "bottom": 900,
+      "left": 17,
+      "right": 226,
+      "height": 151,
+      "clientHeight": 151,
+      "scrollHeight": 151,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "userMenu": {
+      "top": 842,
+      "bottom": 900,
+      "left": 0,
+      "right": 243,
+      "height": 58,
+      "clientHeight": 57,
+      "scrollHeight": 57,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "signOut": {
+      "top": 856.5,
+      "bottom": 886.5,
+      "left": 197,
+      "right": 227,
+      "height": 30,
+      "clientHeight": 30,
+      "scrollHeight": 30,
+      "overflowY": "visible",
+      "fullyVisible": true
+    },
+    "documentOverflow": false,
+    "contrastFailures": []
+  }
+]

@@ -12,6 +12,7 @@ The overview answers four questions first: how much did we spend, how much traff
 - Show used amount, limit, percentage bar, and tier together. Colors supplement text; tier labels and percentages remain explicit.
 - Search supports customer names and external IDs. `/` focuses search. Request filters and pagination stay together. CSV export explicitly exports the current page.
 - Keys are generated once and copied in a dedicated confirmation view. Revocation has an explanatory confirmation. Errors stay inside the form; successful saves refresh persisted data and show a dismissible status.
+- A committed write remains successful when its follow-up refresh fails: close the editor or retain the once-shown key, and show a workspace warning requesting Refresh. Actual write failures remain in the form; never retry a mutation automatically.
 - Plans use plain fields and percentage thresholds. Routing uses a visible vertical ladder and left-to-right fallbacks, editable with model selectors.
 - Playground shows input and output side by side, redaction preview below the input, and actual model/tier/cache response metadata beside the answer. Streaming can be stopped.
 - Shared sessions are deployment-wide administrator identities. Workspace navigation does not claim to be per-tenant identity authorization.
