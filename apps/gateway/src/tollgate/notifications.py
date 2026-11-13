@@ -114,6 +114,10 @@ async def deliver(repo, crypto, tenant):
         body = json.dumps(item["payload"], sort_keys=True, separators=(",", ":")).encode()
         stamp = str(int(time.time()))
         try:
+            from .schemas import WebhookConfig
+
+            # Apply current destination policy to stored configurations too.
+            WebhookConfig(url=config["url"], enabled=True)
             destination = httpx.URL(config["url"])
             host = urlsplit(config["url"]).hostname
             address = await public_address(host, 443)

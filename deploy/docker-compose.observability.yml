@@ -1,7 +1,9 @@
 services:
   prometheus:
     image: prom/prometheus:v3.2.1
-    volumes: [./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro]
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
     ports: ['127.0.0.1:9197:9090']
     networks: [tollgate]
     depends_on: [gateway]

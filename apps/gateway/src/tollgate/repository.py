@@ -1,6 +1,8 @@
 import asyncio
 
-from sqlalchemy import and_, case, func, or_, select
+from sqlalchemy import and_, case, func, or_, select, tuple_
+from sqlalchemy.dialects.postgresql import Insert as PGInsert
+from sqlalchemy.dialects.sqlite import Insert as SQLiteInsert
 from sqlalchemy.exc import IntegrityError
 
 from .db import Daily, Log, Record
@@ -113,12 +115,34 @@ class Repository:
                 return await self._write_event(event, recovery)
         return await self._write_event(event, recovery)
 
+    async def mark_recovery(self, session, event):
+        statement: PGInsert | SQLiteInsert
+        if self.db.engine.dialect.name == "postgresql":
+            from sqlalchemy.dialects.postgresql import insert as pg_insert
+
+            statement = pg_insert(Record)
+        else:
+            from sqlalchemy.dialects.sqlite import insert as sqlite_insert
+
+            statement = sqlite_insert(Record)
+        await session.execute(
+            statement.values(
+                kind="recovery",
+                tenant_id=event["tenant_id"],
+                name=event["id"],
+                data={"request_id": event["id"]},
+            ).on_conflict_do_nothing(index_elements=["kind", "tenant_id", "name"])
+        )
+
     async def _write_event(self, event, recovery=False):
         await self.db.ensure_partition(event["created_at"])
         async with self.db.session() as s:
             if await s.scalar(
                 select(Log.id).where(Log.id == event["id"], Log.created_at == event["created_at"])
             ):
+                if recovery:
+                    await self.mark_recovery(s, event)
+                    await s.commit()
                 return
             s.add(
                 Log(
@@ -160,14 +184,7 @@ class Repository:
 
             await enqueue_alerts(s, event)
             if recovery:
-                s.add(
-                    Record(
-                        kind="recovery",
-                        tenant_id=event["tenant_id"],
-                        name=event["id"],
-                        data={"request_id": event["id"]},
-                    )
-                )
+                await self.mark_recovery(s, event)
             await s.commit()
 
     async def logs(self, tenant="default", customer=None, limit=200, since=None):
@@ -208,21 +225,37 @@ class Repository:
                 for r in rows
             ]
 
-    async def ledger_snapshot(self):
-        """One consistent ledger snapshot for rebuilding Redis counters."""
+    async def committed_events(self, events, session=None):
+        """Look up only a bounded delivery batch, including partition identity."""
+        if session is None:
+            async with self.db.session() as connection:
+                return await self.committed_events(events, connection)
+        identities = [(event["id"], event["created_at"]) for event in events]
+        committed: set[tuple[str, str]] = set()
+        for offset in range(0, len(identities), 500):
+            rows = await session.execute(
+                select(Log.id, Log.created_at).where(
+                    tuple_(Log.id, Log.created_at).in_(identities[offset : offset + 500])
+                )
+            )
+            committed.update(tuple(row) for row in rows)
+        return committed
+
+    async def ledger_snapshot(self, events=()):
+        """Transactional daily rollups plus identities for retained deliveries only."""
         async with self.db.session() as session:
             if self.db.engine.dialect.name == "postgresql":
                 from sqlalchemy import text
 
                 await session.execute(text("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ"))
-            rows = (await session.scalars(select(Log))).all()
-            totals: dict[str, int] = {}
-            ids = set()
-            for row in rows:
-                key = f"{row.tenant_id}:{row.customer_id}:{row.created_at[:7]}"
-                totals[key] = totals.get(key, 0) + row.cost
-                ids.add(row.id)
-            return totals, ids
+            month = func.substr(Daily.day, 1, 7)
+            rows = await session.execute(
+                select(Daily.tenant_id, Daily.customer_id, month, func.sum(Daily.cost)).group_by(
+                    Daily.tenant_id, Daily.customer_id, month
+                )
+            )
+            totals = {f"{tenant}:{customer}:{period}": int(cost) for tenant, customer, period, cost in rows}
+            return totals, await self.committed_events(events, session)
 
     @staticmethod
     def log_filters(

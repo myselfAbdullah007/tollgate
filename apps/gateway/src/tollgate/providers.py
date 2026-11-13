@@ -18,8 +18,11 @@ ENV_KEYS = {"openai": "OPENAI_API_KEY", "anthropic": "ANTHROPIC_API_KEY", "googl
 
 
 class ProviderError(Exception):
-    def __init__(self, status=502):
+    def __init__(self, status=502, *, usage_uncertain=None):
         self.status = status
+        # A server failure can follow billable work. Explicit local/pre-dispatch
+        # failures and rejected client requests carry no generation charge.
+        self.usage_uncertain = status >= 500 if usage_uncertain is None else usage_uncertain
         super().__init__("Provider request failed")
 
 
@@ -27,6 +30,13 @@ def valid_usage(value):
     return isinstance(value, dict) and all(
         type(value.get(k)) is int and value[k] >= 0 for k in ("prompt_tokens", "completion_tokens")
     )
+
+
+def anthropic_usage(value):
+    normalized = {"prompt_tokens": value.get("input_tokens"), "completion_tokens": value.get("output_tokens")}
+    if not valid_usage(normalized):
+        return {}
+    return dict(normalized, total_tokens=sum(normalized.values()))
 
 
 def token_count(value):
@@ -137,7 +147,7 @@ class Providers:
         provider, model = target.split("/", 1)
         key = await self.credentials(provider, tenant)
         if not key:
-            raise ProviderError(503)
+            raise ProviderError(503, usage_uncertain=False)
         if provider == "anthropic":
             return (
                 BASES[provider] + "/messages",
@@ -152,7 +162,7 @@ class Providers:
 
     async def mock(self, target, request):
         if not self.enable_mock or target == "mock/outage":
-            raise ProviderError(503)
+            raise ProviderError(503, usage_uncertain=False)
         await asyncio.sleep(0.018)
         text = next((m.get("content", "") for m in reversed(request["messages"]) if m["role"] == "user"), "")
         if isinstance(text, list):
@@ -179,6 +189,8 @@ class Providers:
             if response.status_code >= 400:
                 raise ProviderError(response.status_code)
             result = response.json()
+        except (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout) as exc:
+            raise ProviderError(503, usage_uncertain=False) from exc
         except (httpx.HTTPError, ValueError) as exc:
             raise ProviderError() from exc
         if target.startswith("anthropic/"):
@@ -196,11 +208,10 @@ class Providers:
             if tools:
                 message["tool_calls"] = tools
             u = result.get("usage", {})
-            a, b = u.get("input_tokens", 0), u.get("output_tokens", 0)
             return envelope(
                 target,
                 message,
-                {"prompt_tokens": a, "completion_tokens": b, "total_tokens": a + b},
+                anthropic_usage(u),
                 "tool_calls" if tools else "length" if result.get("stop_reason") == "max_tokens" else "stop",
             )
         return result
@@ -272,16 +283,17 @@ class Providers:
                             }
                     elif kind == "message_delta":
                         usage.update(event.get("usage", {}))
-                        a, b = usage.get("input_tokens", 0), usage.get("output_tokens", 0)
                         reason = event["delta"].get("stop_reason")
                         yield {
                             "delta": {},
-                            "usage": {"prompt_tokens": a, "completion_tokens": b, "total_tokens": a + b},
+                            "usage": anthropic_usage(usage),
                             "finish_reason": "tool_calls"
                             if reason == "tool_use"
                             else "length"
                             if reason == "max_tokens"
                             else "stop",
                         }
+        except (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout) as exc:
+            raise ProviderError(503, usage_uncertain=False) from exc
         except (httpx.HTTPError, ValueError) as exc:
             raise ProviderError() from exc

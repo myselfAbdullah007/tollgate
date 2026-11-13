@@ -3,7 +3,7 @@ import json
 import httpx
 import pytest
 import respx
-from tollgate.providers import anthropic_payload
+from tollgate.providers import ProviderError, anthropic_payload, anthropic_usage
 
 
 @pytest.mark.parametrize(
@@ -115,3 +115,20 @@ def test_anthropic_input_tool_translation():
     )
     assert result["messages"][0]["content"][0]["type"] == "tool_use"
     assert result["messages"][1]["content"][0]["type"] == "tool_result"
+
+
+@pytest.mark.parametrize("usage", [{}, {"input_tokens": 2}, {"input_tokens": None, "output_tokens": 1}])
+def test_missing_anthropic_usage_is_not_fabricated_as_zero(usage):
+    assert anthropic_usage(usage) == {}
+
+
+@pytest.mark.parametrize("failure,uncertain", [(httpx.ReadTimeout, True), (httpx.ConnectError, False)])
+@respx.mock
+async def test_transport_failure_preserves_billing_uncertainty(app, monkeypatch, failure, uncertain):
+    monkeypatch.setenv("OPENAI_API_KEY", "fake-key")
+    respx.post("https://api.openai.com/v1/chat/completions").mock(side_effect=failure("synthetic"))
+    with pytest.raises(ProviderError) as error:
+        await app.state.pipeline.providers.chat(
+            "openai/gpt-4.1-mini", {"messages": [{"role": "user", "content": "Hello"}]}, "default"
+        )
+    assert error.value.usage_uncertain is uncertain

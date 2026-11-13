@@ -22,6 +22,7 @@ def main():
             "reset-password",
             "rotate-master-key",
             "validate-config",
+            "check-production",
         ],
     )
     parser.add_argument(
@@ -45,6 +46,14 @@ def main():
         )
         return
     settings = Settings()
+    if args.command == "check-production":
+        from .preflight import production_checks
+
+        checks = production_checks(settings)
+        for name, passed in checks.items():
+            print(f"{'PASS' if passed else 'FAIL'} {name}")
+        print("Offline configuration checks only; provider, restore, TLS and capacity checks are separate.")
+        raise SystemExit(0 if all(checks.values()) else 1)
     settings.validate_secrets()
     if args.command == "serve":
         import uvicorn

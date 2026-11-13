@@ -1,12 +1,19 @@
 import json
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from .pricing import RATES as PRICES
 
 
+class StreamOptions(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    include_usage: bool = False
+
+
 class ChatRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     model: str = Field(min_length=1, max_length=100)
     messages: list[dict] = Field(min_length=1, max_length=100)
     stream: bool = False
@@ -15,12 +22,14 @@ class ChatRequest(BaseModel):
     user: str | None = Field(default=None, max_length=200)
     tools: list[dict] | None = None
     tool_choice: str | dict | None = None
-    stream_options: dict | None = None
+    stream_options: StreamOptions | None = None
     feature: str = Field(default="general", pattern=r"^[a-zA-Z0-9_-]{1,64}$")
     environment: str = Field(default="production", pattern=r"^[a-zA-Z0-9_-]{1,32}$")
 
     @model_validator(mode="after")
     def text_only(self):
+        if self.stream_options is not None and not self.stream:
+            raise ValueError("stream_options requires stream=true")
         if len(json.dumps(self.model_dump()).encode()) > 262144:
             raise ValueError("Request exceeds 256 KiB")
         for m in self.messages:
@@ -56,6 +65,23 @@ class ChatRequest(BaseModel):
             function = tool["function"]
             if not isinstance(function.get("name"), str) or not isinstance(function.get("parameters"), dict):
                 raise ValueError("Function tools require a name and parameter schema")
+            if "description" in function and not isinstance(function["description"], str):
+                raise ValueError("Function descriptions must be text")
+        if isinstance(self.tool_choice, str) and self.tool_choice not in ("auto", "none", "required"):
+            raise ValueError("tool_choice must be auto, none, required or a named function")
+        if self.tool_choice == "required" and not self.tools:
+            raise ValueError("Required tool choice needs at least one tool")
+        if isinstance(self.tool_choice, dict):
+            function = self.tool_choice.get("function")
+            if (
+                self.tool_choice.get("type") != "function"
+                or not isinstance(function, dict)
+                or not isinstance(function.get("name"), str)
+                or not function["name"]
+            ):
+                raise ValueError("Named tool choice requires a function name")
+            if function["name"] not in [tool["function"]["name"] for tool in self.tools or []]:
+                raise ValueError("Named tool choice must reference a supplied tool")
         return self
 
 
@@ -165,12 +191,13 @@ class WebhookConfig(BaseModel):
         value = urlsplit(self.url)
         if (
             value.scheme != "https"
+            or value.port not in (None, 443)
             or not value.hostname
             or value.username
             or value.password
             or value.fragment
         ):
-            raise ValueError("A public HTTPS URL without credentials or fragments is required")
+            raise ValueError("A public HTTPS URL on port 443 without credentials or fragments is required")
         host = value.hostname.lower()
         if host == "localhost" or host.endswith((".local", ".internal", ".localhost")):
             raise ValueError("Private webhook destinations are not allowed")

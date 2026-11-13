@@ -1,0 +1,43 @@
+groups:
+  - name: tollgate-accounting
+    rules:
+      - alert: TollgateGatewayUnavailable
+        expr: up{job="tollgate"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Tollgate gateway cannot be scraped
+      - alert: TollgateWorkerUnavailable
+        expr: tollgate_worker_healthy == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Ledger worker heartbeat or accounting metrics unavailable
+      - alert: TollgateLedgerBacklog
+        expr: tollgate_ledger_pending_events > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Ledger backlog requires investigation before reconciliation reaches its batch limit
+      - alert: TollgateAccountingFailure
+        expr: increase(tollgate_accounting_failures_total[5m]) > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: Accounting failed in both storage paths; investigate request metadata immediately
+      - alert: TollgateReconciliationBacklog
+        expr: tollgate_retained_events > 10000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Reconciliation is deferred while retained delivery history drains
+      - alert: TollgateUncertainProviderCost
+        expr: increase(tollgate_uncertain_requests_total[5m]) > 0
+        labels:
+          severity: warning
+        annotations:
+          summary: Provider work has conservative estimated charges requiring review

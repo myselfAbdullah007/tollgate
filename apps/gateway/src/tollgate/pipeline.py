@@ -11,6 +11,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 
 from .db import now, uid
 from .fastpath import BudgetExhausted
+from .metrics import Metrics
 from .pricing import VERSION as PRICE_VERSION
 from .pricing import cost
 from .providers import ProviderError, token_count, valid_usage
@@ -25,6 +26,7 @@ class Pipeline:
         self.max_concurrent = max_concurrent
         self.requests = 0
         self.errors = 0
+        self.metrics = Metrics()
 
     async def customer(self, tenant, external):
         customer = await self.repo.find("customer", external, tenant)
@@ -40,6 +42,7 @@ class Pipeline:
 
     async def execute(self, request, tenant, external, key_id="playground"):
         lease, acquired, streaming = uid(), False, False
+        started = time.monotonic()
         try:
             if await self.repo.recovery_pending(tenant):
                 raise HTTPException(503, "Accounting recovery in progress", headers={"Retry-After": "5"})
@@ -55,6 +58,7 @@ class Pipeline:
                         async for chunk in iterator:
                             yield chunk
                     finally:
+                        self.metrics.observe(time.monotonic() - started)
                         await asyncio.shield(self.fast.release(tenant, lease))
 
                 response.body_iterator = guarded_stream()
@@ -98,6 +102,8 @@ class Pipeline:
                     logger.exception("Unable to record rejection %s", event["id"])
             raise
         finally:
+            if not streaming:
+                self.metrics.observe(time.monotonic() - started)
             if acquired and not streaming:
                 await asyncio.shield(self.fast.release(tenant, lease))
 
@@ -137,7 +143,7 @@ class Pipeline:
         budget = plan["monthly_budget"] if budget is None else budget
         input_estimate = token_count(redacted)
         estimates = [
-            max(cost(t, input_estimate, request["max_tokens"] * 4) for t in tier) for tier in alias["tiers"]
+            sum(cost(t, input_estimate, request["max_tokens"] * 4) for t in tier) for tier in alias["tiers"]
         ]
 
         def key_for(level):
@@ -197,22 +203,41 @@ class Pipeline:
             "http_status": 200,
         }
         settled = False
+        uncertain_cost = 0
+        attempt_estimate = 0
+        attempt_pending = False
 
         async def account(usage=None, error=False, conservative=False, estimated=False):
             nonlocal settled
             if settled:
                 return
             settled = True
-            usage = usage or {}
+            usage = usage if valid_usage(usage) else {}
             a, b = usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0)
-            actual = 0 if hit else estimate if conservative else cost(target, a, b)
+            unknown = uncertain_cost + (attempt_estimate if conservative and attempt_pending else 0)
+            actual = 0 if hit else unknown + (0 if conservative else cost(target, a, b))
+            if unknown:
+                self.metrics.counters["uncertain_requests"] += 1
+                self.metrics.counters["uncertain_micro_usd"] += unknown
+            if hit:
+                cost_basis = "cache"
+            elif unknown:
+                cost_basis = "conservative"
+            elif not usage:
+                cost_basis = "unbilled"
+            elif estimated or target.startswith("mock/"):
+                cost_basis = "estimated"
+            else:
+                cost_basis = "reported"
             event.update(
                 provider=target.split("/")[0],
                 model=target,
                 cost=actual,
                 input_tokens=a,
                 output_tokens=b,
-                tokens_estimated=target.startswith("mock/") or not bool(usage) or estimated or conservative,
+                tokens_estimated=target.startswith("mock/") or not bool(usage) or estimated or bool(unknown),
+                uncertain_cost=unknown,
+                cost_basis=cost_basis,
                 latency_ms=round((time.monotonic() - started) * 1000),
                 fallback_count=fallback_count,
                 status="error" if error else "success",
@@ -245,8 +270,10 @@ class Pipeline:
                 # Preserve billed work in the authoritative ledger. A transactional
                 # recovery marker fences further paid admissions until Redis is rebuilt.
                 await self.repo.write_event(event, recovery=bool(self.fast.redis))
+                self.metrics.counters["accounting_recoveries"] += 1
                 logger.error("Accounting request %s entered ledger recovery", request_id)
             except Exception:
+                self.metrics.counters["accounting_failures"] += 1
                 logger.critical(
                     "Accounting unavailable for request %s; manual reconciliation required", request_id
                 )
@@ -261,6 +288,11 @@ class Pipeline:
                 for i, candidate in enumerate(alias["tiers"][tier]):
                     if await self.fast.breaker_open(tenant + ":" + candidate):
                         continue
+                    target, fallback_count = candidate, i
+                    if i:
+                        self.metrics.counters["fallback_attempts"] += 1
+                    attempt_estimate = cost(candidate, input_estimate, request["max_tokens"] * 4)
+                    attempt_pending = True
                     try:
                         if request.get("stream"):
                             iterator = self.providers.stream(candidate, redacted, tenant)
@@ -278,6 +310,9 @@ class Pipeline:
                             await self.fast.success(tenant + ":" + candidate)
                         break
                     except (ProviderError, StopAsyncIteration, TimeoutError) as exc:
+                        if not isinstance(exc, ProviderError) or exc.usage_uncertain:
+                            uncertain_cost += attempt_estimate
+                        attempt_pending = False
                         last_error = exc
                         await self.fast.failure(tenant + ":" + candidate)
                         if (
@@ -307,12 +342,11 @@ class Pipeline:
                         input_estimate,
                         started + 120,
                         cache_key if request.get("temperature") == 0 and plan["pii_mode"] != "off" else None,
+                        request.get("stream_options", {}).get("include_usage", False),
                     ),
                     media_type="text/event-stream",
                     headers=dict(headers, **{"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}),
                 )
-            if request.get("temperature") == 0 and plan["pii_mode"] != "off" and not hit:
-                await self.fast.cache_put(cache_key, {"target": target, "result": result})
             usage_estimated = not valid_usage(result.get("usage"))
             usage = (
                 result.get("usage")
@@ -323,6 +357,12 @@ class Pipeline:
                 }
             )
             await account(usage, estimated=usage_estimated)
+            if request.get("temperature") == 0 and plan["pii_mode"] != "off" and not hit:
+                try:
+                    await self.fast.cache_put(cache_key, {"target": target, "result": result})
+                except Exception:
+                    self.metrics.counters["cache_write_failures"] += 1
+                    logger.warning("Cache write unavailable for request %s", request_id)
             result["usage"] = dict(
                 usage,
                 total_tokens=usage.get("total_tokens", usage["prompt_tokens"] + usage["completion_tokens"]),
@@ -341,12 +381,14 @@ class Pipeline:
             return JSONResponse(result, headers=headers)
         except BaseException as exc:
             self.errors += 1
-            await asyncio.shield(account(error=True))
+            await asyncio.shield(account(error=True, conservative=True))
             if isinstance(exc, (asyncio.CancelledError, KeyboardInterrupt)):
                 raise
             raise HTTPException(502, "No healthy provider available in the selected tier") from exc
 
-    async def _stream(self, result, hit, target, vault, event, account, input_estimate, deadline, cache_key):
+    async def _stream(
+        self, result, hit, target, vault, event, account, input_estimate, deadline, cache_key, include_usage
+    ):
         restorers = {"content": StreamRestorer(vault)}
         usage, captured, text, finished = None, [], "", False
         created = int(time.time())
@@ -423,25 +465,30 @@ class Pipeline:
             await self.fast.success(event["tenant_id"] + ":" + target)
             await account(usage, estimated=usage_estimated)
             if cache_key and not hit:
-                await self.fast.cache_put(cache_key, {"target": target, "result": captured})
+                try:
+                    await self.fast.cache_put(cache_key, {"target": target, "result": captured})
+                except Exception:
+                    self.metrics.counters["cache_write_failures"] += 1
+                    logger.warning("Cache write unavailable for request %s", event["id"])
             finished = True
             yield frame({}, finish_reason)
-            yield (
-                "data: "
-                + json.dumps(
-                    {
-                        "id": "chatcmpl-" + event["id"],
-                        "object": "chat.completion.chunk",
-                        "created": created,
-                        "model": target,
-                        "choices": [],
-                        "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
-                        if hit
-                        else usage,
-                    }
+            if include_usage:
+                yield (
+                    "data: "
+                    + json.dumps(
+                        {
+                            "id": "chatcmpl-" + event["id"],
+                            "object": "chat.completion.chunk",
+                            "created": created,
+                            "model": target,
+                            "choices": [],
+                            "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+                            if hit
+                            else usage,
+                        }
+                    )
+                    + "\n\n"
                 )
-                + "\n\n"
-            )
             yield "data: [DONE]\n\n"
         except asyncio.CancelledError:
             raise
@@ -450,7 +497,9 @@ class Pipeline:
             await self.fast.failure(event["tenant_id"] + ":" + target)
             yield 'data: {"error":{"message":"Provider stream interrupted","type":"upstream_error"}}\n\n'
         finally:
-            if not hit and isinstance(result, tuple):
-                await result[1].aclose()
-            if not finished:
-                await asyncio.shield(account(usage, error=True, conservative=not hit))
+            try:
+                if not hit and isinstance(result, tuple):
+                    await result[1].aclose()
+            finally:
+                if not finished:
+                    await asyncio.shield(account(usage, error=True, conservative=not hit))

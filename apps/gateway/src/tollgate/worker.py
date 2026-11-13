@@ -6,6 +6,43 @@ import time
 from redis.exceptions import ResponseError
 
 logger = logging.getLogger("tollgate.worker")
+RECONCILE_EVENT_LIMIT = 10_000
+DELIVERY_BATCH = 500
+
+
+def delivery_event(fields):
+    event = json.loads(fields["event"])
+    if (
+        not isinstance(event, dict)
+        or not all(
+            isinstance(event.get(key), str) for key in ("id", "tenant_id", "customer_id", "created_at")
+        )
+        or type(event.get("cost")) is not int
+        or event["cost"] < 0
+    ):
+        raise ValueError("Invalid accounting metadata")
+    return event
+
+
+async def prune_committed(repo, redis):
+    """Migrate legacy acknowledged entries without ever trimming uncommitted work.
+
+    The ledger consumer is the sole supported consumer of this private stream.
+    A crash between commit and deletion merely causes idempotent replay.
+    """
+    entries = []
+    for id, fields in await redis.xrange("tollgate:events", count=DELIVERY_BATCH):
+        try:
+            entries.append((id, delivery_event(fields)))
+        except (ValueError, KeyError, TypeError):
+            continue
+    committed = await repo.committed_events([event for _, event in entries])
+    ids = [id for id, event in entries if (event["id"], event["created_at"]) in committed]
+    if ids:
+        async with redis.pipeline(transaction=True) as transaction:
+            transaction.xack("tollgate:events", "ledger", *ids)
+            transaction.xdel("tollgate:events", *ids)
+            await transaction.execute()
 
 
 async def run_worker(repo, fast, once=False):
@@ -38,8 +75,11 @@ async def run_worker(repo, fast, once=False):
         for _, messages in batches:
             for id, fields in messages:
                 try:
-                    await repo.write_event(json.loads(fields["event"]))
-                    await redis.xack("tollgate:events", "ledger", id)
+                    await repo.write_event(delivery_event(fields))
+                    async with redis.pipeline(transaction=True) as transaction:
+                        transaction.xack("tollgate:events", "ledger", id)
+                        transaction.xdel("tollgate:events", id)
+                        await transaction.execute()
                 except (ValueError, KeyError, TypeError):
                     await redis.xadd(
                         "tollgate:dead-letter", {"source_id": id, "error": "invalid_event"}, maxlen=1000
@@ -48,8 +88,9 @@ async def run_worker(repo, fast, once=False):
                     await redis.xdel("tollgate:events", id)
                     logger.error("Malformed event %s quarantined without payload", id)
                 except Exception:
-                    logger.exception("Ledger write failed; event retained for retry")
+                    logger.error("Ledger write failed; event retained for retry")
                     await asyncio.sleep(0.2)
+        await prune_committed(repo, redis)
         await redis.set("tollgate:worker-heartbeat", str(time.time()), ex=60)
         if time.monotonic() - last_notifications > 15 and (
             notification_task is None or notification_task.done()
@@ -100,17 +141,26 @@ async def reconcile(repo, fast):
         return
     try:
         recovering = await repo.recovery_records()
-        totals, ids = await repo.ledger_snapshot()
-        for _, fields in await redis.xrange("tollgate:events"):
+        # Read the delivery stream BEFORE the SQL snapshot: a worker may commit
+        # and delete an entry concurrently. Deleted entries are then in SQL;
+        # captured entries are deduplicated against the same SQL snapshot.
+        retained = await redis.xrange("tollgate:events", count=RECONCILE_EVENT_LIMIT + 1)
+        if len(retained) > RECONCILE_EVENT_LIMIT:
+            logger.warning("Reconciliation deferred until ledger delivery backlog drains")
+            return False
+        events = []
+        for _, fields in retained:
             try:
-                event = json.loads(fields["event"])
-                if not all(k in event for k in ("id", "tenant_id", "customer_id", "created_at", "cost")):
-                    continue
+                events.append(delivery_event(fields))
             except (ValueError, KeyError, TypeError):
                 continue
-            if event["id"] not in ids:
+        totals, ids = await repo.ledger_snapshot(events)
+        for event in events:
+            identity = (event["id"], event["created_at"])
+            if identity not in ids:
                 key = f"{event['tenant_id']}:{event['customer_id']}:{event['created_at'][:7]}"
                 totals[key] = totals.get(key, 0) + event["cost"]
+                ids.add(identity)
         # Compare lease value in the same atomic operation as the writes. Never commit
         # an old snapshot after a long-running query outlives the admission freeze.
         async for key in redis.scan_iter(match="spend:*"):
@@ -132,6 +182,7 @@ async def reconcile(repo, fast):
         if committed:
             for row in recovering:
                 await repo.delete("recovery", row["id"], row["tenant_id"])
+        return bool(committed)
     finally:
         await redis.eval(
             "if redis.call('GET', KEYS[1]) == ARGV[1] then return redis.call('DEL', KEYS[1]) end return 0",
